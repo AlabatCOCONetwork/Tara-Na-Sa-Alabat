@@ -100,7 +100,6 @@
             border: 3px solid rgba(255,255,255,0.8); overflow: hidden; 
             background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             aspect-ratio: 16 / 9;
-            cursor: pointer;
         }
         
         .video-box iframe {
@@ -114,6 +113,18 @@
             background: rgba(0,0,0,0.6); padding: 5px 12px; border-radius: 5px;
             backdrop-filter: blur(5px); pointer-events: none;
         }
+
+        /* --- VIDEO CONTROLS --- */
+        .video-controls {
+            display: flex; justify-content: center; gap: 10px; margin-top: -10px;
+        }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white; padding: 8px 20px; border-radius: 20px; cursor: pointer;
+            font-weight: 700; font-size: 10px; text-transform: uppercase; transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .nav-btn:hover { background: #00AEEF; border-color: #00AEEF; }
 
         .preview-row { display: flex; gap: 15px; width: 100%; }
         
@@ -165,7 +176,7 @@
         </div>
 
         <div class="media-group">
-            <div class="video-box" onclick="changeVideo()">
+            <div class="video-box">
                 <div class="video-label">ANG ALABAT</div>
                 <iframe 
                     id="heroVideo"
@@ -173,6 +184,11 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
+            </div>
+
+            <div class="video-controls">
+                <button class="nav-btn" onclick="prevVideo()">&#8592; Prev</button>
+                <button class="nav-btn" onclick="nextVideo()">Next &#8594;</button>
             </div>
 
             <div class="preview-row">
@@ -204,22 +220,28 @@
         window.addEventListener('load', updateNavSlider);
         window.addEventListener('resize', updateNavSlider);
 
-        // --- YOUTUBE VIDEO TOGGLE ---
+        // --- YOUTUBE VIDEO NAVIGATION ---
         const heroVideo = document.getElementById('heroVideo');
-        // Added the new video ID "TdZzwAT-FFw" to the list
         const playlist = ["pSD9s5_IVJk", "TdZzwAT-FFw"];
         let vIdx = 0;
 
-        function changeVideo() {
-            vIdx = (vIdx + 1) % playlist.length;
+        function updateVideo() {
             const newId = playlist[vIdx];
-            // Mute=0 ensures it plays with sound when clicked
             heroVideo.src = https://www.youtube.com/embed/${newId}?autoplay=1&mute=0&loop=1&playlist=${newId};
+        }
+
+        function nextVideo() {
+            vIdx = (vIdx + 1) % playlist.length;
+            updateVideo();
+        }
+
+        function prevVideo() {
+            vIdx = (vIdx - 1 + playlist.length) % playlist.length;
+            updateVideo();
         }
     </script>
 </body>
 </html>
-fonts.googleapis.com
 You sent
 <!DOCTYPE html>
 <html lang="en">
@@ -316,6 +338,7 @@ You sent
         /* --- MEDIA GROUP (YOUTUBE INTEGRATION) --- */
         .media-group {
             display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 550px;
+            position: relative;
         }
 
         .video-box { 
@@ -333,21 +356,22 @@ You sent
         .video-label { 
             position: absolute; top: 15px; left: 15px; z-index: 10; 
             font-weight: 900; font-size: 9px; text-transform: uppercase; 
-            background: rgba(0,0,0,0.6); padding: 5px 12px; border-radius: 5px;
-            backdrop-filter: blur(5px); pointer-events: none;
+            background: transparent; padding: 5px 0; border-radius: 5px;
+            pointer-events: none; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* --- VIDEO CONTROLS --- */
-        .video-controls {
-            display: flex; justify-content: center; gap: 10px; margin-top: -10px;
+        /* --- VISIBLE ARROW BUTTONS --- */
+        .video-nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0, 174, 239, 0.7); color: white; border: none;
+            width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+            z-index: 20; display: flex; align-items: center; justify-content: center;
+            font-size: 20px; transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white; padding: 8px 20px; border-radius: 20px; cursor: pointer;
-            font-weight: 700; font-size: 10px; text-transform: uppercase; transition: 0.3s;
-            backdrop-filter: blur(10px);
-        }
-        .nav-btn:hover { background: #00AEEF; border-color: #00AEEF; }
+        .video-nav-btn:hover { background: #00AEEF; scale: 1.1; }
+        .btn-prev { left: -20px; }
+        .btn-next { right: -20px; }
 
         .preview-row { display: flex; gap: 15px; width: 100%; }
         
@@ -367,6 +391,8 @@ You sent
         @media (max-width: 480px) {
             .preview-row { flex-direction: column; }
             .main-title { font-size: 50px; }
+            .btn-prev { left: 5px; }
+            .btn-next { right: 5px; }
         }
     </style>
 </head>
@@ -399,6 +425,9 @@ You sent
         </div>
 
         <div class="media-group">
+            <button class="video-nav-btn btn-prev" onclick="prevVideo()">&#10094;</button>
+            <button class="video-nav-btn btn-next" onclick="nextVideo()">&#10095;</button>
+            
             <div class="video-box">
                 <div class="video-label">ANG ALABAT</div>
                 <iframe 
@@ -407,11 +436,6 @@ You sent
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
-            </div>
-
-            <div class="video-controls">
-                <button class="nav-btn" onclick="prevVideo()">&#8592; Prev</button>
-                <button class="nav-btn" onclick="nextVideo()">Next &#8594;</button>
             </div>
 
             <div class="preview-row">
