@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations | Alabat Tourism</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('destinationbg.jpg') no-repeat center center fixed; 
+            background-size: cover; color: white; min-height: 100vh; overflow-x: hidden;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* --- LOGO --- */
+        .top-left-logo {
+            position: absolute; top: 20px; left: 20px; width: 100px; 
+            z-index: 2000; animation: slideUp 1s ease forwards;
+        }
+
+        .logo-wrapper {
+            display: flex; justify-content: center; padding-top: 40px; width: 100%;
+            animation: slideUp 1s ease forwards;
+        }
+        .nav-logo { height: 60px; filter: drop-shadow(0 0 10px rgba(0,174,239,0.3)); }
+
+        /* --- NAVIGATION --- */
+        nav { display: flex; justify-content: center; padding: 15px; position: sticky; top: 0; z-index: 1000; width: 100%; }
+        .nav-container {
+            position: relative; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
+            padding: 5px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex; align-items: center; max-width: 95vw; overflow-x: auto; scrollbar-width: none;
+        }
+        .nav-container::-webkit-scrollbar { display: none; }
+        
+        .nav-links { display: flex; list-style: none; position: relative; z-index: 2; }
+        .nav-links a { 
+            color: white; text-decoration: none; font-size: 10px; font-weight: 700; 
+            text-transform: uppercase; padding: 10px 18px; display: inline-block; 
+            transition: 0.3s; opacity: 0.6; white-space: nowrap;
+        }
+        .nav-links a.active { opacity: 1; }
+        
+        .nav-slider {
+            position: absolute; height: calc(100% - 10px);
+            background: rgba(0, 174, 239, 0.5); border-radius: 50px;
+            top: 5px; z-index: 1; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* --- HERO & VIDEO --- */
+        .adventure-container { 
+            display: flex; flex-direction: column; align-items: center; 
+            padding: 40px 5%; gap: 30px; text-align: center;
+        }
+        @media (min-width: 1024px) {
+            .adventure-container { flex-direction: row; text-align: left; padding: 60px 8%; gap: 60px; }
+            .top-left-logo { width: 150px; top: 30px; left: 30px; }
+        }
+
+        .adventure-text-box { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
+        .adventure-text { font-size: clamp(35px, 8vw, 70px); font-weight: 900; line-height: 0.9; text-transform: uppercase; }
+        
+        .book-now-btn { 
+            align-self: center; padding: 15px 40px; background: #00AEEF;
+            color: white; text-decoration: none; font-weight: 900; font-size: 13px; 
+            letter-spacing: 1px; border-radius: 50px; transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0,174,239,0.3);
+        }
+        @media (min-width: 1024px) { .book-now-btn { align-self: flex-start; } }
+
+        .video-wrapper { width: 100%; max-width: 650px; position: relative; }
+        .video-frame { 
+            position: relative; 
+            width: 100%; 
+            border-radius: 25px; 
+            border: 3px solid white; 
+            overflow: hidden; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
+            background: #000;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+        }
+        .video-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-label { 
+            position: absolute; top: 15px; left: 15px; z-index: 10; 
+            font-weight: 800; font-size: 10px; text-transform: uppercase; 
+            background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 4px;
+            pointer-events: none;
+        }
+
+        /* --- SLIDER --- */
+        .slider-container { 
+            padding: 20px 0 60px; width: 100%; position: relative; 
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); 
+        }
+        .slider-wrapper { 
+            display: flex; gap: 20px; overflow-x: auto; 
+            padding: 20px 10%; scrollbar-width: none; 
+        }
+        .slider-wrapper::-webkit-scrollbar { display: none; }
+
+        .destination-card { 
+            flex: 0 0 85%; max-width: 350px; background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(20px); padding: 20px; border-radius: 25px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer;
+            transition: 0.4s ease; 
+        }
+        @media (min-width: 768px) { .destination-card { flex: 0 0 350px; } }
+        .destination-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
+        .destination-card h3 { font-size: 18px; font-weight: 800; text-transform: uppercase; color: #00AEEF; }
+        .destination-card p { font-size: 12px; opacity: 0.7; line-height: 1.4; margin-top: 5px; }
+
+        /* --- MODAL --- */
+        .zoom-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); 
+            display: none; justify-content: center; align-items: center; z-index: 5000; 
+            padding: 20px;
+        }
+        .zoom-overlay.active { display: flex; }
+        .zoom-card { 
+            background: white; color: #111; width: 100%; max-width: 500px; 
+            border-radius: 30px; overflow: hidden; position: relative; 
+            animation: slideUp 0.4s ease forwards;
+        }
+        .zoom-img { width: 100%; height: 250px; object-fit: cover; }
+        .zoom-details { padding: 25px; }
+        .zoom-title { font-size: 24px; font-weight: 900; color: #00AEEF; text-transform: uppercase; }
+        .zoom-desc { font-size: 14px; color: #444; margin-top: 10px; line-height: 1.6; }
+        .close-zoom { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+
+    <div class="logo-wrapper">
+        <a href="index.html">
+            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+        </a>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-slider" id="navShade"></div>
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="destinations.html" id="activeLink" class="active">DESTINATIONS</a></li>
+                <li><a href="products.html">PRODUCTS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="zoom-overlay" id="zoomOverlay" onclick="closeZoom(event)">
+        <div class="zoom-card">
+            <button class="close-zoom" onclick="closeZoom(event)">✕</button>
+            <img src="" id="zoomImg" class="zoom-img">
+            <div class="zoom-details">
+                <h2 id="zoomTitle" class="zoom-title"></h2>
+                <p id="zoomDesc" class="zoom-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="adventure-container">
+        <div class="adventure-text-box">
+            <div class="adventure-text">YOUR NEXT<br>ADVENTURE<br>AWAITS</div>
+            <a href="contact.html" class="book-now-btn">BOOK NOW</a>
+        </div>
+        <div class="video-wrapper">
+            <div class="video-frame" onclick="changeVideo()">
+                <div class="video-label" id="videoTitle">DISCOVER ALABAT</div>
+                <iframe id="videoPlayer" 
+                        src="https://www.youtube.com/embed/J_i3Oupb4R4?autoplay=0&loop=1&playlist=J_i3Oupb4R4" 
+                        allow="autoplay; encrypted-media" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-container">
+        <div class="slider-wrapper" id="destinations-list"></div>
+    </div>
+
+    <script>
+        const shade = document.getElementById('navShade');
+        let currentActive = document.getElementById('activeLink');
+
+        function moveShade(element) {
+            shade.style.width = `${element.offsetWidth}px`;
+            shade.style.left = `${element.offsetLeft}px`;
+        }
+
+        window.onload = () => moveShade(currentActive);
+        window.onresize = () => moveShade(currentActive);
+
+        // --- YOUTUBE VIDEO TOGGLE ---
+        const videoFrame = document.getElementById('videoPlayer');
+        const videoTitle = document.getElementById('videoTitle');
+        
+        const myVideos = [
+            { title: "DISCOVER ALABAT", id: "J_i3Oupb4R4" },
+            { title: "ALABAT ISLAND EXPERIENCE", id: "VEgYSAwmH4c" }
+        ];
+        let vIdx = 0;
+
+        function changeVideo() {
+            vIdx = (vIdx + 1) % myVideos.length;
+            const newId = myVideos[vIdx].id;
+            // Autoplay is set to 1 here so it plays with sound once the user interacts/clicks
+            videoFrame.src = `https://www.youtube.com/embed/${newId}?autoplay=1&loop=1&playlist=${newId}`;
+            videoTitle.innerText = myVideos[vIdx].title;
+        }
+
+        const myDestinations = [
+            { name: "Pulong Bato", img: "pulongbato.jpg", short: "Iconic white rock formation.", long: "Pulong Bato is one of Alabat's most famous natural landmarks, featuring a stunning white stone structure surrounded by crystal clear waters." },
+            { name: "Alabat Cove", img: "alabatcove.jpg", short: "Golden sunsets and calm seas.", long: "A serene escape offering breathtaking golden sunsets. The calm waters make it an ideal spot for peaceful afternoons." },
+            { name: "Tumiis Falls", img: "tumiisfalls.jpg", short: "Hidden multi-tiered waterfall.", long: "Nestled deep in the lush greenery, Tumiis Falls features multiple levels of refreshing spring water cascades." },
+            { name: "Tumiis Peak", img: "tumiispeak.jpg", short: "High-altitude panoramic views.", long: "The best vantage point on the island, providing a 360-degree view of the surrounding ocean and green landscapes." }
+        ];
+
+        const listDiv = document.getElementById('destinations-list');
+        myDestinations.forEach((dest, index) => {
+            listDiv.innerHTML += `
+                <div class="destination-card" onclick="openZoom(${index})">
+                    <img src="${dest.img}" alt="${dest.name}">
+                    <h3>${dest.name}</h3>
+                    <p>${dest.short}</p>
+                </div>`;
+        });
+
+        function openZoom(index) {
+            const dest = myDestinations[index];
+            document.getElementById('zoomImg').src = dest.img;
+            document.getElementById('zoomTitle').innerText = dest.name;
+            document.getElementById('zoomDesc').innerText = dest.long;
+            document.getElementById('zoomOverlay').classList.add('active');
+        }
+
+        function closeZoom(e) {
+            if (e.target.id === 'zoomOverlay' || e.target.className === 'close-zoom') {
+                document.getElementById('zoomOverlay').classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
+
+
