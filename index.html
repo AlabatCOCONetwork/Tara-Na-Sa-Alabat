@@ -18,20 +18,19 @@
         }
 
         /* --- ANIMATIONS --- */
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* --- LOGO --- */
+        /* --- LOGO (Removed Popping/Slide Animation) --- */
         .top-left-logo {
             position: absolute; top: 20px; left: 20px; width: 100px; 
-            z-index: 2000; animation: slideUp 1s ease forwards;
+            z-index: 2000;
         }
 
         .logo-wrapper {
             display: flex; justify-content: center; padding-top: 40px; width: 100%;
-            animation: slideUp 1s ease forwards;
         }
         .nav-logo { height: 60px; width: auto; filter: drop-shadow(0 0 10px rgba(0,174,239,0.3)); }
 
@@ -66,7 +65,7 @@
             display: flex; flex-direction: column; align-items: center;
             width: 90%; max-width: 1200px; flex: 1; gap: 40px;
             padding: 40px 0; text-align: center;
-            animation: slideUp 1s ease 0.2s forwards; opacity: 0;
+            animation: fadeIn 1s ease forwards;
         }
 
         @media (min-width: 1024px) {
@@ -90,7 +89,7 @@
             display: inline-block; box-shadow: 0 10px 20px rgba(0,174,239,0.3);
         }
 
-        /* --- MEDIA GROUP (YOUTUBE INTEGRATION) --- */
+        /* --- MEDIA GROUP --- */
         .media-group {
             display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 550px;
             position: relative;
@@ -115,30 +114,30 @@
             pointer-events: none; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* --- PHONE FRIENDLY BUTTONS --- */
+        /* --- GLASS BUTTONS (Pure Glass, No Blue, No Pop) --- */
         .video-nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px);
             color: white; border: 1px solid rgba(255, 255, 255, 0.3);
             width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
             z-index: 20; display: flex; align-items: center; justify-content: center;
-            font-size: 18px; transition: 0.3s;
-            -webkit-tap-highlight-color: transparent; /* Removes blue highlight on tap */
+            font-size: 18px; transition: background 0.3s, border 0.3s;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        .btn-prev { left: 10px; }
-        .btn-next { right: 10px; }
+        .btn-prev { left: 15px; }
+        .btn-next { right: 15px; }
 
         @media (min-width: 768px) {
-            .video-nav-btn { width: 50px; height: 50px; font-size: 20px; }
+            .video-nav-btn { width: 50px; height: 50px; }
             .btn-prev { left: -25px; }
             .btn-next { right: -25px; }
         }
 
+        /* Pure Glass Hover (No Blue) */
         .video-nav-btn:hover { 
-            background: #00AEEF; 
-            border-color: #00AEEF;
-            box-shadow: 0 0 15px rgba(0, 174, 239, 0.4);
+            background: rgba(255, 255, 255, 0.25); 
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .preview-row { display: flex; gap: 15px; width: 100%; }
@@ -148,7 +147,6 @@
             border-radius: 25px; padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1);
             text-decoration: none; color: white; transition: 0.3s;
         }
-        .preview-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); }
         .preview-card img { 
             width: 100%; height: 100px; object-fit: cover; 
             border-radius: 15px; margin: 10px 0; 
@@ -191,14 +189,14 @@
         </div>
 
         <div class="media-group">
-            <button class="video-nav-btn btn-prev" onclick="changeVideo(-1)" aria-label="Previous Video">&#10094;</button>
-            <button class="video-nav-btn btn-next" onclick="changeVideo(1)" aria-label="Next Video">&#10095;</button>
+            <button class="video-nav-btn btn-prev" onclick="changeVideo(-1)" aria-label="Previous">&#10094;</button>
+            <button class="video-nav-btn btn-next" onclick="changeVideo(1)" aria-label="Next">&#10095;</button>
 
             <div class="video-box">
                 <div class="video-label">ISLAND PREVIEW</div>
                 <iframe 
                     id="heroVideo"
-                    src="https://www.youtube.com/embed/pSD9s5_IVJk?autoplay=1&mute=0&loop=1&playlist=pSD9s5_IVJk" 
+                    src="https://www.youtube.com/embed/pSD9s5_IVJk?autoplay=1&mute=0&enablejsapi=1" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
@@ -232,14 +230,19 @@
         window.addEventListener('load', updateNavSlider);
         window.addEventListener('resize', updateNavSlider);
 
-        const heroVideo = document.getElementById('heroVideo');
+        // --- FIXED NAVIGATION LOGIC ---
         const playlist = ["pSD9s5_IVJk", "TdZzwAT-FFw"];
         let vIdx = 0;
 
         function changeVideo(direction) {
-            vIdx = (vIdx + direction + playlist.length) % playlist.length;
+            vIdx += direction;
+            if (vIdx >= playlist.length) vIdx = 0;
+            if (vIdx < 0) vIdx = playlist.length - 1;
+            
             const newId = playlist[vIdx];
-            heroVideo.src = https://www.youtube.com/embed/${newId}?autoplay=1&mute=0&loop=1&playlist=${newId};
+            const videoElement = document.getElementById('heroVideo');
+            // Re-generating URL to force refresh and skip YouTube's internal playlist cache
+            videoElement.src = https://www.youtube.com/embed/${newId}?autoplay=1&mute=0&enablejsapi=1;
         }
     </script>
 </body>
