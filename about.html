@@ -57,10 +57,14 @@
         }
 
         /* --- HERO TEXT --- */
-        .hero-title {
-            font-size: clamp(50px, 15vw, 120px); font-weight: 900; text-transform: uppercase;
-            letter-spacing: -3px; margin-top: 20px; line-height: 0.8;
-            animation: slideUp 1s ease 0.2s forwards; opacity: 0;
+        .hero-img {
+            width: 100%;
+            max-width: 800px; /* Adjust this to control max width on desktop */
+            height: auto;
+            margin-top: 20px;
+            display: block;
+            animation: slideUp 1s ease 0.2s forwards;
+            opacity: 0;
         }
         .hero-sub {
             font-size: 16px; font-weight: 700; color: #00AEEF; margin-bottom: 20px;
@@ -149,8 +153,8 @@
         </div>
     </nav>
 
-    <h1 class="hero-title">ALABAT</h1>
-    <p class="hero-sub">QUEZON, PHILIPPINES</p>
+    <img src="Alabat.jpg" alt="Alabat" class="hero-img">
+    <p class="hero-sub">QUEZON, PHILIPPINES</p
 
     <div class="slider-container">
         <div class="slider-wrapper">
