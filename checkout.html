@@ -57,7 +57,7 @@
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
+         /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
             position: sticky; 
             top: 40px; 
@@ -72,7 +72,9 @@
         .nav-container {
             position: relative; flex: 1; display: flex; 
             justify-content: center;
+            overflow-x: auto; scrollbar-width: none;
         }
+        .nav-container::-webkit-scrollbar { display: none; }
         
         .nav-links { display: flex; list-style: none; gap: 5px; }
         .nav-links a {
@@ -87,7 +89,6 @@
             box-shadow: 2px 2px 0px #CE1126; border-radius: 5px;
             z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
 
         /* MOBILE TWEAKS */
         @media (max-width: 480px) {
