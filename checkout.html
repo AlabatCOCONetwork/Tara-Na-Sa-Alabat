@@ -26,45 +26,53 @@
             min-height: 100vh;
         }
 
-        /* --- PHILIPPINE FLAG TOP BAR --- */
+        /* --- BRANDED PATTERN TOP BAR (STANDARDIZED) --- */
         .top-accent {
-            height: 6px;
-            background: linear-gradient(90deg, #0038A8 25%, #CE1126 25%, #CE1126 50%, #FFD300 50%, #FFD300 75%, #00AF66 75%);
+            height: 40px;
+            background-image: url('image_8311da.png');
+            background-size: auto 100%;
+            background-repeat: repeat-x;
             width: 100%;
             position: fixed;
             top: 0;
-            z-index: 3000;
+            z-index: 4000;
+            border-bottom: 2px solid #fff;
         }
 
-        /* --- HEADER AREA --- */
+        /* --- HEADER & BRANDING (STANDARDIZED) --- */
         header {
-            padding: 50px 20px 15px;
+            height: 125px;
+            padding-top: 40px; 
             display: flex;
+            align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.95)), url('background.jpg');
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.98)), url('background.jpg');
             background-size: cover;
             background-position: center;
             width: 100%;
+            position: relative;
+            border-bottom: 1px solid #eee;
         }
         .nav-logo { height: 60px; width: auto; }
-        .top-left-logo { width: 55px; position: absolute; top: 20px; left: 15px; z-index: 2000; }
+        .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
+        .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAV --- */
+        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
-            position: sticky; top: 6px; z-index: 1000; 
+            position: sticky; 
+            top: 40px; 
+            height: 60px;
+            z-index: 3000; 
             background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #eee;
-            padding: 10px 0;
             width: 100%;
+            display: flex; align-items: center;
         }
         .nav-container {
-            position: relative; display: flex; 
-            overflow-x: auto; scrollbar-width: none;
-            padding: 0 15px;
+            position: relative; flex: 1; display: flex; 
             justify-content: center;
         }
-        .nav-container::-webkit-scrollbar { display: none; }
         
         .nav-links { display: flex; list-style: none; gap: 5px; }
         .nav-links a {
@@ -79,6 +87,16 @@
             box-shadow: 2px 2px 0px #CE1126; border-radius: 5px;
             z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* MOBILE TWEAKS */
+        @media (max-width: 480px) {
+            header { height: 110px; }
+            .ariya-badge { width: 45px; top: 50px; }
+            .top-right-logo { width: 60px; top: 45px; }
+            .nav-logo { height: 45px; }
+            nav { height: 50px; }
+            .nav-links a { font-size: 10px; padding: 10px 6px; }
         }
 
         /* --- CHECKOUT CONTAINER --- */
@@ -171,15 +189,12 @@
         .order-num-box { background: #f8f8f8; padding: 25px; border-radius: 10px; margin: 25px 0; border: 2px dashed #ddd; }
         .order-num-box span { font-size: 11px; font-weight: 800; color: #999; letter-spacing: 1px; }
         .order-num-box h3 { font-family: monospace; font-size: 34px; color: #0038A8; margin-top: 5px; }
-
-        @media (min-width: 1024px) {
-            .nav-logo { height: 80px; }
-        }
     </style>
 </head>
 <body>
     <div class="top-accent"></div>
-    <img src="ariya.jpg" alt="Ariya Logo" class="top-left-logo">
+    <img src="ariya.jpg" alt="Ariya Logo" class="ariya-badge">
+    <img src="niyogyuganlogo.jpg" alt="Niyogyugan" class="top-right-logo">
 
     <header>
         <a href="index.html"><img src="AlabatLogo.png" alt="Alabat Tourism" class="nav-logo"></a>
@@ -192,7 +207,7 @@
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="about.html">ABOUT</a></li>
                 <li><a href="destinations.html">DESTINATIONS</a></li>
-                <li><a href="products.html" class="active" id="activeLink">PRODUCTS</a></li>
+                <li><a href="products.html" id="activeLink">PRODUCTS</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
             </ul>
         </div>
