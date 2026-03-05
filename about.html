@@ -5,179 +5,182 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Alabat Tourism</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        /* --- LOCAL BARABARA FONT --- */
+        @font-face {
+            font-family: 'Barabara';
+            src: url('BARABARA-final.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            /* Changed to a warmer dark overlay */
-            background: linear-gradient(rgba(20, 15, 0, 0.7), rgba(20, 15, 0, 0.7)), 
-                        url('background.jpg') no-repeat center center fixed; 
-            background-size: cover; color: white; min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
-            position: relative; overflow-x: hidden;
+        body { 
+            background-color: #fcfcfc; 
+            color: #222; 
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        /* --- PHILIPPINE TOURISM ACCENT --- */
+        .top-accent {
+            height: 8px;
+            background: linear-gradient(90deg, #0038A8 25%, #CE1126 25%, #CE1126 50%, #FFD300 50%, #FFD300 75%, #00AF66 75%);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 3000;
         }
 
-        /* --- LOGO --- */
-        .top-left-logo {
-            position: absolute; top: 20px; left: 20px; width: 100px; 
-            z-index: 2000;
+        header {
+            padding: 60px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
         }
+        .nav-logo { height: 75px; width: auto; }
+        .ariya-badge { width: 65px; position: absolute; top: 25px; left: 20px; }
 
-        .logo-wrapper {
-            display: flex; justify-content: center; padding-top: 40px; width: 100%;
+        /* --- FESTIVE NAVIGATION --- */
+        nav { 
+            position: sticky; top: 8px; z-index: 1000; 
+            background: rgba(255, 255, 255, 0.95); 
+            border-bottom: 2px solid #f1f1f1;
+            padding: 12px 0;
+            backdrop-filter: blur(10px);
         }
-        .nav-logo { height: 60px; width: auto; filter: none; }
-
-        /* --- NAVIGATION --- */
-        nav { display: flex; justify-content: center; padding: 15px; position: sticky; top: 0; z-index: 1000; width: 100%; }
         .nav-container {
-            position: relative; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
-            padding: 5px; border-radius: 50px; border: 1px solid rgba(255, 211, 0, 0.2);
-            display: flex; align-items: center; gap: 2px;
-            max-width: 95vw; overflow-x: auto; scrollbar-width: none;
+            display: flex; gap: 8px; overflow-x: auto;
+            justify-content: center; scrollbar-width: none;
+            padding: 0 15px;
         }
         .nav-container::-webkit-scrollbar { display: none; }
         
         .nav-container a {
-            position: relative; z-index: 2; color: white; text-decoration: none;
-            font-weight: 700; font-size: 10px; text-transform: uppercase;
-            padding: 10px 18px; transition: 0.3s; opacity: 0.6; white-space: nowrap;
+            text-decoration: none; 
+            color: #0038A8; 
+            font-family: 'Barabara', sans-serif; 
+            font-size: 13px;
+            padding: 8px 14px; 
+            border-radius: 4px;
+            transition: 0.2s;
+            white-space: nowrap;
         }
-        .nav-container a.active { opacity: 1; color: #FFD300; }
+        .nav-container a.active { background: #FFD300; box-shadow: 2px 2px 0px #CE1126; }
 
-        .nav-slider {
-            position: absolute; height: calc(100% - 10px);
-            background: rgba(255, 211, 0, 0.3); /* Yellow slider tint */
-            border-radius: 50px;
-            top: 5px; z-index: 1; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            border: 1px solid rgba(255, 211, 0, 0.5);
-        }
-
-        /* --- HERO TEXT --- */
-        .hero-img {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            margin-top: 20px;
-            display: block;
-            animation: slideUp 1s ease 0.2s forwards;
-            opacity: 0;
-        }
-        .hero-sub {
-            font-size: 16px; font-weight: 700; color: #FFD300; margin-bottom: 20px;
-            letter-spacing: 2px; animation: slideUp 1s ease 0.4s forwards; opacity: 0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        /* --- HERO --- */
+        .hero { padding: 40px 20px; text-align: center; background: #fff; }
+        .hero-img { width: 100%; max-width: 450px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
+        .hero-sub { 
+            font-family: 'Barabara', sans-serif;
+            color: #CE1126; font-size: 22px; margin-top: 15px; letter-spacing: 2px;
         }
 
-        /* --- PHOTO SLIDER --- */
-        .slider-container { 
-            padding: 10px 0 30px; width: 100%; position: relative; 
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); 
-            mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); 
+        /* --- FESTIVE BENTO GRID --- */
+        .grid-container {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
-        .slider-wrapper { 
-            display: flex; flex-direction: row; gap: 15px; overflow-x: auto; 
-            scroll-behavior: smooth; padding: 20px 10%; scrollbar-width: none; 
+        .grid-item {
+            position: relative; border-radius: 12px; overflow: hidden;
+            height: 160px; cursor: pointer; border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
-        .slider-wrapper::-webkit-scrollbar { display: none; }
+        .grid-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
+        .grid-item:hover img { transform: scale(1.1); }
+        .grid-item:first-child { grid-column: span 2; height: 220px; }
 
-        .about-photo { 
-            flex: 0 0 280px; height: 200px; object-fit: cover; border-radius: 20px; 
-            cursor: pointer; transition: 0.4s ease; border: 1px solid rgba(255,211,0,0.1);
-            animation: slideUp 1s ease 0.6s forwards; opacity: 0;
-        }
         @media (min-width: 768px) {
-            .about-photo { flex: 0 0 400px; height: 300px; }
+            .grid-container { grid-template-columns: repeat(4, 1fr); }
+            .grid-item { height: 200px; }
+            .grid-item:first-child { grid-column: span 2; grid-row: span 2; height: 412px; }
         }
-        .about-photo:hover { transform: translateY(-5px); border-color: #FFD300; box-shadow: 0 10px 20px rgba(255,211,0,0.2); }
 
         /* --- CONTENT CARD --- */
         .content-card {
-            background: rgba(15, 10, 0, 0.8); backdrop-filter: blur(25px);
-            width: 90%; max-width: 900px; border-radius: 30px; padding: 30px;
-            border: 1px solid rgba(255, 211, 0, 0.1); margin-bottom: 60px; line-height: 1.6;
-            animation: slideUp 1s ease 0.8s forwards; opacity: 0;
+            background: #fff; padding: 40px 25px;
+            margin: 30px auto 60px; max-width: 800px;
+            border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border-top: 5px solid #FFD300;
         }
-        @media (min-width: 768px) {
-            .content-card { padding: 60px; }
+        h2 { 
+            font-family: 'Barabara', sans-serif; 
+            color: #0038A8; font-size: 28px; 
+            margin: 35px 0 15px; text-transform: uppercase;
         }
-
-        h2 { font-size: 28px; font-weight: 900; margin: 30px 0 15px; text-transform: uppercase; color: #FFD300; }
         h2:first-child { margin-top: 0; }
-        p { font-size: 15px; opacity: 0.9; margin-bottom: 20px; }
+        
+        p { margin-bottom: 20px; font-size: 16px; color: #444; }
 
         .highlight-box {
-            background: rgba(255, 211, 0, 0.07); border-left: 4px solid #FFD300;
-            padding: 20px; border-radius: 10px; margin: 25px 0; font-style: italic;
-            color: #fff;
+            background: #fdfaf0; border-left: 6px solid #FFD300;
+            padding: 25px; border-radius: 10px; margin: 30px 0;
+            font-weight: 600; color: #0038A8;
         }
 
         /* --- MODAL --- */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 5, 0, 0.95); display: none; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 5000; backdrop-filter: blur(15px);
-            padding: 20px;
+            background: rgba(255,255,255,0.98); display: none; 
+            flex-direction: column; justify-content: center; align-items: center; 
+            z-index: 5000; padding: 20px;
         }
         .modal.active { display: flex; }
-        .modal-content { 
-            width: 100%; max-width: 800px; border-radius: 15px; 
-            animation: zoomIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            border: 1px solid rgba(255,211,0,0.3);
-        }
-        .modal-details { margin-top: 20px; text-align: center; max-width: 500px; }
-        .modal-details h3 { font-size: 20px; color: #FFD300; text-transform: uppercase; margin-bottom: 10px; }
-        .modal-details p { font-size: 14px; opacity: 0.8; }
-
-        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-content { width: 100%; max-width: 800px; border-radius: 15px; border: 6px solid #FFD300; }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 40px; cursor: pointer; color: #CE1126; font-family: 'Barabara'; }
+        .modal-details { text-align: center; padding: 20px; }
+        .modal-details h3 { font-family: 'Barabara'; color: #0038A8; font-size: 24px; }
     </style>
 </head>
 <body>
 
-    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+    <div class="top-accent"></div>
+    <img src="ariya.jpg" alt="Ariya" class="ariya-badge">
 
-    <div class="logo-wrapper">
+    <header>
         <a href="index.html">
-            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+            <img src="AlabatLogo.png" alt="Alabat Logo" class="nav-logo">
         </a>
-    </div>
+    </header>
 
     <nav>
         <div class="nav-container">
-            <div class="nav-slider" id="navSlider"></div>
             <a href="index.html">HOME</a>
-            <a href="about.html" class="active" id="activeLink">ABOUT</a>
+            <a href="about.html" class="active">ABOUT</a>
             <a href="destinations.html">DESTINATIONS</a>
             <a href="products.html">PRODUCTS</a>
             <a href="contact.html">CONTACT</a>
         </div>
     </nav>
 
-    <img src="Alabat.png" alt="Alabat" class="hero-img">
-    <p class="hero-sub">QUEZON, PHILIPPINES</p>
+    <section class="hero">
+        <img src="Alabat.png" alt="Alabat" class="hero-img">
+        <p class="hero-sub">QUEZON, PHILIPPINES</p>
+    </section>
 
-    <div class="slider-container">
-        <div class="slider-wrapper">
-            <img src="farmersbg.png" class="about-photo" onclick="openZoom(this, 'Farmers of Alabat', 'The hardworking local farmers processing organic goods.')">
-            <img src="PulongBatoo.png" class="about-photo" onclick="openZoom(this, 'Pulong Bato', 'A natural rock formation and crystal clear waters of Villa Norte.')">
-            <img src="tumiispeak.jpg" class="about-photo" onclick="openZoom(this, 'Tumii Peak', 'The highest point in Alabat offering a 360-degree view of the island.')">
-            <img src="alabatcove.jpg" class="about-photo" onclick="openZoom(this, 'Alabat Cove', 'A serene coastal area perfect for witnessing the sunset.')">
-            <img src="background.jpg" class="about-photo" onclick="openZoom(this, 'Island Overview', 'A bird\'s eye view of the lush greenery and blue waters.')">
+    <div class="grid-container">
+        <div class="grid-item" onclick="openZoom(this, 'Farmers of Alabat', 'The hardworking local farmers processing organic goods.')">
+            <img src="farmersbg.png" alt="Farmers">
         </div>
-    </div>
-
-    <div class="modal" id="zoomModal" onclick="closeZoom()">
-        <img class="modal-content" id="modalImg">
-        <div class="modal-details">
-            <h3 id="modalTitle"></h3>
-            <p id="modalDesc"></p>
+        <div class="grid-item" onclick="openZoom(this, 'Pulong Bato', 'A natural rock formation and crystal clear waters of Villa Norte.')">
+            <img src="PulongBatoo.png" alt="Rocks">
+        </div>
+        <div class="grid-item" onclick="openZoom(this, 'Tumii Peak', 'The highest point in Alabat offering a 360-degree view.')">
+            <img src="tumiispeak.jpg" alt="Peak">
+        </div>
+        <div class="grid-item" onclick="openZoom(this, 'Alabat Cove', 'A serene coastal area perfect for witnessing the sunset.')">
+            <img src="alabatcove.jpg" alt="Cove">
+        </div>
+        <div class="grid-item" onclick="openZoom(this, 'Island Overview', 'A bird\'s eye view of the lush greenery.')">
+            <img src="background.jpg" alt="Overview">
         </div>
     </div>
 
@@ -201,26 +204,25 @@
         <p>Another local folklore says that the name 'Alabat' was from Muslim origins where Alabat comes from Allah-bat, and if the word is mixed up actually means <strong>Bathala</strong>, the local word for god.</p>
     </div>
 
-    <script>
-        function updateNavSlider() {
-            const activeLink = document.getElementById('activeLink');
-            const slider = document.getElementById('navSlider');
-            if (activeLink && slider) {
-                slider.style.width = activeLink.offsetWidth + "px";
-                slider.style.left = activeLink.offsetLeft + "px";
-            }
-        }
-        window.addEventListener('load', updateNavSlider);
-        window.addEventListener('resize', updateNavSlider);
+    <div class="modal" id="zoomModal">
+        <span class="close-btn" onclick="closeZoom()">×</span>
+        <img class="modal-content" id="modalImg">
+        <div class="modal-details">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDesc"></p>
+        </div>
+    </div>
 
+    <script>
         const modal = document.getElementById('zoomModal');
         const modalImg = document.getElementById('modalImg');
         const modalTitle = document.getElementById('modalTitle');
         const modalDesc = document.getElementById('modalDesc');
 
-        function openZoom(imgElement, title, description) {
+        function openZoom(el, title, description) {
+            const img = el.querySelector('img');
             modal.classList.add('active');
-            modalImg.src = imgElement.src;
+            modalImg.src = img.src;
             modalTitle.innerText = title;
             modalDesc.innerText = description;
         }
