@@ -30,21 +30,27 @@ body::before {
     top: 0; 
     left: 0; 
     width: 100%; 
-    /* Use 100vh to lock it to the device screen height */
     height: 100vh; 
-    
-    /* REMOVED 'fixed' from this line to prevent mobile jumping */
-    background: url('ariya.jpg') no-repeat center center; 
-    
-    background-size: contain;
-    background-origin: content-box;
-    padding: 10%;
-    opacity: 0.15;
     z-index: -1;
+    opacity: 0.15;
+    
+    /* This forces the center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    /* ADD THIS: Forces mobile browsers to stop moving the layer */
-    will-change: transform;
+    /* We use mask/background logic that is rock-solid */
+    background-image: url('ariya.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+    /* 'contain' ensures it fits the screen, 
+       '80%' ensures it doesn't touch the edges */
+    background-size: contain;
+    
+    /* Fix for mobile jumping/moving */
     pointer-events: none;
+    will-change: transform;
 }
 
         /* --- BRANDED PATTERN TOP BAR --- */
