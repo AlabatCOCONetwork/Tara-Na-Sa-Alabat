@@ -7,7 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         
-        /* --- LOCAL FONT --- */
+        /* --- MASTER FONT --- */
         @font-face {
             font-family: 'Barabara';
             src: url('BARABARA-final.otf') format('opentype');
@@ -17,53 +17,67 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #ffffff;
+            background-color: #f8f9fa;
             color: #222;
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* --- PHILIPPINE FLAG TOP BAR --- */
-             .top-accent {
-            height: 40px; /* Increased height to show the pattern */
+        /* --- 1. TOP BAR (PATTERN) --- */
+        .top-accent {
+            height: 40px;
             background-image: url('topper.png');
-            background-size: auto 100%; /* Keeps pattern proportions */
-            background-repeat: repeat-x; /* Tiles horizontally */
+            background-size: auto 100%;
+            background-repeat: repeat-x;
             width: 100%;
             position: fixed;
             top: 0;
             z-index: 4000;
-            border-bottom: 2px solid #fff; /* Optional: adds a crisp edge */
+            border-bottom: 2px solid #fff;
         }
-        /* --- HEADER AREA --- */
+
+        /* --- 2. HEADER & BRANDING --- */
         header {
-            padding: 50px 20px 15px;
+            height: 125px;
+            padding-top: 40px; 
             display: flex;
+            align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), url('farmersbg.png');
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.98)), url('farmersbg.png');
             background-size: cover;
             background-position: center;
+            width: 100%;
+            position: relative;
+            border-bottom: 1px solid #eee;
         }
         .nav-logo { height: 60px; width: auto; }
-        .top-left-logo { width: 55px; position: absolute; top: 20px; left: 15px; z-index: 2000; }
+        .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
+        .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAV (NO SLIDE) --- */
+        /* --- 3. STICKY SLIDING NAV --- */
         nav { 
-            position: sticky; top: 6px; z-index: 1000; 
-            background: rgba(255, 255, 255, 0.9); 
+            position: sticky; 
+            top: 40px; 
+            height: 60px;
+            z-index: 3000; 
+            background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #eee;
-            padding: 10px 0;
+            width: 100%;
+            display: flex; align-items: center;
         }
         .nav-container {
-            position: relative; display: flex; 
-            overflow: hidden;
-            padding: 0 5px;
+            position: relative; flex: 1; display: flex; 
             justify-content: center;
+            overflow-x: auto; scrollbar-width: none;
         }
+        .nav-container::-webkit-scrollbar { display: none; }
         
-        .nav-links { display: flex; list-style: none; gap: 5px; width: 100%; justify-content: center;}
+        .nav-links { display: flex; list-style: none; gap: 5px; }
         .nav-links a {
             position: relative; z-index: 2;
             text-decoration: none; color: #0038A8; 
@@ -78,107 +92,134 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* MOBILE NAV TWEAKS */
-        @media (max-width: 480px) {
-            .nav-links { gap: 2px; justify-content: space-evenly; }
-            .nav-links a { font-size: 10px; padding: 8px 4px; letter-spacing: -0.5px; }
-            .nav-slider { height: 30px; }
-        }
-
-        /* --- HERO SECTION --- */
+        /* --- 4. HERO SECTION --- */
         .adventure-container { 
-            padding: 30px 20px; text-align: center;
-            display: flex; flex-direction: column; gap: 20px;
+            padding: 60px 20px; 
+            text-align: center;
+            display: flex; 
+            flex-direction: column; 
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
         }
         .adventure-text { 
             font-family: 'Barabara', sans-serif;
-            font-size: 38px; color: #0038A8; line-height: 1;
+            font-size: clamp(38px, 8vw, 60px); 
+            color: #0038A8; 
+            line-height: 1;
             text-transform: uppercase;
         }
+        .adventure-text span { color: #CE1126; }
+
         .book-now-btn { 
             display: inline-block; padding: 12px 30px; 
             background: #CE1126; color: white; text-decoration: none;
             font-family: 'Barabara', sans-serif; border-radius: 5px;
             box-shadow: 3px 3px 0px #FFD300; transition: 0.2s;
-            margin: 10px 0;
+            margin-top: 20px;
         }
+        .book-now-btn:hover { transform: scale(1.05); }
 
-        /* --- VIDEO BOX --- */
-        .video-wrapper { width: 100%; max-width: 600px; margin: 0 auto; position: relative; }
+        /* --- 5. MINIMALIST VIDEO BOX --- */
+        .video-wrapper { width: 100%; max-width: 700px; margin: 0 auto; position: relative; }
         .video-frame { 
-            border-radius: 20px; border: 4px solid #fff; overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); background: #000;
+            border-radius: 20px; border: 8px solid #fff; overflow: hidden;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1); background: #000;
             aspect-ratio: 16/9;
+            position: relative;
         }
         .video-frame iframe { width: 100%; height: 100%; }
         
         .video-label { 
-            position: absolute; bottom: 80px; left: 0; z-index: 10;
+            position: absolute; top: 20px; left: 20px; z-index: 10;
             font-family: 'Barabara'; font-size: 12px; color: #fff;
-            background: #0038A8; padding: 8px 20px; 
-            box-shadow: 4px 0 0 #FFD300;
+            background: rgba(0, 56, 168, 0.9); padding: 8px 15px; 
+            border-radius: 4px;
+            pointer-events: none;
             transition: opacity 0.5s ease;
         }
 
-        .video-controls { display: flex; justify-content: flex-end; gap: 10px; margin-top: -25px; position: relative; z-index: 20; padding-right: 20px; }
+        .video-controls { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-top: 20px; 
+        }
         
         .video-nav-btn {
-            background: #CE1126; border: none; width: 50px; height: 50px;
-            cursor: pointer; font-size: 18px; transition: 0.3s;
+            background: #fff; border: 1px solid #ddd; width: 45px; height: 45px;
+            cursor: pointer; font-size: 16px; transition: 0.3s;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 4px 4px 0px #FFD300; color: white;
-            border-radius: 4px;
+            color: #0038A8;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .video-nav-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #FFD300; }
+        .video-nav-btn:hover { background: #FFD300; border-color: #FFD300; transform: translateY(-2px); }
 
-        /* --- HORIZONTAL SCROLL SLIDER --- */
+        /* --- 6. HORIZONTAL SCROLL SLIDER --- */
         .slider-container { 
-            padding: 40px 0;
-            background: linear-gradient(to bottom, #fff, #f9f9f9);
+            width: 100%;
+            padding: 60px 0;
+            background: #fff;
         }
         .slider-wrapper { 
             display: flex; gap: 20px; overflow-x: auto; 
-            padding: 10px 20px 30px; scrollbar-width: none;
+            padding: 20px 20px 40px; scrollbar-width: none;
         }
         .slider-wrapper::-webkit-scrollbar { display: none; }
 
         .destination-card { 
-            flex: 0 0 280px; background: #fff; border-radius: 20px; 
+            flex: 0 0 300px; background: #fff; border-radius: 20px; 
             padding: 15px; border: 1px solid #eee; transition: 0.3s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
         }
-        .destination-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 12px; }
+        .destination-card:hover { transform: translateY(-10px); border-color: #FFD300; }
+        .destination-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
         .destination-card h3 { font-family: 'Barabara'; color: #0038A8; font-size: 18px; }
         .destination-card p { font-size: 13px; color: #666; margin-top: 5px; }
 
         /* --- MODAL --- */
         .zoom-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #fff; display: none; z-index: 5000; 
+            background: rgba(255,255,255,0.98); display: none; z-index: 5000; 
             padding: 20px; flex-direction: column; align-items: center; justify-content: center;
         }
         .zoom-overlay.active { display: flex; }
-        .zoom-card { width: 100%; max-width: 500px; text-align: center; }
-        .zoom-img { width: 100%; border-radius: 15px; border: 5px solid #FFD300; }
-        .zoom-title { font-family: 'Barabara'; color: #0038A8; font-size: 28px; margin-top: 20px; }
-        .zoom-desc { font-size: 15px; color: #444; margin: 15px 0; }
-        .close-zoom { position: absolute; top: 20px; right: 20px; font-size: 35px; color: #CE1126; cursor: pointer; border: none; background: none; font-family: 'Barabara'; }
+        .zoom-card { width: 100%; max-width: 600px; text-align: center; }
+        .zoom-img { width: 100%; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .zoom-title { font-family: 'Barabara'; color: #0038A8; font-size: 32px; margin-top: 25px; }
+        .zoom-desc { font-size: 16px; color: #444; margin: 15px 0; max-width: 500px; margin-inline: auto; }
+        .close-zoom { position: absolute; top: 30px; right: 30px; font-size: 30px; color: #CE1126; cursor: pointer; border: none; background: none; font-family: 'Barabara'; }
+
+        /* RESPONSIVE TWEAKS */
+        @media (max-width: 480px) {
+            header { height: 110px; }
+            .ariya-badge { width: 45px; top: 50px; }
+            .top-right-logo { width: 60px; top: 45px; }
+            .nav-logo { height: 45px; }
+            nav { height: 50px; top: 40px; }
+            .nav-links a { font-size: 10px; padding: 10px 8px; }
+            .adventure-text { font-size: 34px; }
+            .destination-card { flex: 0 0 260px; }
+        }
 
         @media (min-width: 1024px) {
-            .adventure-container { flex-direction: row; text-align: left; padding: 60px 10%; justify-content: space-between; }
-            .adventure-text { font-size: 60px; }
-            .destination-card { flex: 0 0 320px; }
+            .adventure-container { flex-direction: row; text-align: left; padding: 80px 5%; align-items: center; justify-content: space-between; }
+            .adventure-text-box { flex: 1; }
+            .video-wrapper { flex: 1; }
         }
     </style>
 </head>
 <body>
 
     <div class="top-accent"></div>
-    <img src="ariya.jpg" alt="Ariya" class="top-left-logo">
+    <img src="ariya.jpg" alt="Ariya Logo" class="ariya-badge">
+    <img src="niyogyuganlogo.png" alt="Niyogyugan Logo" class="top-right-logo">
 
     <header>
         <a href="index.html">
-            <img src="AlabatLogo.png" alt="Alabat Logo" class="nav-logo">
+            <img src="AlabatLogo.png" alt="Alabat Tourism" class="nav-logo">
         </a>
     </header>
 
@@ -206,8 +247,8 @@
 
     <div class="adventure-container">
         <div class="adventure-text-box">
-            <div class="adventure-text">YOUR NEXT<br>ADVENTURE<br>AWAITS</div>
-            <a href="contact.html" class="book-now-btn">BOOK NOW</a>
+            <div class="adventure-text">YOUR NEXT<br><span>ADVENTURE</span><br>AWAITS</div>
+            <a href="contact.html" class="book-now-btn">PLAN YOUR TRIP</a>
         </div>
         <div class="video-wrapper">
             <div class="video-frame">
@@ -225,48 +266,43 @@
     </div>
 
     <div class="slider-container">
-        <h2 style="font-family:'Barabara'; color:#0038A8; padding: 0 20px; margin-bottom: 10px;">POPULAR SPOTS</h2>
+        <h2 style="font-family:'Barabara'; color:#0038A8; padding: 0 40px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Popular Spots</h2>
         <div class="slider-wrapper" id="destinations-list"></div>
     </div>
 
     <script>
-        // Nav Slider Logic
+        // Nav Slider
         const shade = document.getElementById('navShade');
         const activeLink = document.getElementById('activeLink');
         function moveShade(el) {
-            shade.style.width = el.offsetWidth + 'px';
-            shade.style.left = el.offsetLeft + 'px';
+            if(el) {
+                shade.style.width = el.offsetWidth + 'px';
+                shade.style.left = el.offsetLeft + 'px';
+            }
         }
         window.addEventListener('load', () => moveShade(activeLink));
         window.addEventListener('resize', () => moveShade(activeLink));
 
-        // Video Label Fade Logic
+        // Video Control
         const vTitle = document.getElementById('videoTitle');
-        function fadeLabel() {
-            vTitle.style.opacity = '1';
-            setTimeout(() => {
-                vTitle.style.opacity = '0';
-            }, 1000);
-        }
-        window.addEventListener('load', fadeLabel);
-
-        // Video Playlist Logic
         const videoFrame = document.getElementById('videoPlayer');
         const myVideos = [
             { title: "DISCOVER ALABAT", id: "J_i3Oupb4R4" },
             { title: "ALABAT ISLAND EXPERIENCE", id: "VEgYSAwmH4c" }
         ];
         let vIdx = 0;
+
         function updateVideo() {
             const vid = myVideos[vIdx];
             videoFrame.src = `https://www.youtube.com/embed/${vid.id}?autoplay=1&loop=1&playlist=${vid.id}`;
             vTitle.innerText = vid.title;
-            fadeLabel();
+            vTitle.style.opacity = '1';
+            setTimeout(() => { vTitle.style.opacity = '0.7'; }, 2000);
         }
         function nextVideo() { vIdx = (vIdx + 1) % myVideos.length; updateVideo(); }
         function prevVideo() { vIdx = (vIdx - 1 + myVideos.length) % myVideos.length; updateVideo(); }
 
-        // Destination Data
+        // Destinations Data
         const myDestinations = [
             { name: "Pulong Bato", img: "pulongbato.jpg", short: "Iconic white rock formation.", long: "Pulong Bato is one of Alabat's most famous natural landmarks, featuring a stunning white stone structure surrounded by crystal clear waters." },
             { name: "Alabat Cove", img: "alabatcove.jpg", short: "Golden sunsets and calm seas.", long: "A serene escape offering breathtaking golden sunsets. The calm waters make it an ideal spot for peaceful afternoons." },
