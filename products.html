@@ -374,5 +374,176 @@ body::before {
             moveShade(activeLink);
         });
     </script>
+    <style>
+    /* Footer Main Container */
+    .site-footer {
+        background-color: #00384d; /* The dark teal/blue from your screenshot */
+        color: #ffffff;
+        padding: 60px 5% 30px 5%;
+        width: 100%;
+        font-family: 'Inter', sans-serif;
+        margin-top: 80px;
+        position: relative;
+        z-index: 100;
+    }
+
+    .footer-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.5fr 0.8fr 1fr 1.2fr; /* Creates the professional spacing */
+        gap: 40px;
+    }
+
+    /* Column Headers */
+    .footer-col h3 {
+        font-family: 'Barabara', sans-serif;
+        font-size: 14px;
+        color: #ffffff;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        position: relative;
+    }
+
+    /* The underline effect from the screenshot */
+    .footer-col h3::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #ffffff;
+        opacity: 0.3;
+    }
+
+    .footer-col p {
+        line-height: 1.6;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 15px;
+    }
+
+    /* Quick Links */
+    .footer-col ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-col ul li {
+        margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-size: 13px;
+        transition: 0.3s;
+    }
+
+    .footer-col ul li a:hover {
+        color: #FFD300;
+        padding-left: 5px;
+    }
+
+    /* Agency Logos Section */
+    .agency-grid {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+
+    .agency-grid img {
+        height: 45px;
+        width: auto;
+        /* Matches the clean look in your reference */
+    }
+
+    .arta-logo {
+        height: 35px !important; /* ARTA logo is usually wider, so we adjust height */
+    }
+
+    /* Bottom Copyright Bar */
+    .footer-bottom {
+        max-width: 1200px;
+        margin: 50px auto 0 auto;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 900px) {
+        .footer-wrapper {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .footer-wrapper {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+        .footer-col h3::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .agency-grid {
+            justify-content: center;
+        }
+        .footer-bottom {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
+
+<footer class="site-footer">
+    <div class="footer-wrapper">
+        
+        <div class="footer-col">
+            <h3>ALABAT TOURISM OFFICE</h3>
+            <p>Alabat Island, a land of thousand colors, celebrates life through festivals, flavors, and culture. Discover nature, heritage, and adventures that stay with you forever.</p>
+        </div>
+
+        <div class="footer-col">
+            <h3>QUICK LINKS</h3>
+            <ul>
+                <li><a href="index.html">Travel Spot</a></li>
+                <li><a href="destinations.html">Festivals</a></li>
+                <li><a href="products.html">Local Shop</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>EMERGENCY HOTLINES</h3>
+            <p><strong>PDRRMO:</strong><br>(042) 710-3933</p>
+            <p>0942-274-8702</p>
+        </div>
+
+        <div class="footer-col">
+            <h3>NATIONAL AGENCIES</h3>
+            <div class="agency-grid">
+                <img src="logo-dot.png" alt="DOT">
+                <img src="logo-dilg.png" alt="DILG">
+                <img src="arta-logo.png" alt="ARTA" class="arta-logo">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <div>&copy; 2026 Alabat Island Tourism Office. All rights reserved.</div>
+        <div>Developed by Alabat Coconetwork</div>
+    </div>
+</footer>
 </body>
 </html>
