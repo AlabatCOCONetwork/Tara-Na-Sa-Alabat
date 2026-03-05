@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Alabat Tourism</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
         /* --- LOCAL BARABARA FONT --- */
         @font-face {
@@ -19,13 +19,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body { 
-            background-color: #fcfcfc; 
+            background-color: #ffffff; 
             color: #222; 
             font-family: 'Inter', sans-serif;
-            line-height: 1.7;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- PHILIPPINE TOURISM ACCENT --- */
+        /* --- FESTIVE DOT TOP ACCENT --- */
         .top-accent {
             height: 8px;
             background: linear-gradient(90deg, #0038A8 25%, #CE1126 25%, #CE1126 50%, #FFD300 50%, #FFD300 75%, #00AF66 75%);
@@ -35,6 +36,7 @@
             z-index: 3000;
         }
 
+        /* --- LOGO SECTION --- */
         header {
             padding: 60px 20px 20px;
             display: flex;
@@ -42,10 +44,10 @@
             align-items: center;
             background: #fff;
         }
-        .nav-logo { height: 75px; width: auto; }
-        .ariya-badge { width: 65px; position: absolute; top: 25px; left: 20px; }
+        .nav-logo { height: 80px; width: auto; }
+        .top-left-logo { width: 70px; position: absolute; top: 25px; left: 20px; z-index: 2000; }
 
-        /* --- FESTIVE NAVIGATION --- */
+        /* --- NAVIGATION --- */
         nav { 
             position: sticky; top: 8px; z-index: 1000; 
             background: rgba(255, 255, 255, 0.95); 
@@ -54,6 +56,7 @@
             backdrop-filter: blur(10px);
         }
         .nav-container {
+            position: relative;
             display: flex; gap: 8px; overflow-x: auto;
             justify-content: center; scrollbar-width: none;
             padding: 0 15px;
@@ -61,69 +64,86 @@
         .nav-container::-webkit-scrollbar { display: none; }
         
         .nav-container a {
+            position: relative; z-index: 2;
             text-decoration: none; 
             color: #0038A8; 
             font-family: 'Barabara', sans-serif; 
-            font-size: 13px;
-            padding: 8px 14px; 
+            font-size: 14px;
+            padding: 8px 16px; 
             border-radius: 4px;
             transition: 0.2s;
             white-space: nowrap;
         }
-        .nav-container a.active { background: #FFD300; box-shadow: 2px 2px 0px #CE1126; }
+        .nav-container a.active { color: #0038A8; }
+
+        /* Navigation Slider Logic Maintained */
+        .nav-slider {
+            position: absolute;
+            background: #FFD300;
+            box-shadow: 2px 2px 0px #CE1126;
+            border-radius: 4px;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            height: 34px; /* Matches link height */
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
         /* --- HERO --- */
         .hero { padding: 40px 20px; text-align: center; background: #fff; }
-        .hero-img { width: 100%; max-width: 450px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
+        .hero-img { 
+            width: 100%; max-width: 500px; 
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+            animation: slideUp 1s ease forwards;
+        }
         .hero-sub { 
             font-family: 'Barabara', sans-serif;
             color: #CE1126; font-size: 22px; margin-top: 15px; letter-spacing: 2px;
+            animation: slideUp 1s ease 0.2s forwards; opacity: 0;
         }
 
-        /* --- FESTIVE BENTO GRID --- */
-        .grid-container {
-            padding: 15px;
+        /* --- BENTO GRID GALLERY --- */
+        .slider-container { padding: 20px; max-width: 1100px; margin: 0 auto; }
+        .slider-wrapper {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            max-width: 1000px;
-            margin: 0 auto;
         }
-        .grid-item {
-            position: relative; border-radius: 12px; overflow: hidden;
-            height: 160px; cursor: pointer; border: 4px solid #fff;
+        .about-photo {
+            width: 100%; height: 160px; object-fit: cover; border-radius: 12px;
+            cursor: pointer; border: 4px solid #fff; transition: 0.4s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            animation: slideUp 1s ease 0.4s forwards; opacity: 0;
         }
-        .grid-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
-        .grid-item:hover img { transform: scale(1.1); }
-        .grid-item:first-child { grid-column: span 2; height: 220px; }
+        .about-photo:hover { transform: scale(1.03); border-color: #FFD300; }
+        .about-photo:first-child { grid-column: span 2; height: 220px; }
 
         @media (min-width: 768px) {
-            .grid-container { grid-template-columns: repeat(4, 1fr); }
-            .grid-item { height: 200px; }
-            .grid-item:first-child { grid-column: span 2; grid-row: span 2; height: 412px; }
+            .slider-wrapper { grid-template-columns: repeat(4, 1fr); }
+            .about-photo { height: 220px; }
+            .about-photo:first-child { grid-column: span 2; grid-row: span 2; height: 452px; }
         }
 
         /* --- CONTENT CARD --- */
         .content-card {
             background: #fff; padding: 40px 25px;
-            margin: 30px auto 60px; max-width: 800px;
-            border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            border-top: 5px solid #FFD300;
+            margin: 30px auto 60px; max-width: 850px;
+            border-radius: 25px; border: 1px solid #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            animation: slideUp 1s ease 0.6s forwards; opacity: 0;
         }
         h2 { 
             font-family: 'Barabara', sans-serif; 
-            color: #0038A8; font-size: 28px; 
-            margin: 35px 0 15px; text-transform: uppercase;
+            color: #0038A8; font-size: 32px; 
+            margin: 35px 0 15px; border-left: 8px solid #FFD300; padding-left: 15px;
         }
         h2:first-child { margin-top: 0; }
-        
-        p { margin-bottom: 20px; font-size: 16px; color: #444; }
+        p { font-size: 17px; color: #444; margin-bottom: 20px; }
 
         .highlight-box {
-            background: #fdfaf0; border-left: 6px solid #FFD300;
-            padding: 25px; border-radius: 10px; margin: 30px 0;
-            font-weight: 600; color: #0038A8;
+            background: #FFF9E6; border-radius: 15px; padding: 30px;
+            border-bottom: 5px solid #FFD300; color: #0038A8;
+            font-weight: bold; font-size: 18px; margin: 30px 0;
         }
 
         /* --- MODAL --- */
@@ -134,27 +154,31 @@
             z-index: 5000; padding: 20px;
         }
         .modal.active { display: flex; }
-        .modal-content { width: 100%; max-width: 800px; border-radius: 15px; border: 6px solid #FFD300; }
-        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 40px; cursor: pointer; color: #CE1126; font-family: 'Barabara'; }
-        .modal-details { text-align: center; padding: 20px; }
-        .modal-details h3 { font-family: 'Barabara'; color: #0038A8; font-size: 24px; }
+        .modal-content { width: 100%; max-width: 800px; border-radius: 20px; border: 6px solid #FFD300; animation: zoomIn 0.4s ease; }
+        .modal-details { text-align: center; margin-top: 20px; }
+        .modal-details h3 { font-family: 'Barabara'; color: #0038A8; font-size: 26px; margin-bottom: 5px; }
+        .modal-details p { color: #666; font-size: 16px; }
+
+        @keyframes slideUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
 </head>
 <body>
 
     <div class="top-accent"></div>
-    <img src="ariya.jpg" alt="Ariya" class="ariya-badge">
+    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
 
     <header>
         <a href="index.html">
-            <img src="AlabatLogo.png" alt="Alabat Logo" class="nav-logo">
+            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
         </a>
     </header>
 
     <nav>
         <div class="nav-container">
+            <div class="nav-slider" id="navSlider"></div>
             <a href="index.html">HOME</a>
-            <a href="about.html" class="active">ABOUT</a>
+            <a href="about.html" class="active" id="activeLink">ABOUT</a>
             <a href="destinations.html">DESTINATIONS</a>
             <a href="products.html">PRODUCTS</a>
             <a href="contact.html">CONTACT</a>
@@ -166,21 +190,13 @@
         <p class="hero-sub">QUEZON, PHILIPPINES</p>
     </section>
 
-    <div class="grid-container">
-        <div class="grid-item" onclick="openZoom(this, 'Farmers of Alabat', 'The hardworking local farmers processing organic goods.')">
-            <img src="farmersbg.png" alt="Farmers">
-        </div>
-        <div class="grid-item" onclick="openZoom(this, 'Pulong Bato', 'A natural rock formation and crystal clear waters of Villa Norte.')">
-            <img src="PulongBatoo.png" alt="Rocks">
-        </div>
-        <div class="grid-item" onclick="openZoom(this, 'Tumii Peak', 'The highest point in Alabat offering a 360-degree view.')">
-            <img src="tumiispeak.jpg" alt="Peak">
-        </div>
-        <div class="grid-item" onclick="openZoom(this, 'Alabat Cove', 'A serene coastal area perfect for witnessing the sunset.')">
-            <img src="alabatcove.jpg" alt="Cove">
-        </div>
-        <div class="grid-item" onclick="openZoom(this, 'Island Overview', 'A bird\'s eye view of the lush greenery.')">
-            <img src="background.jpg" alt="Overview">
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <img src="farmersbg.png" class="about-photo" onclick="openZoom(this, 'Farmers of Alabat', 'The hardworking local farmers processing organic goods.')">
+            <img src="PulongBatoo.png" class="about-photo" onclick="openZoom(this, 'Pulong Bato', 'A natural rock formation and crystal clear waters of Villa Norte.')">
+            <img src="tumiispeak.jpg" class="about-photo" onclick="openZoom(this, 'Tumii Peak', 'The highest point in Alabat offering a 360-degree view of the island.')">
+            <img src="alabatcove.jpg" class="about-photo" onclick="openZoom(this, 'Alabat Cove', 'A serene coastal area perfect for witnessing the sunset.')">
+            <img src="background.jpg" class="about-photo" onclick="openZoom(this, 'Island Overview', 'A bird\'s eye view of the lush greenery and blue waters.')">
         </div>
     </div>
 
@@ -204,8 +220,7 @@
         <p>Another local folklore says that the name 'Alabat' was from Muslim origins where Alabat comes from Allah-bat, and if the word is mixed up actually means <strong>Bathala</strong>, the local word for god.</p>
     </div>
 
-    <div class="modal" id="zoomModal">
-        <span class="close-btn" onclick="closeZoom()">×</span>
+    <div class="modal" id="zoomModal" onclick="closeZoom()">
         <img class="modal-content" id="modalImg">
         <div class="modal-details">
             <h3 id="modalTitle"></h3>
@@ -214,15 +229,26 @@
     </div>
 
     <script>
+        // Original functionality maintained
+        function updateNavSlider() {
+            const activeLink = document.getElementById('activeLink');
+            const slider = document.getElementById('navSlider');
+            if (activeLink && slider) {
+                slider.style.width = activeLink.offsetWidth + "px";
+                slider.style.left = activeLink.offsetLeft + "px";
+            }
+        }
+        window.addEventListener('load', updateNavSlider);
+        window.addEventListener('resize', updateNavSlider);
+
         const modal = document.getElementById('zoomModal');
         const modalImg = document.getElementById('modalImg');
         const modalTitle = document.getElementById('modalTitle');
         const modalDesc = document.getElementById('modalDesc');
 
-        function openZoom(el, title, description) {
-            const img = el.querySelector('img');
+        function openZoom(imgElement, title, description) {
             modal.classList.add('active');
-            modalImg.src = img.src;
+            modalImg.src = imgElement.src;
             modalTitle.innerText = title;
             modalDesc.innerText = description;
         }
