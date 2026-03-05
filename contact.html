@@ -88,7 +88,7 @@ body::before {
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
+       /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
             position: sticky; 
             top: 40px; 
@@ -120,6 +120,17 @@ body::before {
             box-shadow: 2px 2px 0px #CE1126; border-radius: 5px;
             z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Mobile Adjustments (Uniform across all pages) */
+        @media (max-width: 480px) {
+            header { height: 110px; }
+            .top-left-logo { width: 45px; top: 50px; }
+            .top-right-logo { width: 60px; top: 45px; }
+            .nav-logo { height: 45px; }
+            nav { height: 50px; }
+            .nav-links a { font-size: 10px; padding: 10px 6px; }
+            .nav-slider { height: 30px; }
         }
 
         /* --- CONTACT CONTENT --- */
