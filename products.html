@@ -26,7 +26,7 @@
         /* --- BRANDED PATTERN TOP BAR (STANDARDIZED) --- */
         .top-accent {
             height: 40px;
-            background-image: url('image_8311da.png');
+            background-image: url('topper.png');
             background-size: auto 100%;
             background-repeat: repeat-x;
             width: 100%;
@@ -36,9 +36,9 @@
             border-bottom: 2px solid #fff;
         }
 
-        /* --- HEADER & BRANDING (STANDARDIZED HEIGHT) --- */
+        /* --- HEADER & BRANDING (STANDARDIZED) --- */
         header {
-            height: 125px; /* Locked height to prevent jumping */
+            height: 125px;
             padding-top: 40px; 
             display: flex;
             align-items: center;
@@ -50,27 +50,27 @@
             border-bottom: 1px solid #eee;
         }
         .nav-logo { height: 60px; width: auto; }
-        
-        /* --- SIDE LOGOS (LOCKED POSITION) --- */
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
         /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
             position: sticky; 
-            top: 40px; /* Sticks exactly below the 40px pattern */
-            height: 60px; /* Locked height */
+            top: 40px; 
+            height: 60px;
             z-index: 3000; 
             background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #eee;
-            padding: 0 10px;
-            display: flex; justify-content: space-between; align-items: center;
+            width: 100%;
+            display: flex; align-items: center;
         }
         .nav-container {
             position: relative; flex: 1; display: flex; 
             justify-content: center;
+            overflow-x: auto; scrollbar-width: none;
         }
+        .nav-container::-webkit-scrollbar { display: none; }
         
         .nav-links { display: flex; list-style: none; gap: 5px; }
         .nav-links a {
@@ -87,17 +87,6 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* MOBILE NAV TWEAKS (STANDARDIZED) */
-        @media (max-width: 480px) {
-            header { height: 110px; }
-            .ariya-badge { width: 45px; top: 50px; }
-            .top-right-logo { width: 60px; top: 45px; }
-            .nav-logo { height: 45px; }
-            nav { height: 50px; }
-            .nav-links a { font-size: 10px; padding: 10px 6px; }
-            .nav-slider { height: 30px; }
-        }
-
         /* --- CART ICON --- */
         .cart-trigger {
             background: #0038A8; width: 44px; height: 44px; border-radius: 8px;
@@ -112,7 +101,7 @@
             justify-content: center; border: 2px solid #fff;
         }
 
-        /* --- MAIN LAYOUT --- */
+        /* --- MAIN CONTENT LAYOUT --- */
         .main-content { padding: 30px 20px; max-width: 1200px; margin: 0 auto; }
         
         .made-with-love { 
@@ -169,7 +158,6 @@
             border-radius: 8px; border: none; font-weight: 900; font-size: 22px;
             cursor: pointer; box-shadow: 3px 3px 0px #CE1126; transition: 0.1s;
         }
-        .add-cart-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px #CE1126; }
 
         /* --- CART SIDEBAR --- */
         .cart-sidebar {
@@ -194,8 +182,19 @@
         /* Desktop Adjustments */
         @media (min-width: 992px) {
             .main-content { display: grid; grid-template-columns: 1.3fr 1fr; gap: 50px; padding: 60px 20px; }
-            .video-side { position: sticky; top: 100px; }
+            .video-side { position: sticky; top: 110px; }
             .made-with-love { text-align: left; font-size: 52px; margin-bottom: 40px; }
+        }
+
+        /* MOBILE TWEAKS */
+        @media (max-width: 480px) {
+            header { height: 110px; }
+            .ariya-badge { width: 45px; top: 50px; }
+            .top-right-logo { width: 60px; top: 45px; }
+            .nav-logo { height: 45px; }
+            nav { height: 50px; }
+            .nav-links a { font-size: 10px; padding: 10px 6px; }
+            .nav-slider { height: 30px; }
         }
 
         /* --- ZOOM OVERLAY --- */
@@ -219,7 +218,7 @@
 
     <div class="top-accent"></div>
     <img src="ariya.jpg" alt="Ariya" class="ariya-badge">
-    <img src="niyogyuganlogo.jpg" alt="Niyogyugan" class="top-right-logo">
+    <img src="niyogyuganlogo.png" alt="Niyogyugan" class="top-right-logo">
 
     <header>
         <a href="index.html"><img src="AlabatLogo.png" alt="Alabat Logo" class="nav-logo"></a>
@@ -287,7 +286,7 @@
     </div>
 
     <script>
-        // --- NAVIGATION SLIDER ---
+        // Standard Navigation logic
         const shade = document.getElementById('navShade');
         const activeLink = document.getElementById('activeLink');
         function moveShade(el) {
@@ -299,7 +298,7 @@
         window.addEventListener('load', () => moveShade(activeLink));
         window.addEventListener('resize', () => moveShade(activeLink));
 
-        // --- VIDEO LOGIC ---
+        // Video & Product Inventory Logic
         const vTitle = document.getElementById('videoTitle');
         const videoFrame = document.getElementById('processVideo');
         const myVideos = [
@@ -310,21 +309,14 @@
         ];
         let vIdx = 0;
         
-        function fadeLabel() {
-            vTitle.style.opacity = '1';
-            setTimeout(() => { vTitle.style.opacity = '0'; }, 1000);
-        }
-        
         function updateVideo() { 
             const vid = myVideos[vIdx];
             videoFrame.src = `https://www.youtube.com/embed/${vid.id}?autoplay=1&loop=1&playlist=${vid.id}`; 
             vTitle.innerText = vid.title;
-            fadeLabel();
         }
         function nextVideo() { vIdx = (vIdx + 1) % myVideos.length; updateVideo(); }
         function prevVideo() { vIdx = (vIdx - 1 + myVideos.length) % myVideos.length; updateVideo(); }
 
-        // --- PRODUCT INVENTORY ---
         const inventory = [
             { name: "BALAT LITSON", price: "₱100.00", img: "balatlitchon.jpg", desc: "Alabat's signature crispy bread snack! A local favorite." },
             { name: "BANANA CHIPS", price: "₱120.00", img: "bananachips.jpg", desc: "Crispy Saba slices glazed with natural coco honey." },
@@ -395,7 +387,6 @@
         window.addEventListener('load', () => {
             renderProducts();
             updateCart();
-            fadeLabel();
         });
     </script>
 </body>
