@@ -15,7 +15,7 @@
             background-size: cover; color: white; min-height: 100vh; overflow-x: hidden;
         }
 
-        /* --- LOGO & NAV (Glow and Pop Removed) --- */
+        /* --- LOGO & NAV --- */
         .top-left-logo {
             position: absolute; top: 20px; left: 20px; width: 100px; 
             z-index: 2000; opacity: 0.8;
@@ -49,7 +49,7 @@
             top: 5px; z-index: 1; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* --- CART UI (Glow Removed) --- */
+        /* --- CART UI --- */
         .cart-trigger { 
             margin-left: 15px; position: relative; cursor: pointer; 
             background: #00AEEF; width: 45px; height: 45px; border-radius: 50%; 
@@ -213,13 +213,24 @@
         }
         window.addEventListener('load', () => moveShade(currentActive));
 
+        // --- EDITABLE VIDEO PLAYLIST ---
         const videoFrame = document.getElementById('processVideo');
-        const myVideos = ["Na-BqhLr-PA", "qLVsOpQ2sUM", "y2l_bqQWGEM"];
+        const myVideos = [
+            "TdZzwAT-FFw",
+            "Na-BqhLr-PA", 
+            "qLVsOpQ2sUM", 
+            "y2l_bqQWGEM"
+        ];
+        
         let vIdx = 0;
-        function updateVideo() { videoFrame.src = `https://www.youtube.com/embed/${myVideos[vIdx]}?autoplay=1&loop=1&playlist=${myVideos[vIdx]}`; }
+        function updateVideo() { 
+            const vidId = myVideos[vIdx];
+            videoFrame.src = `https://www.youtube.com/embed/${vidId}?autoplay=1&loop=1&playlist=${vidId}`; 
+        }
         function nextVideo() { vIdx = (vIdx + 1) % myVideos.length; updateVideo(); }
         function prevVideo() { vIdx = (vIdx - 1 + myVideos.length) % myVideos.length; updateVideo(); }
 
+        // --- EDITABLE PRODUCT INVENTORY ---
         const inventory = [
             { name: "BALAT LITSON", price: "₱100.00", content: "100% Pure Organic Made with love of Alabatin Farmers", img: "balatlitchon.jpg", desc: "Alabat's signature crispy bread snack! Thin, toasted strips that mimic the irresistible crunch of roasted pig skin.", available: true },
             { name: "BANANA CHIPS", price: "₱120.00", content: "100% Pure Organic Made with love of Alabatin Farmers", img: "bananachips.jpg", desc: "Crispy, golden 'Saba' banana slices lightly coated with Alabat coco sugar and honey.", available: true },
