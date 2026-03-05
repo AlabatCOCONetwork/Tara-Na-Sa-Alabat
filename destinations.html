@@ -25,15 +25,17 @@
         }
 
         /* --- PHILIPPINE FLAG TOP BAR --- */
-        .top-accent {
-            height: 6px;
-            background: linear-gradient(90deg, #0038A8 25%, #CE1126 25%, #CE1126 50%, #FFD300 50%, #FFD300 75%, #00AF66 75%);
+             .top-accent {
+            height: 40px; /* Increased height to show the pattern */
+            background-image: url('topper.png');
+            background-size: auto 100%; /* Keeps pattern proportions */
+            background-repeat: repeat-x; /* Tiles horizontally */
             width: 100%;
             position: fixed;
             top: 0;
-            z-index: 3000;
+            z-index: 4000;
+            border-bottom: 2px solid #fff; /* Optional: adds a crisp edge */
         }
-
         /* --- HEADER AREA --- */
         header {
             padding: 50px 20px 15px;
