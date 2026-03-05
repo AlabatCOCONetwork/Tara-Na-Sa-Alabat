@@ -253,8 +253,11 @@
 
         function renderProducts() {
             const inventory = JSON.parse(localStorage.getItem('alabat_inventory')) || [
-                { name: "COCO SUGAR", price: "₱180.00", content: "100% Pure Organic", img: "coco-sugar.jpg", desc: "Healthy alternative sugar produced from Alabat coconuts.", available: true },
-                { name: "VIRGIN COCONUT OIL", price: "₱250.00", content: "Cold-Pressed", img: "vco.jpg", desc: "Multi-purpose premium oil for health and wellness.", available: true }
+                { name: "COCO SUGAR", price: "₱180.00", content: "100% Pure Organic Made with love of Alabatin Farmers", img: "coco-sugar.jpg", desc: "Healthy alternative sugar produced from Alabat coconuts.", available: true },
+                { name: "CACAO BRITTLE", price: "₱150.00", content: "100% Pure Organic Made with love of Alabatin Farmers", img: "kakaobrittle.jpg", desc: "Thin, crunchy, and intensely chocolatey—a perfect blend of sweet caramel and roasted cacao nibs.", available: true },
+                { name: "CACAO TABLEA", price: "₱120.00", content: "100% Pure Organic Made with love of Alabatin Farmers", img: "kakaotablea.jpg", desc: "Traditional rich chocolate discs perfect for a thick, authentic 'Sikwate' or champorado.", available: true },
+                { name: "LIPOTE WINE", price: "₱280.00", content: "100% Pure Organic Made with love of Alabatin Farmers", img: "lipote.jpg", desc: "Exotic and antioxidant-rich fermented wine crafted from indigenous wild Lipote berries.", available: true },
+                { name: "VIRGIN COCONUT OIL", price: "₱250.00", content: "100% Pure Organic Made with love of Alabatin Farmers", img: "vco.jpg", desc: "Multi-purpose premium oil for health and wellness.", available: true }
             ];
             const listDiv = document.getElementById('products-list');
             listDiv.innerHTML = inventory.map((prod, index) => {
