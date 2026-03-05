@@ -33,7 +33,7 @@
             align-items: center;
         }
 
-        /* --- 1. TOP BAR (STANDARDIZED) --- */
+         /* --- BRANDED PATTERN TOP BAR --- */
         .top-accent {
             height: 40px;
             background-image: url('topper.png');
@@ -43,10 +43,27 @@
             position: fixed;
             top: 0;
             z-index: 4000;
-            border-bottom: 2px solid #fff;
+            border-bottom: 0px solid #fff;
         }
 
-        /* --- 2. HEADER & BRANDING --- */
+        /* --- HEADER AREA (FIXED HEIGHT) --- */
+        header {
+            height: 125px; /* Fixed height to prevent jumping */
+            padding-top: 40px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), url('farmersbg.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .nav-logo { height: 60px; width: auto; }
+
+        /* --- SIDE LOGOS (LOCKED POSITION) --- */
+        .top-left-logo { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
+        .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
+/* --- HEADER & BRANDING (STANDARDIZED) --- */
         header {
             height: 125px;
             padding-top: 40px; 
@@ -64,7 +81,7 @@
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- 3. STICKY NAV --- */
+        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
             position: sticky; 
             top: 40px; 
