@@ -26,6 +26,8 @@
         }
 
         .top-accent {
+         /* --- BRANDED PATTERN TOP BAR --- */
+        .top-accent {
             height: 40px;
             background-image: url('topper.png');
             background-size: auto 100%;
@@ -34,16 +36,34 @@
             position: fixed;
             top: 0;
             z-index: 4000;
-            border-bottom: 2px solid #fff;
+            border-bottom: 0px solid #fff;
         }
 
+        /* --- HEADER AREA (FIXED HEIGHT) --- */
+        header {
+            height: 125px; /* Fixed height to prevent jumping */
+            padding-top: 40px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), url('farmersbg.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .nav-logo { height: 60px; width: auto; }
+
+        /* --- SIDE LOGOS (LOCKED POSITION) --- */
+        .top-left-logo { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
+        .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
+/* --- HEADER & BRANDING (STANDARDIZED) --- */
         header {
             height: 125px;
             padding-top: 40px; 
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.98)), url('farmersbg.png');
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.98)), url('background.jpg');
             background-size: cover;
             background-position: center;
             width: 100%;
@@ -54,7 +74,7 @@
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- FIXED SCROLLABLE NAV --- */
+        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
             position: sticky; 
             top: 40px; 
@@ -65,22 +85,15 @@
             border-bottom: 1px solid #eee;
             width: 100%;
             display: flex; align-items: center;
-            padding: 0 15px;
         }
         .nav-container {
-            position: relative; 
-            flex: 1; 
-            display: flex; 
-            overflow-x: auto; 
-            scrollbar-width: none; /* Firefox */
+            position: relative; flex: 1; display: flex; 
+            justify-content: center;
+            overflow-x: auto; scrollbar-width: none;
         }
-        .nav-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+        .nav-container::-webkit-scrollbar { display: none; }
         
-        .nav-links { 
-            display: flex; 
-            list-style: none; 
-            gap: 5px; 
-        }
+        .nav-links { display: flex; list-style: none; gap: 5px; }
         .nav-links a {
             position: relative; z-index: 2;
             text-decoration: none; color: #0038A8; 
