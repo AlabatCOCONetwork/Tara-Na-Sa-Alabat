@@ -32,7 +32,7 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* --- LOGO (Animations Removed) --- */
+        /* --- LOGO --- */
         .top-left-logo {
             position: absolute; top: 20px; left: 20px; width: 100px; 
             z-index: 2000;
@@ -41,7 +41,8 @@
         .logo-wrapper {
             display: flex; justify-content: center; padding-top: 40px; width: 100%;
         }
-        .nav-logo { height: 60px; width: auto; filter: drop-shadow(0 0 10px rgba(0,174,239,0.3)); }
+        /* Glow/Shadow removed here */
+        .nav-logo { height: 60px; width: auto; filter: none; }
 
         /* --- NAVIGATION --- */
         nav { 
@@ -95,10 +96,10 @@
             background: #00AEEF; color: white; padding: 16px 35px; 
             border-radius: 50px; text-decoration: none; font-weight: 900; 
             font-size: 13px; text-transform: uppercase; transition: 0.3s; 
-            display: inline-block; box-shadow: 0 10px 20px rgba(0,174,239,0.3);
+            display: inline-block; box-shadow: none; /* Glow removed */
         }
 
-        /* --- MEDIA GROUP (YOUTUBE INTEGRATION) --- */
+        /* --- MEDIA GROUP --- */
         .media-group {
             display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 550px;
         }
@@ -106,7 +107,7 @@
         .video-box { 
             width: 100%; position: relative; border-radius: 25px; 
             border: 3px solid rgba(255,255,255,0.8); overflow: hidden; 
-            background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: #000; box-shadow: none; /* Glow removed */
             aspect-ratio: 16 / 9;
         }
         
@@ -122,7 +123,7 @@
             backdrop-filter: blur(5px); pointer-events: none;
         }
 
-        /* --- GLASS VIDEO CONTROLS --- */
+        /* --- VIDEO CONTROLS --- */
         .video-controls {
             display: flex;
             justify-content: center;
@@ -145,7 +146,7 @@
             align-items: center;
             justify-content: center;
             transition: 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: none; /* Glow removed */
         }
 
         .video-nav-btn:hover {
@@ -175,7 +176,7 @@
         @media (max-width: 480px) {
             .preview-row { flex-direction: column; }
             .main-title { font-size: 50px; }
-            .video-nav-btn { width: 60px; height: 60px; font-size: 22px; } /* Thicker for thumbs */
+            .video-nav-btn { width: 60px; height: 60px; font-size: 22px; }
         }
     </style>
 </head>
@@ -240,7 +241,6 @@
     </div>
 
     <script>
-        // --- NAVIGATION SLIDER ---
         function updateNavSlider() {
             const activeLink = document.getElementById('activeLink');
             const slider = document.getElementById('navSlider');
@@ -252,7 +252,6 @@
         window.addEventListener('load', updateNavSlider);
         window.addEventListener('resize', updateNavSlider);
 
-        // --- YOUTUBE VIDEO CONTROLS ---
         const heroVideo = document.getElementById('heroVideo');
         const playlist = ["pSD9s5_IVJk", "B7YRdNexH3c"];
         let vIdx = 0;
