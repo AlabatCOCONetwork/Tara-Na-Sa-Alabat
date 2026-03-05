@@ -3,36 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products | Alabat Tourism</title>
+    <title>Destinations | Alabat Tourism</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
         body {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('farmersbg.png') no-repeat center center fixed; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('destinationbg.jpg') no-repeat center center fixed; 
             background-size: cover; color: white; min-height: 100vh; overflow-x: hidden;
         }
 
-        /* --- LOGO & NAV --- */
+        /* --- ANIMATIONS --- */
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* --- LOGO --- */
         .top-left-logo {
             position: absolute; top: 20px; left: 20px; width: 100px; 
-            z-index: 2000; opacity: 0.8;
+            z-index: 2000; animation: slideUp 1s ease forwards;
         }
 
-        .logo-wrapper { display: flex; justify-content: center; padding-top: 40px; width: 100%; }
+        .logo-wrapper {
+            display: flex; justify-content: center; padding-top: 40px; width: 100%;
+            animation: slideUp 1s ease forwards;
+        }
         .nav-logo { height: 60px; filter: drop-shadow(0 0 10px rgba(0,174,239,0.3)); }
 
-        nav { 
-            display: flex; justify-content: center; align-items: center; 
-            padding: 15px; position: sticky; top: 0; z-index: 1000; width: 100%;
-        }
-
+        /* --- NAVIGATION --- */
+        nav { display: flex; justify-content: center; padding: 15px; position: sticky; top: 0; z-index: 1000; width: 100%; }
         .nav-container {
             position: relative; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
             padding: 5px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex; align-items: center; max-width: 90vw; overflow-x: auto; scrollbar-width: none;
+            display: flex; align-items: center; max-width: 95vw; overflow-x: auto; scrollbar-width: none;
         }
         .nav-container::-webkit-scrollbar { display: none; }
         
@@ -50,83 +56,91 @@
             top: 5px; z-index: 1; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* --- CART UI --- */
-        .cart-trigger { 
-            margin-left: 15px; position: relative; cursor: pointer; 
-            background: #00AEEF; width: 45px; height: 45px; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; 
-            box-shadow: 0 5px 15px rgba(0,174,239,0.4);
+        /* --- HERO & VIDEO --- */
+        .adventure-container { 
+            display: flex; flex-direction: column; align-items: center; 
+            padding: 40px 5%; gap: 30px; text-align: center;
         }
-        .cart-count { 
-            position: absolute; top: -2px; right: -2px; background: #ff4757; 
-            color: white; font-size: 10px; font-weight: 900; width: 20px; 
-            height: 20px; border-radius: 50%; display: flex; align-items: center; 
-            justify-content: center; border: 2px solid white;
-        }
-        
-        .cart-sidebar { 
-            position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; 
-            height: 100vh; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); 
-            z-index: 3000; padding: 30px 20px; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            color: #1a1a1a; display: flex; flex-direction: column;
-        }
-        .cart-sidebar.active { right: 0; }
-        .cart-header { font-weight: 900; font-size: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; }
-        #cart-items-list { flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .cart-item { display: flex; align-items: center; gap: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
-        .cart-item img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; }
-        
-        .checkout-pill { 
-            background: #111; color: white; padding: 18px; border-radius: 50px; 
-            text-decoration: none; font-weight: 800; text-align: center; 
-            text-transform: uppercase; margin-top: 20px; transition: 0.3s;
+        @media (min-width: 1024px) {
+            .adventure-container { flex-direction: row; text-align: left; padding: 60px 8%; gap: 60px; }
+            .top-left-logo { width: 150px; top: 30px; left: 30px; }
         }
 
-        /* --- MAIN CONTENT --- */
-        .main-content { 
-            display: flex; flex-direction: column; padding: 20px 5% 80px; gap: 40px; 
-        }
-        @media (min-width: 1100px) {
-            .main-content { flex-direction: row; align-items: flex-start; padding: 40px 8%; gap: 60px; }
-            .video-side { position: sticky; top: 120px; flex: 1.2; }
-            .slider-section { flex: 1; }
-            .top-left-logo { width: 140px; }
-        }
-
-        .made-with-love { font-size: clamp(32px, 7vw, 55px); font-weight: 900; line-height: 0.9; margin-bottom: 20px; }
+        .adventure-text-box { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; }
+        .adventure-text { font-size: clamp(35px, 8vw, 70px); font-weight: 900; line-height: 0.9; text-transform: uppercase; }
         
-        /* --- YOUTUBE FRAME --- */
+        .book-now-btn { 
+            align-self: center; padding: 15px 40px; background: #00AEEF;
+            color: white; text-decoration: none; font-weight: 900; font-size: 13px; 
+            letter-spacing: 1px; border-radius: 50px; transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0,174,239,0.3);
+        }
+        @media (min-width: 1024px) { .book-now-btn { align-self: flex-start; } }
+
+        .video-wrapper { width: 100%; max-width: 650px; position: relative; }
         .video-frame { 
             position: relative; 
+            width: 100%; 
             border-radius: 25px; 
             border: 3px solid white; 
             overflow: hidden; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
             background: #000;
             aspect-ratio: 16/9;
             cursor: pointer;
         }
-        .video-frame iframe { width: 100%; height: 100%; border: none; }
+        .video-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-label { 
+            position: absolute; top: 15px; left: 15px; z-index: 10; 
+            font-weight: 800; font-size: 10px; text-transform: uppercase; 
+            background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 4px;
+            pointer-events: none;
+        }
 
-        /* --- PRODUCT CARDS --- */
-        .product-list { display: flex; flex-direction: column; gap: 20px; }
-        .product-card { 
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); 
-            padding: 20px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); 
-            display: flex; gap: 20px; cursor: pointer; transition: 0.3s;
+        /* --- SLIDER --- */
+        .slider-container { 
+            padding: 20px 0 60px; width: 100%; position: relative; 
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); 
         }
-        .product-card:hover { background: rgba(255, 255, 255, 0.1); transform: scale(1.02); }
-        .product-card img { width: 100px; height: 100px; border-radius: 20px; object-fit: cover; }
-        .product-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        .product-name { font-size: 16px; font-weight: 900; color: #00AEEF; text-transform: uppercase; }
-        .product-description { font-size: 12px; opacity: 0.7; margin: 5px 0; }
-        .list-price { font-weight: 900; font-size: 15px; }
-        
-        .add-cart-btn { 
-            background: white; color: black; width: 40px; height: 40px; 
-            border-radius: 12px; display: flex; align-items: center; 
-            justify-content: center; font-weight: 900; font-size: 20px; border: none;
+        .slider-wrapper { 
+            display: flex; gap: 20px; overflow-x: auto; 
+            padding: 20px 10%; scrollbar-width: none; 
         }
-        .sold-out-badge { background: #ff4757; font-size: 9px; padding: 5px 10px; border-radius: 5px; font-weight: 900; }
+        .slider-wrapper::-webkit-scrollbar { display: none; }
+
+        .destination-card { 
+            flex: 0 0 85%; max-width: 350px; background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(20px); padding: 20px; border-radius: 25px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer;
+            transition: 0.4s ease; 
+        }
+        @media (min-width: 768px) { .destination-card { flex: 0 0 350px; } }
+        .destination-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
+        .destination-card h3 { font-size: 18px; font-weight: 800; text-transform: uppercase; color: #00AEEF; }
+        .destination-card p { font-size: 12px; opacity: 0.7; line-height: 1.4; margin-top: 5px; }
+
+        /* --- MODAL --- */
+        .zoom-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); 
+            display: none; justify-content: center; align-items: center; z-index: 5000; 
+            padding: 20px;
+        }
+        .zoom-overlay.active { display: flex; }
+        .zoom-card { 
+            background: white; color: #111; width: 100%; max-width: 500px; 
+            border-radius: 30px; overflow: hidden; position: relative; 
+            animation: slideUp 0.4s ease forwards;
+        }
+        .zoom-img { width: 100%; height: 250px; object-fit: cover; }
+        .zoom-details { padding: 25px; }
+        .zoom-title { font-size: 24px; font-weight: 900; color: #00AEEF; text-transform: uppercase; }
+        .zoom-desc { font-size: 14px; color: #444; margin-top: 10px; line-height: 1.6; }
+        .close-zoom { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -134,7 +148,9 @@
     <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
 
     <div class="logo-wrapper">
-        <a href="index.html"><img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo"></a>
+        <a href="index.html">
+            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+        </a>
     </div>
 
     <nav>
@@ -143,124 +159,104 @@
             <ul class="nav-links">
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="about.html">ABOUT</a></li>
-                <li><a href="destinations.html">DESTINATIONS</a></li>
-                <li><a href="products.html" id="activeLink" class="active">PRODUCTS</a></li>
+                <li><a href="destinations.html" id="activeLink" class="active">DESTINATIONS</a></li>
+                <li><a href="products.html">PRODUCTS</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
             </ul>
         </div>
-        <div class="cart-trigger" onclick="toggleCart()">
-            <span>🛒</span>
-            <div class="cart-count" id="cart-badge">0</div>
-        </div>
     </nav>
 
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">YOUR BASKET <span onclick="toggleCart()" style="cursor:pointer;">✕</span></div>
-        <div id="cart-items-list"></div>
-        <div style="margin-top:auto; padding-top:20px; border-top:2px solid #eee;">
-            <div style="display:flex; justify-content:space-between; font-weight:900; font-size:1.2rem;">
-                <span>Total</span>
-                <span id="cart-total-amount">₱0.00</span>
+    <div class="zoom-overlay" id="zoomOverlay" onclick="closeZoom(event)">
+        <div class="zoom-card">
+            <button class="close-zoom" onclick="closeZoom(event)">✕</button>
+            <img src="" id="zoomImg" class="zoom-img">
+            <div class="zoom-details">
+                <h2 id="zoomTitle" class="zoom-title"></h2>
+                <p id="zoomDesc" class="zoom-desc"></p>
             </div>
-            <a href="checkout.html" class="checkout-pill" style="display:block;">Secure Checkout</a>
         </div>
     </div>
 
-    <div class="main-content">
-        <div class="video-side">
-            <h1 class="made-with-love">MADE WITH LOVE<br>JUST FOR YOU!</h1>
+    <div class="adventure-container">
+        <div class="adventure-text-box">
+            <div class="adventure-text">YOUR NEXT<br>ADVENTURE<br>AWAITS</div>
+            <a href="contact.html" class="book-now-btn">BOOK NOW</a>
+        </div>
+        <div class="video-wrapper">
             <div class="video-frame" onclick="changeVideo()">
-                <iframe id="processVideo" 
-                        src="https://www.youtube.com/embed/Na-BqhLr-PA?autoplay=0&loop=1&playlist=Na-BqhLr-PA" 
+                <div class="video-label" id="videoTitle">DISCOVER ALABAT</div>
+                <iframe id="videoPlayer" 
+                        src="https://www.youtube.com/embed/J_i3Oupb4R4?autoplay=0&loop=1&playlist=J_i3Oupb4R4" 
                         allow="autoplay; encrypted-media" allowfullscreen>
                 </iframe>
             </div>
         </div>
-        <div class="slider-section">
-            <div class="product-list" id="products-list"></div>
-        </div>
+    </div>
+
+    <div class="slider-container">
+        <div class="slider-wrapper" id="destinations-list"></div>
     </div>
 
     <script>
         const shade = document.getElementById('navShade');
         let currentActive = document.getElementById('activeLink');
 
-        function moveShade(el) {
-            shade.style.width = el.offsetWidth + 'px';
-            shade.style.left = el.offsetLeft + 'px';
+        function moveShade(element) {
+            shade.style.width = `${element.offsetWidth}px`;
+            shade.style.left = `${element.offsetLeft}px`;
         }
 
-        window.addEventListener('load', () => moveShade(currentActive));
+        window.onload = () => moveShade(currentActive);
         window.onresize = () => moveShade(currentActive);
 
         // --- YOUTUBE VIDEO TOGGLE ---
-        const videoFrame = document.getElementById('processVideo');
-        const myVideos = ["Na-BqhLr-PA", "qLVsOpQ2sUM", "y2l_bqQWGEM"];
+        const videoFrame = document.getElementById('videoPlayer');
+        const videoTitle = document.getElementById('videoTitle');
+        
+        const myVideos = [
+            { title: "DISCOVER ALABAT", id: "J_i3Oupb4R4" },
+            { title: "ALABAT ISLAND EXPERIENCE", id: "VEgYSAwmH4c" }
+        ];
         let vIdx = 0;
 
         function changeVideo() {
             vIdx = (vIdx + 1) % myVideos.length;
-            const newId = myVideos[vIdx];
+            const newId = myVideos[vIdx].id;
+            // Autoplay is set to 1 here so it plays with sound once the user interacts/clicks
             videoFrame.src = `https://www.youtube.com/embed/${newId}?autoplay=1&loop=1&playlist=${newId}`;
+            videoTitle.innerText = myVideos[vIdx].title;
         }
 
-        let cart = JSON.parse(localStorage.getItem('alabat_cart')) || [];
+        const myDestinations = [
+            { name: "Pulong Bato", img: "pulongbato.jpg", short: "Iconic white rock formation.", long: "Pulong Bato is one of Alabat's most famous natural landmarks, featuring a stunning white stone structure surrounded by crystal clear waters." },
+            { name: "Alabat Cove", img: "alabatcove.jpg", short: "Golden sunsets and calm seas.", long: "A serene escape offering breathtaking golden sunsets. The calm waters make it an ideal spot for peaceful afternoons." },
+            { name: "Tumiis Falls", img: "tumiisfalls.jpg", short: "Hidden multi-tiered waterfall.", long: "Nestled deep in the lush greenery, Tumiis Falls features multiple levels of refreshing spring water cascades." },
+            { name: "Tumiis Peak", img: "tumiispeak.jpg", short: "High-altitude panoramic views.", long: "The best vantage point on the island, providing a 360-degree view of the surrounding ocean and green landscapes." }
+        ];
 
-        function renderProducts() {
-            const inventory = JSON.parse(localStorage.getItem('alabat_inventory')) || [
-                { name: "COCO SUGAR", price: "₱180.00", content: "100% Pure Organic", img: "coco-sugar.jpg", desc: "Healthy alternative sugar produced from Alabat coconuts.", available: true },
-                { name: "VIRGIN COCONUT OIL", price: "₱250.00", content: "Cold-Pressed", img: "vco.jpg", desc: "Multi-purpose premium oil for health and wellness.", available: true }
-            ];
-            const listDiv = document.getElementById('products-list');
-            listDiv.innerHTML = inventory.map((prod, index) => {
-                const isAvail = prod.available !== false;
-                return `
-                    <div class="product-card">
-                        <img src="${prod.img}" style="${isAvail ? '' : 'filter:grayscale(1); opacity:0.5;'}">
-                        <div class="product-info">
-                            <h3 class="product-name">${prod.name}</h3>
-                            <p class="product-description">${prod.desc}</p>
-                            <span class="list-price">${prod.price}</span>
-                        </div>
-                        <div style="display:flex; align-items:center;">
-                            ${isAvail ? 
-                                `<button class="add-cart-btn" onclick="addToCart('${prod.name}', '${prod.img}', '${prod.price}')">+</button>` : 
-                                `<span class="sold-out-badge">SOLD OUT</span>`}
-                        </div>
-                    </div>`;
-            }).join('');
+        const listDiv = document.getElementById('destinations-list');
+        myDestinations.forEach((dest, index) => {
+            listDiv.innerHTML += `
+                <div class="destination-card" onclick="openZoom(${index})">
+                    <img src="${dest.img}" alt="${dest.name}">
+                    <h3>${dest.name}</h3>
+                    <p>${dest.short}</p>
+                </div>`;
+        });
+
+        function openZoom(index) {
+            const dest = myDestinations[index];
+            document.getElementById('zoomImg').src = dest.img;
+            document.getElementById('zoomTitle').innerText = dest.name;
+            document.getElementById('zoomDesc').innerText = dest.long;
+            document.getElementById('zoomOverlay').classList.add('active');
         }
 
-        function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); }
-        
-        function addToCart(name, img, price) {
-            const item = cart.find(i => i.name === name);
-            if (item) item.quantity++; else cart.push({ name, img, price, quantity: 1 });
-            updateCart();
-            if(!document.getElementById('cartSidebar').classList.contains('active')) toggleCart();
+        function closeZoom(e) {
+            if (e.target.id === 'zoomOverlay' || e.target.className === 'close-zoom') {
+                document.getElementById('zoomOverlay').classList.remove('active');
+            }
         }
-
-        function removeFromCart(name) { 
-            cart = cart.filter(i => i.name !== name); 
-            updateCart(); 
-        }
-
-        function updateCart() {
-            localStorage.setItem('alabat_cart', JSON.stringify(cart));
-            document.getElementById('cart-badge').innerText = cart.reduce((s, i) => s + i.quantity, 0);
-            const list = document.getElementById('cart-items-list');
-            let total = 0;
-            list.innerHTML = cart.map(i => {
-                total += parseFloat(i.price.replace(/[₱,]/g, '')) * i.quantity;
-                return `<div class="cart-item"><img src="${i.img}">
-                        <div style="flex:1"><h4>${i.name}</h4><p>${i.price} x ${i.quantity}</p></div>
-                        <span onclick="removeFromCart('${i.name}')" style="color:#ff4757; cursor:pointer;">✕</span></div>`;
-            }).join('');
-            document.getElementById('cart-total-amount').innerText = `₱${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
-        }
-
-        renderProducts();
-        updateCart();
     </script>
 </body>
 </html>
