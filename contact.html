@@ -27,43 +27,53 @@
             align-items: center;
         }
 
-        /* --- PHILIPPINE FLAG TOP BAR --- */
+        /* --- BRANDED PATTERN TOP BAR (STANDARDIZED) --- */
         .top-accent {
-            height: 6px;
-            background: linear-gradient(90deg, #0038A8 25%, #CE1126 25%, #CE1126 50%, #FFD300 50%, #FFD300 75%, #00AF66 75%);
+            height: 40px;
+            background-image: url('image_8311da.png');
+            background-size: auto 100%;
+            background-repeat: repeat-x;
             width: 100%;
             position: fixed;
             top: 0;
-            z-index: 3000;
+            z-index: 4000;
+            border-bottom: 2px solid #fff;
         }
 
-        /* --- HEADER AREA --- */
+        /* --- HEADER & BRANDING (STANDARDIZED) --- */
         header {
-            padding: 50px 20px 15px;
+            height: 125px;
+            padding-top: 40px; 
             display: flex;
+            align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.95)), url('background.jpg');
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.98)), url('background.jpg');
             background-size: cover;
             background-position: center;
             width: 100%;
+            position: relative;
+            border-bottom: 1px solid #eee;
         }
         .nav-logo { height: 60px; width: auto; }
-        .top-left-logo { width: 55px; position: absolute; top: 20px; left: 15px; z-index: 2000; }
+        .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
+        .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAV --- */
+        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
-            position: sticky; top: 6px; z-index: 1000; 
-            background: rgba(255, 255, 255, 0.9); 
+            position: sticky; 
+            top: 40px; 
+            height: 60px;
+            z-index: 3000; 
+            background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #eee;
-            padding: 10px 0;
             width: 100%;
+            display: flex; align-items: center;
         }
         .nav-container {
-            position: relative; display: flex; 
-            overflow-x: auto; scrollbar-width: none;
-            padding: 0 15px;
+            position: relative; flex: 1; display: flex; 
             justify-content: center;
+            overflow-x: auto; scrollbar-width: none;
         }
         .nav-container::-webkit-scrollbar { display: none; }
         
@@ -173,15 +183,22 @@
 
         @keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
 
-        @media (min-width: 1024px) {
-            .nav-logo { height: 80px; }
+        /* MOBILE TWEAKS */
+        @media (max-width: 480px) {
+            header { height: 110px; }
+            .ariya-badge { width: 45px; top: 50px; }
+            .top-right-logo { width: 60px; top: 45px; }
+            .nav-logo { height: 45px; }
+            nav { height: 50px; }
+            .nav-links a { font-size: 10px; padding: 10px 6px; }
         }
     </style>
 </head>
 <body>
 
     <div class="top-accent"></div>
-    <img src="ariya.jpg" alt="Ariya Logo" class="top-left-logo">
+    <img src="ariya.jpg" alt="Ariya Logo" class="ariya-badge">
+    <img src="niyogyuganlogo.jpg" alt="Niyogyugan Logo" class="top-right-logo">
 
     <header>
         <a href="index.html">
@@ -212,21 +229,19 @@
             </div>
             <div class="info-card">
                 <h3>Call Us</h3>
-                <a href="tel:00078263117">0947 826 3117</a>
+                <a href="tel:09478263117">0947 826 3117</a>
             </div>
             <div class="info-card">
                 <h3>Email Us</h3>
-                <a href="mailto:alabattourismoffice@gmail.com">alabattourism@gmail.com</a>
+                <a href="mailto:alabattourism@gmail.com">alabattourism@gmail.com</a>
             </div>
         </div>
     </div>
 
-    
-
     <div class="map-section">
         <div class="map-wrapper">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m122.2132!2m3!14.1033!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a1e5088924b245%3A0x867332f915720790!2sAlabat%2C%20Quezon!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph"></iframe>
-            <a href="https://maps.google.com?q=Alabat+Quezon+Tourist+Center" target="_blank" class="map-btn">GET DIRECTIONS</a>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3869.563212891341!2d122.0125!3d14.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b0000000000000%3A0x0!2zMTTCsDA2JzAwLjAiTiAxMjLCsDAwJzQ1LjAiRQ!5e0!3m2!1sen!2sph!4v1700000000000"></iframe>
+            <a href="https://maps.google.com" target="_blank" class="map-btn">GET DIRECTIONS</a>
         </div>
     </div>
 
