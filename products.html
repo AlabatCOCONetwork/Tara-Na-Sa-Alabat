@@ -23,46 +23,56 @@
             overflow-x: hidden;
         }
 
-        /* --- PHILIPPINE FLAG TOP BAR --- */
+        /* --- BRANDED PATTERN TOP BAR (STANDARDIZED) --- */
         .top-accent {
-            height: 6px;
-            background: linear-gradient(90deg, #0038A8 25%, #CE1126 25%, #CE1126 50%, #FFD300 50%, #FFD300 75%, #00AF66 75%);
+            height: 40px;
+            background-image: url('image_8311da.png');
+            background-size: auto 100%;
+            background-repeat: repeat-x;
             width: 100%;
             position: fixed;
             top: 0;
             z-index: 4000;
+            border-bottom: 2px solid #fff;
         }
 
-        /* --- HEADER & BRANDING --- */
+        /* --- HEADER & BRANDING (STANDARDIZED HEIGHT) --- */
         header {
-            padding: 50px 20px 40px;
+            height: 125px; /* Locked height to prevent jumping */
+            padding-top: 40px; 
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
             background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.98)), url('farmersbg.png');
             background-size: cover;
             background-position: center;
+            position: relative;
             border-bottom: 1px solid #eee;
         }
-        .nav-logo { height: 65px; width: auto; }
-        .ariya-badge { width: 55px; position: absolute; top: 20px; left: 15px; z-index: 2000; }
+        .nav-logo { height: 60px; width: auto; }
+        
+        /* --- SIDE LOGOS (LOCKED POSITION) --- */
+        .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
+        .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAVIGATION (FIXED) --- */
+        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
-            position: sticky; top: 6px; z-index: 3000; 
+            position: sticky; 
+            top: 40px; /* Sticks exactly below the 40px pattern */
+            height: 60px; /* Locked height */
+            z-index: 3000; 
             background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #eee;
-            padding: 10px 10px;
+            padding: 0 10px;
             display: flex; justify-content: space-between; align-items: center;
         }
         .nav-container {
             position: relative; flex: 1; display: flex; 
-            overflow: hidden;
             justify-content: center;
         }
         
-        .nav-links { display: flex; list-style: none; gap: 5px; width: 100%; justify-content: center; }
+        .nav-links { display: flex; list-style: none; gap: 5px; }
         .nav-links a {
             position: relative; z-index: 2;
             text-decoration: none; color: #0038A8; 
@@ -77,10 +87,14 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* MOBILE NAV TWEAKS */
+        /* MOBILE NAV TWEAKS (STANDARDIZED) */
         @media (max-width: 480px) {
-            .nav-links { gap: 2px; justify-content: space-evenly; }
-            .nav-links a { font-size: 10px; padding: 8px 4px; letter-spacing: -0.5px; }
+            header { height: 110px; }
+            .ariya-badge { width: 45px; top: 50px; }
+            .top-right-logo { width: 60px; top: 45px; }
+            .nav-logo { height: 45px; }
+            nav { height: 50px; }
+            .nav-links a { font-size: 10px; padding: 10px 6px; }
             .nav-slider { height: 30px; }
         }
 
@@ -205,6 +219,7 @@
 
     <div class="top-accent"></div>
     <img src="ariya.jpg" alt="Ariya" class="ariya-badge">
+    <img src="niyogyuganlogo.jpg" alt="Niyogyugan" class="top-right-logo">
 
     <header>
         <a href="index.html"><img src="AlabatLogo.png" alt="Alabat Logo" class="nav-logo"></a>
@@ -276,23 +291,16 @@
         const shade = document.getElementById('navShade');
         const activeLink = document.getElementById('activeLink');
         function moveShade(el) {
-            shade.style.width = el.offsetWidth + 'px';
-            shade.style.left = el.offsetLeft + 'px';
+            if (el && shade) {
+                shade.style.width = el.offsetWidth + 'px';
+                shade.style.left = el.offsetLeft + 'px';
+            }
         }
         window.addEventListener('load', () => moveShade(activeLink));
         window.addEventListener('resize', () => moveShade(activeLink));
 
-        // --- VIDEO LABEL FADE ---
+        // --- VIDEO LOGIC ---
         const vTitle = document.getElementById('videoTitle');
-        function fadeLabel() {
-            vTitle.style.opacity = '1';
-            setTimeout(() => {
-                vTitle.style.opacity = '0';
-            }, 1000);
-        }
-        window.addEventListener('load', fadeLabel);
-
-        // --- VIDEO PLAYLIST ---
         const videoFrame = document.getElementById('processVideo');
         const myVideos = [
             { id: "TdZzwAT-FFw", title: "HANDMADE QUALITY" },
@@ -301,6 +309,12 @@
             { id: "y2l_bqQWGEM", title: "ALABAT TRADITION" }
         ];
         let vIdx = 0;
+        
+        function fadeLabel() {
+            vTitle.style.opacity = '1';
+            setTimeout(() => { vTitle.style.opacity = '0'; }, 1000);
+        }
+        
         function updateVideo() { 
             const vid = myVideos[vIdx];
             videoFrame.src = `https://www.youtube.com/embed/${vid.id}?autoplay=1&loop=1&playlist=${vid.id}`; 
@@ -342,7 +356,6 @@
             }).join('');
         }
 
-        // --- MODAL & CART LOGIC ---
         function openZoom(idx) {
             const p = inventory[idx];
             document.getElementById('zoomImg').src = p.img;
@@ -379,8 +392,11 @@
             document.getElementById('cart-total-amount').innerText = `₱${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
         }
 
-        renderProducts();
-        updateCart();
+        window.addEventListener('load', () => {
+            renderProducts();
+            updateCart();
+            fadeLabel();
+        });
     </script>
 </body>
 </html>
