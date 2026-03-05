@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tara na sa Alabat! | Tourism & Products</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        /* --- PAGE VISIBILITY SYSTEM --- */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* --- SHARED STYLES --- */
+        body { color: white; min-height: 100vh; overflow-x: hidden; }
+        
+        .top-left-logo { position: absolute; top: 20px; left: 20px; width: 100px; z-index: 2000; }
+        .logo-wrapper { display: flex; justify-content: center; padding-top: 40px; width: 100%; }
+        .nav-logo { height: 60px; width: auto; filter: drop-shadow(0 0 10px rgba(0,174,239,0.3)); }
+
+        /* --- NAVIGATION --- */
+        nav { 
+            display: flex; justify-content: center; padding: 15px; 
+            z-index: 1000; width: 100%; position: sticky; top: 0;
+        }
+        .nav-container {
+            position: relative; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
+            padding: 5px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex; align-items: center; gap: 2px;
+            max-width: 95vw; overflow-x: auto; scrollbar-width: none;
+        }
+        .nav-container::-webkit-scrollbar { display: none; }
+        .nav-container a {
+            position: relative; z-index: 2; color: white; text-decoration: none;
+            font-weight: 700; font-size: 10px; text-transform: uppercase;
+            padding: 10px 18px; transition: 0.3s; opacity: 0.6; white-space: nowrap;
+            cursor: pointer;
+        }
+        .nav-container a.active { opacity: 1; }
+        .nav-slider {
+            position: absolute; height: calc(100% - 10px);
+            background: rgba(0, 174, 239, 0.5); border-radius: 50px;
+            top: 5px; z-index: 1; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* === PAGE 1: HOME === */
+        #home-page {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('background.jpg') no-repeat center center fixed; 
+            background-size: cover; display: flex; flex-direction: column; align-items: center;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .hero-container {
+            display: flex; flex-direction: column; align-items: center;
+            width: 90%; max-width: 1200px; flex: 1; gap: 40px;
+            padding: 40px 0; text-align: center;
+            animation: slideUp 1s ease 0.2s forwards; opacity: 0;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-container { flex-direction: row; text-align: left; gap: 80px; }
+            .top-left-logo { width: 150px; top: 30px; left: 30px; }
+        }
+
+        .content { flex: 1; }
+        .main-title { 
+            font-size: clamp(45px, 10vw, 90px); 
+            font-weight: 900; line-height: 0.9; 
+            text-transform: uppercase; letter-spacing: -2px; 
+        }
+        .sub-title { font-size: 18px; margin: 15px 0 30px; font-weight: 400; opacity: 0.8; }
+        
+        .btn-explore { 
+            background: #00AEEF; color: white; padding: 16px 35px; 
+            border-radius: 50px; text-decoration: none; font-weight: 900; 
+            font-size: 13px; text-transform: uppercase; transition: 0.3s; 
+            display: inline-block; box-shadow: 0 10px 20px rgba(0,174,239,0.3);
+            border: none; cursor: pointer;
+        }
+        .btn-explore:hover { transform: translateY(-2px); }
+
+        .media-group {
+            display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 550px;
+        }
+
+        .video-box { 
+            width: 100%; position: relative; border-radius: 25px; 
+            border: 3px solid rgba(255,255,255,0.8); overflow: hidden; 
+            background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            aspect-ratio: 16 / 9;
+        }
+        
+        .video-box iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        .video-label { 
+            position: absolute; top: 15px; left: 15px; z-index: 10; 
+            font-weight: 900; font-size: 9px; text-transform: uppercase; 
+            background: rgba(0,0,0,0.6); padding: 5px 12px; border-radius: 5px;
+            backdrop-filter: blur(5px); pointer-events: none;
+        }
+
+        .video-controls {
+            display: flex; justify-content: center; gap: 20px; padding: 5px 0;
+        }
+
+        .video-nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .video-nav-btn:hover {
+            background: rgba(0, 174, 239, 0.4);
+            border-color: #00AEEF;
+        }
+
+        .preview-row { display: flex; gap: 15px; width: 100%; }
+        
+        .preview-card {
+            flex: 1; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); 
+            border-radius: 25px; padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none; color: white; transition: 0.3s; cursor: pointer;
+        }
+        .preview-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); }
+        .preview-card img { 
+            width: 100%; height: 100px; object-fit: cover; 
+            border-radius: 15px; margin: 10px 0; 
+        }
+        .preview-card h3 { font-size: 14px; font-weight: 800; text-transform: uppercase; }
+        .preview-card .label { font-size: 8px; font-weight: 700; opacity: 0.5; letter-spacing: 1px; }
+
+        /* === PAGE 2: ABOUT === */
+        #about-page {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('background.jpg') no-repeat center center fixed; 
+            background-size: cover; display: flex; flex-direction: column; align-items: center;
+        }
+
+        .hero-title {
+            font-size: clamp(50px, 15vw, 120px); font-weight: 900; text-transform: uppercase;
+            letter-spacing: -3px; margin-top: 20px; line-height: 0.8;
+            animation: slideUp 1s ease 0.2s forwards; opacity: 0;
+        }
+        .hero-sub {
+            font-size: 16px; font-weight: 700; color: #00AEEF; margin-bottom: 20px;
+            letter-spacing: 2px; animation: slideUp 1s ease 0.4s forwards; opacity: 0;
+        }
+
+        .slider-container { 
+            padding: 10px 0 30px; width: 100%; position: relative; 
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); 
+            mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%); 
+        }
+        .slider-wrapper { 
+            display: flex; flex-direction: row; gap: 15px; overflow-x: auto; 
+            scroll-behavior: smooth; padding: 20px 10%; scrollbar-width: none; 
+        }
+        .slider-wrapper::-webkit-scrollbar { display: none; }
+
+        .about-photo { 
+            flex: 0 0 280px; height: 200px; object-fit: cover; border-radius: 20px; 
+            cursor: pointer; transition: 0.4s ease; border: 1px solid rgba(255,255,255,0.1);
+            animation: slideUp 1s ease 0.6s forwards; opacity: 0;
+        }
+        @media (min-width: 768px) {
+            .about-photo { flex: 0 0 400px; height: 300px; }
+        }
+        .about-photo:hover { transform: translateY(-5px); border-color: #00AEEF; }
+
+        .content-card {
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(25px);
+            width: 90%; max-width: 900px; border-radius: 30px; padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1); margin-bottom: 60px; line-height: 1.6;
+            animation: slideUp 1s ease 0.8s forwards; opacity: 0;
+        }
+        @media (min-width: 768px) {
+            .content-card { padding: 60px; }
+        }
+
+        h2 { font-size: 28px; font-weight: 900; margin: 30px 0 15px; text-transform: uppercase; color: #00AEEF; }
+        h2:first-child { margin-top: 0; }
+        p { font-size: 15px; opacity: 0.9; margin-bottom: 20px; }
+
+        .highlight-box {
+            background: rgba(0, 174, 239, 0.1); border-left: 4px solid #00AEEF;
+            padding: 20px; border-radius: 10px; margin: 25px 0; font-style: italic;
+        }
+
+        /* MODAL FOR IMAGE ZOOM */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); display: none; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 5000; backdrop-filter: blur(15px);
+            padding: 20px;
+        }
+        .modal.active { display: flex; }
+        .modal-content { 
+            width: 100%; max-width: 800px; border-radius: 15px; 
+            animation: zoomIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .modal-details { margin-top: 20px; text-align: center; max-width: 500px; }
+        .modal-details h3 { font-size: 20px; color: #00AEEF; text-transform: uppercase; margin-bottom: 10px; }
+        .modal-details p { font-size: 14px; opacity: 0.8; }
+
+        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* === PAGE 3: DESTINATIONS === */
+        #destinations-page {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('background.jpg') no-repeat center center fixed; 
+            background-size: cover; display: flex; flex-direction: column; align-items: center;
+        }
+
+        .destinations-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; width: 90%; max-width: 1200px; padding: 40px 20px;
+        }
+
+        .destination-card {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); 
+            padding: 25px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); 
+            transition: 0.3s; cursor: pointer; overflow: hidden;
+        }
+        .destination-card:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-5px); }
+        .destination-card img { width: 100%; height: 200px; border-radius: 20px; object-fit: cover; margin-bottom: 15px; }
+        .destination-card h3 { font-size: 18px; font-weight: 900; color: #00AEEF; margin-bottom: 10px; }
+        .destination-card p { font-size: 14px; opacity: 0.8; }
+
+        /* === PAGE 4: PRODUCTS === */
+        #products-page {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('farmersbg.png') no-repeat center center fixed; 
+            background-size: cover; color: white; min-height: 100vh; overflow-x: hidden;
+        }
+
+        .cart-trigger { 
+            margin-left: 15px; position: relative; cursor: pointer; 
+            background: #00AEEF; width: 45px; height: 45px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            box-shadow: 0 5px 15px rgba(0,174,239,0.4); border: none; font-size: 20px;
+        }
+        .cart-count { 
+            position: absolute; top: -2px; right: -2px; background: #ff4757; 
+            color: white; font-size: 10px; font-weight: 900; width: 20px; 
+            height: 20px; border-radius: 50%; display: flex; align-items: center; 
+            justify-content: center; border: 2px solid white;
+        }
+        
+        .cart-sidebar { 
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; 
+            height: 100vh; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); 
+            z-index: 3000; padding: 30px 20px; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            color: #1a1a1a; display: flex; flex-direction: column;
+        }
+        .cart-sidebar.active { right: 0; }
+        .cart-header { font-weight: 900; font-size: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; }
+        #cart-items-list { flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .cart-item { display: flex; align-items: center; gap: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .cart-item img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; }
+        
+        .checkout-pill { 
+            background: #111; color: white; padding: 18px; border-radius: 50px; 
+            text-decoration: none; font-weight: 800; text-align: center; 
+            text-transform: uppercase; margin-top: 20px; transition: 0.3s; border: none; cursor: pointer;
+        }
+
+        .main-content { 
+            display: flex; flex-direction: column; padding: 20px 5% 80px; gap: 20px; 
+        }
+        @media (min-width: 1100px) {
+            .main-content { flex-direction: row; align-items: flex-start; padding: 40px 8%; gap: 60px; }
+            .video-side { position: sticky; top: 120px; flex: 1.2; }
+            .slider-section { flex: 1; }
+        }
+
+        .made-with-love { font-size: clamp(32px, 7vw, 55px); font-weight: 900; line-height: 0.9; margin-bottom: 20px; text-align: center; }
+        @media (min-width: 1100px) { .made-with-love { text-align: left; } }
+        
+        .video-frame { 
+            position: relative; 
+            border-radius: 25px; 
+            border: 3px solid white; 
+            overflow: hidden; 
+            background: #000;
+            aspect-ratio: 16/9;
+        }
+        .video-frame iframe { width: 100%; height: 100%; border: none; }
+
+        .product-list { display: flex; flex-direction: column; gap: 20px; }
+        .product-card { 
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); 
+            padding: 20px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); 
+            display: flex; gap: 20px; cursor: pointer; transition: 0.3s;
+        }
+        .product-card:hover { background: rgba(255, 255, 255, 0.1); transform: scale(1.02); }
+        .product-card img { width: 100px; height: 100px; border-radius: 20px; object-fit: cover; }
+        .product-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .product-name { font-size: 16px; font-weight: 900; color: #00AEEF; text-transform: uppercase; }
+        .product-description { font-size: 12px; opacity: 0.7; margin: 5px 0; }
+        .list-price { font-weight: 900; font-size: 15px; }
+        
+        .add-cart-btn { 
+            background: white; color: black; width: 40px; height: 40px; 
+            border-radius: 12px; display: flex; align-items: center; 
+            justify-content: center; font-weight: 900; font-size: 20px; border: none;
+        }
+        .sold-out-badge { background: #ff4757; font-size: 9px; padding: 5px 10px; border-radius: 5px; font-weight: 900; }
+
+        /* === PAGE 5: CHECKOUT === */
+        #checkout-page {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('background.jpg') no-repeat center center fixed; 
+            background-size: cover; display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
+        }
+
+        .checkout-container { 
+            width: 100%; max-width: 700px; background: rgba(0,0,0,0.7); 
+            backdrop-filter: blur(25px); border-radius: 30px; padding: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 12px; text-transform: uppercase; }
+        .form-group input, .form-group select { 
+            width: 100%; padding: 15px; border-radius: 12px; 
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            color: white; font-size: 14px;
+        }
+
+        .payment-methods { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+        .payment-option { 
+            flex: 1; min-width: 150px; padding: 20px; border-radius: 15px;
+            background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1);
+            text-align: center; cursor: pointer; transition: 0.3s;
+        }
+        .payment-option:hover { background: rgba(255,255,255,0.1); border-color: #00AEEF; }
+        .payment-option.selected { background: #00AEEF; border-color: #00AEEF; color: black; }
+
+        .checkout-btn {
+            width: 100%; padding: 18px; background: #00AEEF; color: white;
+            border: none; border-radius: 50px; font-weight: 900; text-transform: uppercase;
+            cursor: pointer; font-size: 14px; transition: 0.3s;
+        }
+        .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,174,239,0.3); }
+
+        /* === PAGE 6: CONTACT === */
+        #contact-page {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('background.jpg') no-repeat center center fixed; 
+            background-size: cover; color: white; min-height: 100vh; overflow-x: hidden;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .contact-hero { text-align: center; padding: 40px 5%; max-width: 900px; animation: fadeIn 1s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .contact-title { font-size: clamp(30px, 8vw, 60px); font-weight: 900; line-height: 0.9; margin-bottom: 30px; }
+        .contact-title span { color: #00AEEF; }
+
+        .info-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; width: 100%; margin-bottom: 40px; 
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px);
+            padding: 30px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s; text-align: center;
+        }
+        .info-card:hover { background: rgba(255, 255, 255, 0.1); border-color: #00AEEF; }
+        .info-card h3 { font-size: 12px; text-transform: uppercase; color: #00AEEF; margin-bottom: 10px; letter-spacing: 2px; }
+        .info-card p, .info-card a { font-size: 16px; font-weight: 700; color: white; text-decoration: none; word-break: break-all; }
+
+        .map-wrapper { 
+            width: 90%; max-width: 800px; border-radius: 40px; overflow: hidden; 
+            border: 4px solid white; box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            position: relative; height: 400px; margin-bottom: 50px;
+        }
+        .map-wrapper iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.2) contrast(1.1); }
+
+        .map-btn {
+            position: absolute; bottom: 20px; right: 20px; background: white; 
+            color: black; padding: 12px 25px; border-radius: 50px; font-weight: 900;
+            text-decoration: none; font-size: 12px; text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: 0.3s;
+        }
+        .map-btn:hover { background: #00AEEF; color: white; transform: scale(1.05); }
+
+        /* === PAGE 7: ADMIN === */
+        #admin-page {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('background.jpg') no-repeat center center fixed; 
+            background-size: cover; color: white; min-height: 100vh;
+        }
+
+        #login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(25px);
+            display: flex; justify-content: center; align-items: center; z-index: 9999;
+        }
+        .login-box {
+            background: rgba(255,255,255,0.05); padding: 50px; border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 400px; text-align: center;
+        }
+        .login-box input {
+            width: 100%; padding: 15px; margin-top: 15px; border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4);
+            color: white; outline: none; font-size: 16px;
+        }
+        .login-box button {
+            width: 100%; padding: 15px; margin-top: 25px; border-radius: 50px;
+            border: none; background: #00AEEF; color: white; font-weight: 900;
+            cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        #admin-content { display: none; padding: 40px 20px; }
+        
+        .header-area { 
+            display: flex; justify-content: space-between; align-items: center; 
+            max-width: 1300px; margin: 0 auto 30px; 
+        }
+        .logout-btn { 
+            color: #ff4757; font-weight: 900; font-size: 12px; cursor: pointer; 
+            padding: 10px 20px; border-radius: 50px; border: 1px solid #ff4757;
+            text-transform: uppercase; background: none;
+        }
+
+        .dashboard-grid { 
+            display: grid; grid-template-columns: 1fr 400px; gap: 30px; 
+            max-width: 1300px; margin: 0 auto; 
+        }
+
+        .glass-panel {
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px);
+            border-radius: 35px; padding: 35px; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .revenue-card {
+            background: linear-gradient(135deg, #00AEEF, #007bb0);
+            padding: 30px; border-radius: 30px; margin-bottom: 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 15px 30px rgba(0, 174, 239, 0.3);
+        }
+        .revenue-card h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.8); }
+        .revenue-card p { font-size: 36px; font-weight: 900; }
+
+        .tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .tab-btn { 
+            background: none; border: none; color: white; padding: 10px 20px; 
+            border-radius: 12px; cursor: pointer; font-size: 12px; font-weight: 800; opacity: 0.5;
+            text-transform: uppercase; transition: 0.3s;
+        }
+        .tab-btn.active { opacity: 1; background: rgba(0, 174, 239, 0.15); color: #00AEEF; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; font-size: 11px; text-transform: uppercase; opacity: 0.4; padding: 15px; }
+        td { padding: 20px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+
+        .badge { 
+            background: #00AEEF; color: black; padding: 4px 8px; 
+            border-radius: 6px; font-weight: 900; font-size: 11px; 
+        }
+
+        .action-btn { 
+            padding: 10px 15px; border-radius: 12px; border: none; 
+            font-weight: 800; font-size: 10px; cursor: pointer; text-transform: uppercase; 
+        }
+        .btn-green { background: #4caf50; color: white; }
+        .btn-yellow { background: #ffbc00; color: black; }
+        .btn-red { background: none; border: 1px solid #ff4757; color: #ff4757; }
+
+        .inventory-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px; background: rgba(255,255,255,0.03); border-radius: 20px; margin-bottom: 10px;
+        }
+        .toggle-group { display: flex; gap: 5px; background: #000; padding: 5px; border-radius: 12px; }
+        .toggle-btn { 
+            padding: 6px 12px; border-radius: 8px; border: none; font-size: 9px; 
+            font-weight: 900; cursor: pointer; color: rgba(255,255,255,0.4); background: transparent;
+        }
+        .toggle-btn.active-on { background: #4caf50; color: white; }
+        .toggle-btn.active-off { background: #ff4757; color: white; }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 5000;
+        }
+        .modal-card { background: #111; padding: 40px; border-radius: 35px; width: 450px; border: 1px solid #333; }
+        .modal-card input { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; background: #222; border: 1px solid #444; color: white; }
+
+        @media (max-width: 480px) {
+            .preview-row { flex-direction: column; }
+            .main-title { font-size: 50px; }
+            .video-nav-btn { width: 60px; height: 60px; font-size: 22px; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================================
+     PAGE 1: HOME
+     ============================================================================ -->
+<div id="home-page" class="page active">
+    
+    <!-- EDIT: TOP-LEFT LOGO IMAGE -->
+    <!-- Location: Top-left corner, this is a small logo brand (ariya.jpg) -->
+    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+
+    <!-- MAIN LOGO WRAPPER -->
+    <div class="logo-wrapper">
+        <a href="#" onclick="showPage('home-page'); return false;">
+            <!-- EDIT: MAIN LOGO IMAGE (alabatlogo.png) -->
+            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+        </a>
+    </div>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-slider" id="navSlider"></div>
+            <a onclick="navigateTo('home-page')" class="active" id="activeLink">HOME</a>
+            <a onclick="navigateTo('about-page')">ABOUT</a>
+            <a onclick="navigateTo('destinations-page')">DESTINATIONS</a>
+            <a onclick="navigateTo('products-page')">PRODUCTS</a>
+            <a onclick="navigateTo('contact-page')">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div class="hero-container">
+        <div class="content">
+            <!-- EDIT: MAIN TITLE TEXT (Change "TARA NA SA ALABAT!") -->
+            <h1 class="main-title">TARA NA SA<br>ALABAT!</h1>
+            
+            <!-- EDIT: SUBTITLE TEXT (Change "The hidden gem of Quezon!") -->
+            <p class="sub-title">The hidden gem of Quezon!</p>
+            
+            <button class="btn-explore" onclick="navigateTo('about-page')">EXPLORE NOW →</button>
+        </div>
+
+        <!-- MEDIA SECTION -->
+        <div class="media-group">
+            <!-- VIDEO CONTAINER -->
+            <div class="video-box">
+                <div class="video-label">ISLAND PREVIEW</div>
+                <!-- EDIT: HOME PAGE VIDEO 1
+                     Change the src URL to your YouTube video
+                     How to find YouTube ID:
+                     - Go to YouTube video
+                     - Copy the ID after "?v=" from URL
+                     - Example: https://www.youtube.com/watch?v=pSD9s5_IVJk
+                     - ID is: pSD9s5_IVJk
+                     - Replace it in the embed URL below
+                -->
+                <iframe 
+                    id="heroVideo"
+                    src="https://www.youtube.com/embed/pSD9s5_IVJk?autoplay=1&mute=0&loop=1&playlist=pSD9s5_IVJk" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- VIDEO NAVIGATION BUTTONS -->
+            <div class="video-controls">
+                <button class="video-nav-btn" onclick="prevVideo('hero')">‹</button>
+                <button class="video-nav-btn" onclick="nextVideo('hero')">›</button>
+            </div>
+
+            <!-- PREVIEW CARDS -->
+            <div class="preview-row">
+                <!-- CARD 1: DESTINATIONS -->
+                <a onclick="navigateTo('destinations-page')" class="preview-card">
+                    <p class="label">DESTINATIONS</p>
+                    <!-- EDIT: PREVIEW IMAGE 1 (Change src to your image filename) -->
+                    <img src="pulongbato.jpg" alt="Pulong Bato">
+                    <!-- EDIT: PREVIEW TITLE 1 -->
+                    <h3>Pulong Bato</h3>
+                </a>
+
+                <!-- CARD 2: PRODUCTS -->
+                <a onclick="navigateTo('products-page')" class="preview-card">
+                    <p class="label">LOCAL PRODUCTS</p>
+                    <!-- EDIT: PREVIEW IMAGE 2 (Change src to your image filename) -->
+                    <img src="coco-sugar.jpg" alt="Coco Sugar">
+                    <!-- EDIT: PREVIEW TITLE 2 -->
+                    <h3>Coco Sugar</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================================
+     PAGE 2: ABOUT
+     ============================================================================ -->
+<div id="about-page" class="page">
+    
+    <!-- EDIT: TOP-LEFT LOGO IMAGE -->
+    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+
+    <div class="logo-wrapper">
+        <a href="#" onclick="showPage('home-page'); return false;">
+            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+        </a>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-slider" id="navSlider2"></div>
+            <a onclick="navigateTo('home-page')">HOME</a>
+            <a onclick="navigateTo('about-page')" class="active" id="activeLink2">ABOUT</a>
+            <a onclick="navigateTo('destinations-page')">DESTINATIONS</a>
+            <a onclick="navigateTo('products-page')">PRODUCTS</a>
+            <a onclick="navigateTo('contact-page')">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- EDIT: PAGE TITLE -->
+    <h1 class="hero-title">ALABAT</h1>
+    <!-- EDIT: PAGE SUBTITLE -->
+    <p class="hero-sub">QUEZON, PHILIPPINES</p>
+
+    <!-- PHOTO SLIDER SECTION -->
+    <!-- These images appear in a horizontal scrollable slider -->
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <!-- EDIT: ABOUT PAGE PHOTOS (Add/Remove/Change images)
+                 Click on photos to see them zoomed in
+                 Format: onclick="openZoom(this, 'TITLE', 'DESCRIPTION')"
+            -->
+            <img src="farmersbg.png" class="about-photo" onclick="openZoom(this, 'Farmers of Alabat', 'The hardworking local farmers processing organic goods.')">
+            <img src="PulongBatoo.png" class="about-photo" onclick="openZoom(this, 'Pulong Bato', 'A natural rock formation and crystal clear waters of Villa Norte.')">
+            <img src="tumiispeak.jpg" class="about-photo" onclick="openZoom(this, 'Tumii Peak', 'The highest point in Alabat offering a 360-degree view of the island.')">
+            <img src="alabatcove.jpg" class="about-photo" onclick="openZoom(this, 'Alabat Cove', 'A serene coastal area perfect for witnessing the sunset.')">
+            <img src="background.jpg" class="about-photo" onclick="openZoom(this, 'Island Overview', 'A bird\'s eye view of the lush greenery and blue waters.')">
+        </div>
+    </div>
+
+    <!-- ZOOM MODAL FOR IMAGES -->
+    <div class="modal" id="zoomModal" onclick="closeZoom()">
+        <img class="modal-content" id="modalImg">
+        <div class="modal-details">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDesc"></p>
+        </div>
+    </div>
+
+    <!-- CONTENT SECTION -->
+    <div class="content-card">
+        <!-- EDIT: ABOUT CONTENT - HISTORY SECTION -->
+        <h2>History of Alabat</h2>
+        <p>Alabat, officially the <strong>Municipality of Alabat</strong> (Tagalog: Bayan ng Alabat), is a municipality in the province of Quezon, Philippines. It is a peaceful island town known for its hospitality and rich natural resources.</p>
+        
+        <p>The town is home to a few speakers of the critically endangered <strong>Inagta Alabat language</strong>, one of the most endangered languages in the world as listed by UNESCO.</p>  
+
+        <div class="highlight-box">
+            <!-- EDIT: HIGHLIGHT BOX TEXT -->
+            Founded in the year 1882 by a Spanish priest from Gumaca, the town originally built an ermita that honours Our Lady of Monte Carmelo.
+        </div>
+        
+        <p>Its first name was <strong>Gordo</strong>, meaning "fat", due to the island's shape. It was later changed to Gordon, Barcelona, and finally Alabat. The formal establishment of the town occurred in the year 1900.</p>
+        
+        <!-- EDIT: ABOUT CONTENT - ETYMOLOGY SECTION -->
+        <h2>Etymology</h2>
+        <p>Before Spanish colonization, the mountains were already inhabited by the "Baluga" (aborigines). Nomadic by nature, they would clean patches of land, plant rice and vegetables, and hunt.</p>
+
+        <p>The name Alabat came from the word <strong>Alâbât</strong> (local Tagalog word for balustrade or balcony).</p>
+
+        <p>Another local folklore says that the name 'Alabat' was from Muslim origins where Alabat comes from Allah-bat, and if the word is mixed up actually means <strong>Bathala</strong>, the local word for god.</p>
+    </div>
+</div>
+
+<!-- ============================================================================
+     PAGE 3: DESTINATIONS
+     ============================================================================ -->
+<div id="destinations-page" class="page">
+    
+    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+
+    <div class="logo-wrapper">
+        <a href="#" onclick="showPage('home-page'); return false;">
+            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+        </a>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-slider" id="navSlider3"></div>
+            <a onclick="navigateTo('home-page')">HOME</a>
+            <a onclick="navigateTo('about-page')">ABOUT</a>
+            <a onclick="navigateTo('destinations-page')" class="active" id="activeLink3">DESTINATIONS</a>
+            <a onclick="navigateTo('products-page')">PRODUCTS</a>
+            <a onclick="navigateTo('contact-page')">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- PAGE TITLE -->
+    <h1 class="hero-title" style="margin-top: 80px;">EXPLORE ALABAT</h1>
+    <p class="hero-sub">Beautiful Destinations Await You</p>
+
+    <!-- DESTINATIONS GRID -->
+    <!-- EDIT: ADD/REMOVE DESTINATION CARDS
+         Each card has: Image, Title, Description
+    -->
+    <div class="destinations-grid">
+        <!-- DESTINATION 1 -->
+        <div class="destination-card">
+            <!-- EDIT: DESTINATION IMAGE 1 -->
+            <img src="tumiispeak.jpg" alt="Tumii Peak">
+            <!-- EDIT: DESTINATION TITLE 1 -->
+            <h3>Tumii Peak</h3>
+            <!-- EDIT: DESTINATION DESCRIPTION 1 -->
+            <p>The highest point in Alabat offering breathtaking 360-degree views of the island and surrounding seas.</p>
+        </div>
+
+        <!-- DESTINATION 2 -->
+        <div class="destination-card">
+            <img src="pulongbato.jpg" alt="Pulong Bato">
+            <h3>Pulong Bato</h3>
+            <p>A natural rock formation with crystal clear waters, perfect for swimming and snorkeling.</p>
+        </div>
+
+        <!-- DESTINATION 3 -->
+        <div class="destination-card">
+            <img src="alabatcove.jpg" alt="Alabat Cove">
+            <h3>Alabat Cove</h3>
+            <p>A serene coastal area perfect for witnessing stunning sunsets and peaceful beach walks.</p>
+        </div>
+
+        <!-- DESTINATION 4 -->
+        <div class="destination-card">
+            <img src="tumiisfalls.jpg" alt="Tumii Falls">
+            <h3>Tumii Falls</h3>
+            <p>Refreshing natural waterfalls nestled in the island's verdant landscape.</p>
+        </div>
+
+        <!-- DESTINATION 5 -->
+        <div class="destination-card">
+            <img src="destinationbg.jpg" alt="Beach">
+            <h3>Island Beaches</h3>
+            <p>Pristine white-sand beaches with turquoise waters ideal for relaxation and water activities.</p>
+        </div>
+
+        <!-- DESTINATION 6 -->
+        <div class="destination-card">
+            <img src="farmersbg.png" alt="Farm Tours">
+            <h3>Local Farms</h3>
+            <p>Visit organic farms and meet the hardworking farmers who grow Alabat's famous products.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================================
+     PAGE 4: PRODUCTS
+     ============================================================================ -->
+<div id="products-page" class="page">
+    
+    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+
+    <div class="logo-wrapper">
+        <a href="#" onclick="showPage('home-page'); return false;">
+            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+        </a>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-slider" id="navSlider4"></div>
+            <ul style="display: flex; list-style: none; position: relative; z-index: 2; margin: 0; padding: 0;">
+                <li><a onclick="navigateTo('home-page')" style="cursor: pointer;">HOME</a></li>
+                <li><a onclick="navigateTo('about-page')" style="cursor: pointer;">ABOUT</a></li>
+                <li><a onclick="navigateTo('destinations-page')" style="cursor: pointer;">DESTINATIONS</a></li>
+                <li><a onclick="navigateTo('products-page')" class="active" id="activeLink4" style="cursor: pointer;">PRODUCTS</a></li>
+                <li><a onclick="navigateTo('contact-page')" style="cursor: pointer;">CONTACT</a></li>
+            </ul>
+        </div>
+        <button class="cart-trigger" onclick="toggleCart()">🛒<div class="cart-count" id="cart-badge">0</div></button>
+    </nav>
+
+    <!-- SHOPPING CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">YOUR BASKET <span onclick="toggleCart()" style="cursor:pointer;">✕</span></div>
+        <div id="cart-items-list"></div>
+        <div style="margin-top:auto; padding-top:20px; border-top:2px solid #eee;">
+            <div style="display:flex; justify-content:space-between; font-weight:900; font-size:1.2rem;">
+                <span>Total</span>
+                <span id="cart-total-amount">₱0.00</span>
+            </div>
+            <button class="checkout-pill" onclick="navigateTo('checkout-page')">Secure Checkout</button>
+        </div>
+    </div>
+
+    <!-- PRODUCTS MAIN CONTENT -->
+    <div class="main-content">
+        <div class="video-side">
+            <h1 class="made-with-love">MADE WITH LOVE<br>JUST FOR YOU!</h1>
+            
+            <!-- PRODUCTS VIDEO -->
+            <div class="video-frame">
+                <!-- EDIT: PRODUCTS PAGE VIDEO
+                     Change the src URL to your YouTube video ID
+                     Find the ID same way as home page video
+                -->
+                <iframe id="processVideo" 
+                        src="https://www.youtube.com/embed/Na-BqhLr-PA?autoplay=0&loop=1&playlist=Na-BqhLr-PA" 
+                        allow="autoplay; encrypted-media" allowfullscreen>
+                </iframe>
+            </div>
+            
+            <!-- VIDEO NAVIGATION BUTTONS -->
+            <div class="video-controls">
+                <button class="video-nav-btn" onclick="prevVideo('products')">‹</button>
+                <button class="video-nav-btn" onclick="nextVideo('products')">›</button>
+            </div>
+        </div>
+
+        <!-- PRODUCTS LIST (Generated dynamically by JavaScript) -->
+        <div class="slider-section">
+            <div class="product-list" id="products-list"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================================
+     PAGE 5: CHECKOUT
+     ============================================================================ -->
+<div id="checkout-page" class="page">
+    
+    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+
+    <div class="logo-wrapper">
+        <a href="#" onclick="showPage('home-page'); return false;">
+            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+        </a>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a onclick="navigateTo('home-page')">HOME</a>
+            <a onclick="navigateTo('products-page')">PRODUCTS</a>
+        </div>
+    </nav>
+
+    <!-- CHECKOUT FORM -->
+    <div class="checkout-container">
+        <h2 style="margin-bottom: 30px; font-size: 32px;">SECURE CHECKOUT</h2>
+        
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="customerName" placeholder="Your Full Name">
+        </div>
+
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="customerEmail" placeholder="your@email.com">
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="customerPhone" placeholder="+63 9XX XXX XXXX">
+        </div>
+
+        <div class="form-group">
+            <label>Delivery Address</label>
+            <input type="text" id="customerAddress" placeholder="Your Delivery Address">
+        </div>
+
+        <div class="form-group">
+            <label>Payment Method</label>
+            <!-- EDIT: PAYMENT OPTIONS
+                 Change payment methods as needed
+                 Add/remove options by duplicating/removing the payment-option divs
+            -->
+            <div class="payment-methods">
+                <div class="payment-option selected" onclick="selectPayment(this, 'gcash')">
+                    💳<br>GCash
+                </div>
+                <div class="payment-option" onclick="selectPayment(this, 'bank')">
+                    🏦<br>Bank Transfer
+                </div>
+                <div class="payment-option" onclick="selectPayment(this, 'cod')">
+                    📦<br>COD
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDER SUMMARY -->
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                <span>Subtotal:</span>
+                <span id="subtotal">₱0.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                <span>Shipping:</span>
+                <span>₱50.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; font-weight: 900; font-size: 18px;">
+                <span>Total:</span>
+                <span id="grandTotal">₱0.00</span>
+            </div>
+        </div>
+
+        <button class="checkout-btn" onclick="processCheckout()">COMPLETE ORDER</button>
+        <button class="checkout-btn" style="background: rgba(255,255,255,0.1); margin-top: 15px;" onclick="navigateTo('products-page')">← Back to Products</button>
+    </div>
+</div>
+
+<!-- ============================================================================
+     PAGE 6: CONTACT
+     ============================================================================ -->
+<div id="contact-page" class="page">
+    
+    <img src="ariya.jpg" alt="Ariya Logo" class="top-left-logo">
+
+    <div class="logo-wrapper">
+        <img src="AlabatLogo.png" alt="Alabat Tourism" class="nav-logo">
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-slider" id="navSlider5"></div>
+            <ul style="display: flex; list-style: none; position: relative; z-index: 2; margin: 0; padding: 0;">
+                <li><a onclick="navigateTo('home-page')" style="cursor: pointer;">HOME</a></li>
+                <li><a onclick="navigateTo('about-page')" style="cursor: pointer;">ABOUT</a></li>
+                <li><a onclick="navigateTo('destinations-page')" style="cursor: pointer;">DESTINATIONS</a></li>
+                <li><a onclick="navigateTo('products-page')" style="cursor: pointer;">PRODUCTS</a></li>
+                <li><a onclick="navigateTo('contact-page')" class="active" id="activeLink5" style="cursor: pointer;">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="contact-hero">
+        <!-- EDIT: CONTACT PAGE TITLE -->
+        <h1 class="contact-title">SAY HELLO TO <span>ALABAT</span></h1>
+        
+        <!-- CONTACT INFO CARDS -->
+        <div class="info-grid">
+            <!-- LOCATION CARD -->
+            <div class="info-card">
+                <h3>Location</h3>
+                <!-- EDIT: LOCATION ADDRESS -->
+                <p>Tourist Info Center, Alabat, Quezon</p>
+            </div>
+
+            <!-- PHONE CARD -->
+            <div class="info-card">
+                <h3>Call Us</h3>
+                <!-- EDIT: PHONE NUMBER -->
+                <a href="tel:00078263117">0007-826-3117</a>
+            </div>
+
+            <!-- EMAIL CARD -->
+            <div class="info-card">
+                <h3>Email Us</h3>
+                <!-- EDIT: EMAIL ADDRESS -->
+                <a href="mailto:alabattourismoffice@gmail.com">alabattourismoffice@gmail.com</a>
+            </div>
+        </div>
+
+        <!-- GOOGLE MAP EMBED -->
+        <div class="map-wrapper">
+            <!-- EDIT: GOOGLE MAPS EMBED CODE
+                 To get your own map:
+                 1. Go to Google Maps
+                 2. Search for your location
+                 3. Click Share > Embed a map
+                 4. Copy the iframe src URL
+                 5. Replace the src URL below
+            -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15478.434316828518!2d122.0157973!3d14.1005278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a1e2f9f9f9f9f9%3A0x123456789abcdef!2sAlabat%2C%20Quezon!5e0!3m2!1sen!2sph!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+            <a href="https://maps.google.com" target="_blank" class="map-btn">Get Directions</a>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================================
+     PAGE 7: ADMIN
+     ============================================================================ -->
+<div id="admin-page" class="page">
+    
+    <!-- LOGIN OVERLAY -->
+    <div id="login-overlay">
+        <div class="login-box">
+            <img src="AlabatLogo.png" alt="Logo" style="height: 60px; margin-bottom: 25px;">
+            <h2 style="font-weight: 900; margin-bottom: 10px;">STAFF LOGIN</h2>
+            <!-- EDIT: ADMIN CREDENTIALS
+                 Current: username="admin" password="alabat2026"
+                 Change these for security
+            -->
+            <input type="text" id="username" placeholder="Employee ID">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="checkLogin()">Enter Dashboard</button>
+            <p id="error-msg" style="color: #ff4757; margin-top: 15px; font-size: 12px; display: none;">Invalid Staff Credentials</p>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="admin-content">
+        <header class="header-area">
+            <img src="AlabatLogo.png" class="nav-logo">
+            <div style="text-align: right;">
+                <p style="font-size: 10px; opacity: 0.5; font-weight: 900;">ADMINISTRATOR SESSION</p>
+                <button class="logout-btn" onclick="logout()">Sign Out</button>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="main-panel">
+                <!-- REVENUE CARD -->
+                <div class="revenue-card">
+                    <div>
+                        <h3>Total Earnings (Completed Orders)</h3>
+                        <p id="total-revenue">₱0.00</p>
+                    </div>
+                    <button class="action-btn" style="background: rgba(0,0,0,0.3); color: white;" onclick="resetDay()">Clear History</button>
+                </div>
+
+                <!-- ORDERS TABLE -->
+                <div class="glass-panel">
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="switchTab('queue', this)">Active Queue</button>
+                        <button class="tab-btn" onclick="switchTab('completed', this)">Completed</button>
+                        <button class="tab-btn" onclick="switchTab('cancelled', this)">Cancelled</button>
+                    </div>
+                    
+                    <table id="order-table">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Customer</th>
+                                <th>Payment</th>
+                                <th>Summary</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- INVENTORY PANEL -->
+            <div class="side-panel">
+                <div class="glass-panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                        <h2 style="font-size: 16px; font-weight: 900;">INVENTORY</h2>
+                        <button class="badge" style="cursor: pointer; border: none;" onclick="showAddModal()">+ ADD</button>
+                    </div>
+                    <div id="inventory-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD PRODUCT MODAL -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-card">
+            <h2 style="margin-bottom: 25px;">Add New Product</h2>
+            <input type="text" id="pName" placeholder="Product Name">
+            <input type="number" id="pPrice" placeholder="Price (Numeric Only)">
+            <input type="text" id="pImg"
