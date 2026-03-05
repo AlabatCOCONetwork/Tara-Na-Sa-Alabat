@@ -32,16 +32,27 @@ body::before {
     top: 0; 
     left: 0; 
     width: 100%; 
-    height: 100%;
-    /* 1. Changed to ariya.png */
-    background: url('ariya.png') no-repeat center center fixed;
-    /* 2. Changed 'cover' to 'contain' so the logo fits the screen without cropping */
-    background-size: contain; 
-    /* 3. Added a small padding so the logo doesn't touch the screen edges on mobile */
-    background-origin: content-box;
-    padding: 10%; 
-    opacity: 0.15; 
+    height: 100vh; 
     z-index: -1;
+    opacity: 0.15;
+    
+    /* This forces the center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* We use mask/background logic that is rock-solid */
+    background-image: url('ariya.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+    /* 'contain' ensures it fits the screen, 
+       '80%' ensures it doesn't touch the edges */
+    background-size: contain;
+    
+    /* Fix for mobile jumping/moving */
+    pointer-events: none;
+    will-change: transform;
 }
         /* --- BACKGROUND PHOTO EFFECT --- */
 body::before {
