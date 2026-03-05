@@ -58,7 +58,7 @@
         .nav-logo { height: 60px; width: auto; }
         .top-left-logo { width: 55px; position: absolute; top: 20px; left: 15px; z-index: 2000; }
 
-        /* --- UPDATED STICKY NAV (NO SLIDE) --- */
+        /* --- STICKY NAV (NO SLIDE) --- */
         nav { 
             position: sticky; top: 6px; z-index: 1000; 
             background: rgba(255, 255, 255, 0.9); 
@@ -68,27 +68,18 @@
         }
         .nav-container {
             position: relative; display: flex; 
-            overflow: hidden; /* Changed from auto to hidden to stop sliding */
+            overflow: hidden;
             padding: 0 5px;
             justify-content: center;
         }
         
-        .nav-links { 
-            display: flex; 
-            list-style: none; 
-            gap: 5px; 
-            width: 100%;
-            justify-content: center;
-        }
-        
+        .nav-links { display: flex; list-style: none; gap: 5px; width: 100%; justify-content: center;}
         .nav-links a {
             position: relative; z-index: 2;
             text-decoration: none; color: #0038A8; 
             font-family: 'Barabara', sans-serif; font-size: 13px;
             padding: 10px 16px; white-space: nowrap; transition: 0.3s;
-            opacity: 0.7;
         }
-        .nav-links a.active { opacity: 1; }
 
         .nav-slider {
             position: absolute; background: #FFD300;
