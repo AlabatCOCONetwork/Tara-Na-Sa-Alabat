@@ -31,24 +31,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        /* --- BACKGROUND PHOTO EFFECT --- */
+        }/* --- BACKGROUND PHOTO EFFECT --- */
 body::before {
     content: "";
     position: fixed;
     top: 0; 
     left: 0; 
     width: 100%; 
-    height: 100%;
-    /* 1. Changed to ariya.png */
-    background: url('ariya.jpg') no-repeat center center fixed;
-    /* 2. Changed 'cover' to 'contain' so the logo fits the screen without cropping */
-    background-size: contain; 
-    /* 3. Added a small padding so the logo doesn't touch the screen edges on mobile */
+    /* Use 100vh to lock it to the device screen height */
+    height: 100vh; 
+    
+    /* REMOVED 'fixed' from this line to prevent mobile jumping */
+    background: url('ariya.jpg') no-repeat center center; 
+    
+    background-size: contain;
     background-origin: content-box;
-    padding: 10%; 
-    opacity: 0.15; 
+    padding: 10%;
+    opacity: 0.15;
     z-index: -1;
+
+    /* ADD THIS: Forces mobile browsers to stop moving the layer */
+    will-change: transform;
+    pointer-events: none;
 }
 
          /* --- BRANDED PATTERN TOP BAR --- */
