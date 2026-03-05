@@ -43,6 +43,29 @@ body::before {
     opacity: 0.15; 
     z-index: -1;
 }
+        /* --- BACKGROUND PHOTO EFFECT --- */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    /* Use 100vh to lock it to the device screen height */
+    height: 100vh; 
+    
+    /* REMOVED 'fixed' from this line to prevent mobile jumping */
+    background: url('ariya.jpg') no-repeat center center; 
+    
+    background-size: contain;
+    background-origin: content-box;
+    padding: 10%;
+    opacity: 0.15;
+    z-index: -1;
+
+    /* ADD THIS: Forces mobile browsers to stop moving the layer */
+    will-change: transform;
+    pointer-events: none;
+}
 
         /* --- BRANDED PATTERN TOP BAR (STANDARDIZED) --- */
         .top-accent {
