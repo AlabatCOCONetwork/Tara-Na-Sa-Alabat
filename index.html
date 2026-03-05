@@ -24,16 +24,17 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #ffffff;
+            background-color: #f8f9fa;
             color: #222;
             font-family: 'Inter', sans-serif;
+            line-height: 1.6;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* --- 1. TOP BAR (STANDARDIZED) --- */
+        /* --- 1. TOP BAR (PATTERN) --- */
         .top-accent {
             height: 40px;
             background-image: url('topper.png');
@@ -43,7 +44,6 @@
             position: fixed;
             top: 0;
             z-index: 4000;
-            border-bottom: 0px solid #fff;
         }
 
         /* --- 2. HEADER & BRANDING --- */
@@ -64,7 +64,7 @@
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- 3. STICKY NAV --- */
+        /* --- 3. STICKY SLIDING NAV --- */
         nav { 
             position: sticky; 
             top: 40px; 
@@ -98,43 +98,50 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* --- 4. HERO SECTION --- */
-        .hero-container {
-            display: flex; flex-direction: column; align-items: center;
-            padding: 60px 20px; text-align: center; gap: 40px;
-            max-width: 1200px; width: 100%;
+        /* --- 4. HERO SECTION (SPLIT LAYOUT) --- */
+        .adventure-container { 
+            padding: 60px 20px; 
+            text-align: center;
+            display: flex; 
+            flex-direction: column; 
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
         }
-
-        .main-title { 
+        .adventure-text { 
             font-family: 'Barabara', sans-serif;
-            font-size: clamp(45px, 10vw, 90px); color: #0038A8; line-height: 0.9;
-            text-transform: uppercase; margin-bottom: 15px;
+            font-size: clamp(38px, 8vw, 75px); 
+            color: #0038A8; 
+            line-height: 0.9;
+            text-transform: uppercase;
         }
-        .sub-title { font-size: 18px; color: #666; max-width: 600px; margin: 0 auto 30px; }
-        
-        .btn-explore { 
-            display: inline-block; padding: 16px 40px; 
+        .adventure-text span { color: #CE1126; }
+        .sub-text { font-size: 18px; color: #666; margin: 20px 0; max-width: 500px; margin-inline: auto; }
+
+        .btn-main { 
+            display: inline-block; padding: 14px 35px; 
             background: #CE1126; color: white; text-decoration: none;
-            font-family: 'Barabara', sans-serif; border-radius: 6px;
+            font-family: 'Barabara', sans-serif; border-radius: 5px;
             box-shadow: 4px 4px 0px #FFD300; transition: 0.2s;
-            font-size: 18px; border: none; cursor: pointer;
+            font-size: 16px; border: none; cursor: pointer;
         }
-        .btn-explore:hover { transform: translateY(-3px); box-shadow: 6px 6px 0px #FFD300; }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 6px 6px 0px #FFD300; }
 
-        /* --- 5. MEDIA & VIDEO --- */
-        .media-group { width: 100%; max-width: 800px; }
-
-        .video-box { 
-            width: 100%; border-radius: 20px; overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15); background: #000;
-            aspect-ratio: 16/9; border: 8px solid #fff; position: relative;
+        /* --- 5. VIDEO BOX --- */
+        .video-wrapper { width: 100%; max-width: 700px; margin: 0 auto; position: relative; }
+        .video-frame { 
+            border-radius: 20px; border: 8px solid #fff; overflow: hidden;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1); background: #000;
+            aspect-ratio: 16/9;
+            position: relative;
         }
-        .video-box iframe { width: 100%; height: 100%; border: none; }
+        .video-frame iframe { width: 100%; height: 100%; border: none; }
         
         .video-label { 
             position: absolute; top: 20px; left: 20px; z-index: 10;
             font-family: 'Barabara'; font-size: 12px; color: #fff;
-            background: #0038A8; padding: 8px 15px; border-radius: 4px;
+            background: rgba(0, 56, 168, 0.9); padding: 8px 15px; 
+            border-radius: 4px; transition: opacity 0.5s ease;
         }
 
         .video-controls { 
@@ -147,38 +154,43 @@
             color: #0038A8; border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .video-nav-btn:hover { background: #FFD300; transform: translateY(-2px); }
+        .video-nav-btn:hover { background: #FFD300; border-color: #FFD300; transform: translateY(-2px); }
 
         /* --- 6. PREVIEW CARDS --- */
-        .preview-row { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; width: 100%; margin-top: 50px; 
+        .preview-section { width: 100%; max-width: 1200px; padding: 40px 20px 80px; }
+        .preview-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px; margin-top: 30px;
         }
-        
         .preview-card {
-            position: relative; height: 280px; border-radius: 15px; 
-            overflow: hidden; text-decoration: none;
-            transition: 0.4s ease; box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            position: relative; height: 300px; border-radius: 20px; 
+            overflow: hidden; text-decoration: none; border: 1px solid #eee;
+            transition: 0.4s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        .preview-card:hover { transform: translateY(-8px); }
-        .preview-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .preview-card:hover img { scale: 1.1; }
+        .preview-card:hover { transform: translateY(-10px); border-color: #FFD300; }
+        .preview-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .preview-card:hover img { transform: scale(1.1); }
 
         .card-overlay {
             position: absolute; bottom: 0; left: 0; width: 100%;
-            padding: 25px; background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 25px; background: linear-gradient(transparent, rgba(0,56,168,0.9));
             color: #fff; display: flex; flex-direction: column; justify-content: flex-end;
-            height: 60%;
+            height: 70%;
         }
-        .preview-card h3 { font-family: 'Barabara'; font-size: 24px; margin-bottom: 2px; }
-        .preview-card .label { font-size: 11px; font-weight: 900; text-transform: uppercase; color: #FFD300; letter-spacing: 1px; }
+        .card-overlay h3 { font-family: 'Barabara'; font-size: 24px; }
+        .card-overlay p { font-size: 11px; text-transform: uppercase; color: #FFD300; font-weight: 700; letter-spacing: 1px; }
 
-        /* Desktop Adjustments */
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            .nav-links a { font-size: 10px; padding: 10px 8px; }
+            .adventure-text { font-size: 40px; }
+        }
+
         @media (min-width: 1024px) {
-            .hero-container { flex-direction: row; text-align: left; padding: 100px 5%; justify-content: space-between; align-items: center; }
-            .content { flex: 1; }
-            .media-group { flex: 1.2; max-width: 650px; }
-            .sub-title { margin: 0 0 30px 0; }
+            .adventure-container { flex-direction: row; text-align: left; padding: 100px 5%; align-items: center; justify-content: space-between; }
+            .adventure-text-box { flex: 1; }
+            .video-wrapper { flex: 1.2; }
+            .sub-text { margin-inline: 0; }
         }
     </style>
 </head>
@@ -196,7 +208,7 @@
 
     <nav>
         <div class="nav-container">
-            <div class="nav-slider" id="navSlider"></div>
+            <div class="nav-slider" id="navShade"></div>
             <ul class="nav-links">
                 <li><a href="index.html" id="activeLink">HOME</a></li>
                 <li><a href="about.html">ABOUT</a></li>
@@ -207,24 +219,21 @@
         </div>
     </nav>
 
-    <div class="hero-container">
-        <div class="content">
-            <h1 class="main-title">TARA NA SA<br>ALABAT!</h1>
-            <p class="sub-title">Discover the hidden gem of Quezon Province. Experience pristine nature, local culture, and organic wonders.</p>
-            <a href="about.html" class="btn-explore">EXPLORE NOW &rarr;</a>
+    <div class="adventure-container">
+        <div class="adventure-text-box">
+            <div class="adventure-text">TARA NA SA<br><span>ALABAT!</span></div>
+            <p class="sub-text">Experience the hidden gem of Quezon. From pristine rock formations to organic island treasures.</p>
+            <a href="about.html" class="btn-main">EXPLORE NOW &rarr;</a>
         </div>
 
-        <div class="media-group">
-            <div class="video-box">
-                <div class="video-label" id="videoLabel">ISLAND PREVIEW</div>
-                <iframe 
-                    id="heroVideo"
-                    src="https://www.youtube.com/embed/pSD9s5_IVJk?autoplay=1&mute=0&loop=1&playlist=pSD9s5_IVJk" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
+        <div class="video-wrapper">
+            <div class="video-frame">
+                <div class="video-label" id="videoTitle">ISLAND PREVIEW</div>
+                <iframe id="videoPlayer" 
+                        src="https://www.youtube.com/embed/pSD9s5_IVJk?autoplay=0&loop=1&playlist=pSD9s5_IVJk" 
+                        allow="autoplay; encrypted-media" allowfullscreen>
                 </iframe>
             </div>
-
             <div class="video-controls">
                 <button class="video-nav-btn" onclick="prevVideo()">&#10094;</button>
                 <button class="video-nav-btn" onclick="nextVideo()">&#10095;</button>
@@ -232,29 +241,28 @@
         </div>
     </div>
 
-    <div style="max-width:1200px; width:100%; padding:0 20px 80px;">
-        <div class="preview-row">
+    <div class="preview-section">
+        <h2 style="font-family:'Barabara'; color:#0038A8; text-transform: uppercase;">Discover More</h2>
+        <div class="preview-grid">
             <a href="destinations.html" class="preview-card">
-                <img src="pulongbato.jpg" alt="Pulong Bato">
+                <img src="pulongbato.jpg" alt="Destinations">
                 <div class="card-overlay">
-                    <p class="label">Island Spots</p>
+                    <p>Nature & Scenery</p>
                     <h3>Destinations</h3>
                 </div>
             </a>
-
             <a href="products.html" class="preview-card">
-                <img src="coco-sugar.jpg" alt="Coco Sugar">
+                <img src="coco-sugar.jpg" alt="Products">
                 <div class="card-overlay">
-                    <p class="label">Handmade Goods</p>
+                    <p>Organic & Local</p>
                     <h3>Local Products</h3>
                 </div>
             </a>
-
             <a href="about.html" class="preview-card">
-                <img src="background.jpg" alt="About Alabat">
+                <img src="background.jpg" alt="History">
                 <div class="card-overlay">
-                    <p class="label">Our Story</p>
-                    <h3>About Alabat</h3>
+                    <p>Our Story</p>
+                    <h3>About the Island</h3>
                 </div>
             </a>
         </div>
@@ -262,41 +270,35 @@
 
     <script>
         // Synchronized Nav Slider
-        function updateNavSlider() {
-            const activeLink = document.getElementById('activeLink');
-            const slider = document.getElementById('navSlider');
-            if (activeLink && slider) {
-                slider.style.width = activeLink.offsetWidth + "px";
-                slider.style.left = activeLink.offsetLeft + "px";
+        const shade = document.getElementById('navShade');
+        const activeLink = document.getElementById('activeLink');
+        function moveShade(el) {
+            if(el) {
+                shade.style.width = el.offsetWidth + 'px';
+                shade.style.left = el.offsetLeft + 'px';
             }
         }
-        window.addEventListener('load', updateNavSlider);
-        window.addEventListener('resize', updateNavSlider);
+        window.addEventListener('load', () => moveShade(activeLink));
+        window.addEventListener('resize', () => moveShade(activeLink));
 
-        // Video Playlist
-        const vLabel = document.getElementById('videoLabel');
-        const heroVideo = document.getElementById('heroVideo');
-        const playlist = [
-            {id: "pSD9s5_IVJk", title: "ISLAND PREVIEW"}, 
-            {id: "B7YRdNexH3c", title: "ALABAT ADVENTURE"}
+        // Video Control Logic
+        const vTitle = document.getElementById('videoTitle');
+        const videoFrame = document.getElementById('videoPlayer');
+        const myVideos = [
+            { title: "ISLAND PREVIEW", id: "pSD9s5_IVJk" },
+            { title: "ALABAT ADVENTURE", id: "B7YRdNexH3c" }
         ];
         let vIdx = 0;
 
         function updateVideo() {
-            const vid = playlist[vIdx];
-            heroVideo.src = `https://www.youtube.com/embed/${vid.id}?autoplay=1&mute=0&loop=1&playlist=${vid.id}`;
-            vLabel.innerText = vid.title;
+            const vid = myVideos[vIdx];
+            videoFrame.src = `https://www.youtube.com/embed/${vid.id}?autoplay=1&loop=1&playlist=${vid.id}`;
+            vTitle.innerText = vid.title;
+            vTitle.style.opacity = '1';
+            setTimeout(() => { vTitle.style.opacity = '0.7'; }, 2000);
         }
-
-        function nextVideo() {
-            vIdx = (vIdx + 1) % playlist.length;
-            updateVideo();
-        }
-
-        function prevVideo() {
-            vIdx = (vIdx - 1 + playlist.length) % playlist.length;
-            updateVideo();
-        }
+        function nextVideo() { vIdx = (vIdx + 1) % myVideos.length; updateVideo(); }
+        function prevVideo() { vIdx = (vIdx - 1 + myVideos.length) % myVideos.length; updateVideo(); }
     </script>
 </body>
 </html>
