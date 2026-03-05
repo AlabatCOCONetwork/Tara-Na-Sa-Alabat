@@ -10,191 +10,194 @@
     <meta property="og:title" content="Tara na sa Alabat! | Home">
     <meta property="og:description" content="Discover the beauty and organic products of Alabat Island.">
     <meta property="og:image" content="https://alabatcoconetwork.github.io/Tara-Na-Sa-Alabat/ariya.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        /* --- LOCAL FONT --- */
+        @font-face {
+            font-family: 'Barabara';
+            src: url('BARABARA-final.otf') format('opentype');
+            font-weight: normal; font-style: normal; font-display: swap;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('background.jpg') no-repeat center center fixed; 
-            background-size: cover; color: white; min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
-            position: relative; overflow-x: hidden;
+            background-color: #ffffff;
+            color: #222;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        /* --- PHILIPPINE FLAG TOP BAR --- */
+        .top-accent {
+            height: 6px;
+            background: linear-gradient(90deg, #0038A8 25%, #CE1126 25%, #CE1126 50%, #FFD300 50%, #FFD300 75%, #00AF66 75%);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 3000;
         }
 
-        /* --- LOGO --- */
-        .top-left-logo {
-            position: absolute; top: 20px; left: 20px; width: 100px; 
-            z-index: 2000;
+        /* --- HEADER AREA --- */
+        header {
+            padding: 50px 20px 15px;
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), url('background.jpg');
+            background-size: cover;
+            background-position: center;
         }
+        .nav-logo { height: 60px; width: auto; }
+        .top-left-logo { width: 55px; position: absolute; top: 20px; left: 15px; z-index: 2000; }
 
-        .logo-wrapper {
-            display: flex; justify-content: center; padding-top: 40px; width: 100%;
-        }
-        .nav-logo { height: 60px; width: auto; filter: none; }
-
-        /* --- NAVIGATION --- */
+        /* --- STICKY NAV --- */
         nav { 
-            display: flex; justify-content: center; padding: 15px; 
-            z-index: 1000; width: 100%; position: sticky; top: 0;
+            position: sticky; top: 6px; z-index: 1000; 
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
         }
         .nav-container {
-            position: relative; 
-            /* HIGHER OPACITY & 50PX BLUR */
-            background: rgba(255, 255, 255, 0.25); 
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
-            padding: 5px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.3);
-            display: flex; align-items: center; gap: 2px;
-            max-width: 95vw; overflow-x: auto; scrollbar-width: none;
+            position: relative; display: flex; 
+            overflow-x: auto; scrollbar-width: none;
+            padding: 0 15px;
+            justify-content: center;
         }
         .nav-container::-webkit-scrollbar { display: none; }
-
-        .nav-container a {
-            position: relative; z-index: 2; color: white; text-decoration: none;
-            font-weight: 700; font-size: 10px; text-transform: uppercase;
-            padding: 10px 18px; transition: 0.3s; opacity: 0.6; white-space: nowrap;
-        }
-        .nav-container a.active { opacity: 1; }
         
+        .nav-links { display: flex; list-style: none; gap: 5px; }
+        .nav-links a {
+            position: relative; z-index: 2;
+            text-decoration: none; color: #0038A8; 
+            font-family: 'Barabara', sans-serif; font-size: 13px;
+            padding: 10px 16px; white-space: nowrap; transition: 0.3s;
+            opacity: 0.7;
+        }
+        .nav-links a.active { opacity: 1; }
+
         .nav-slider {
-            position: absolute; height: calc(100% - 10px);
-            background: rgba(0, 174, 239, 0.6); border-radius: 50px;
-            top: 5px; z-index: 1; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: absolute; background: #FFD300;
+            box-shadow: 2px 2px 0px #CE1126; border-radius: 5px;
+            z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         /* --- HERO SECTION --- */
         .hero-container {
             display: flex; flex-direction: column; align-items: center;
-            width: 90%; max-width: 1200px; flex: 1; gap: 40px;
-            padding: 40px 0; text-align: center;
-            animation: slideUp 1s ease 0.2s forwards; opacity: 0;
+            padding: 60px 20px; text-align: center; gap: 40px;
+            background: #fcfcfc;
         }
 
-        @media (min-width: 1024px) {
-            .hero-container { flex-direction: row; text-align: left; gap: 80px; }
-            .top-left-logo { width: 150px; top: 30px; left: 30px; }
-        }
-
-        .content { flex: 1; }
         .main-title { 
-            font-size: clamp(45px, 10vw, 90px); 
-            font-weight: 900; line-height: 0.9; 
-            text-transform: uppercase; letter-spacing: -2px; 
+            font-family: 'Barabara', sans-serif;
+            font-size: clamp(40px, 10vw, 85px); color: #0038A8; line-height: 0.9;
+            text-transform: uppercase; margin-bottom: 15px;
         }
-        .sub-title { font-size: 18px; margin: 15px 0 30px; font-weight: 400; opacity: 0.8; }
+        .sub-title { font-size: 18px; color: #666; margin-bottom: 30px; }
         
         .btn-explore { 
-            background: #00AEEF; color: white; padding: 16px 35px; 
-            border-radius: 50px; text-decoration: none; font-weight: 900; 
-            font-size: 13px; text-transform: uppercase; transition: 0.3s; 
-            display: inline-block; box-shadow: none;
+            display: inline-block; padding: 14px 35px; 
+            background: #CE1126; color: white; text-decoration: none;
+            font-family: 'Barabara', sans-serif; border-radius: 4px;
+            box-shadow: 4px 4px 0px #FFD300; transition: 0.2s;
+            font-size: 16px;
         }
 
-        /* --- MEDIA GROUP --- */
-        .media-group {
-            display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 550px;
-        }
+        /* --- MEDIA GROUP (DOT STYLE) --- */
+        .media-group { width: 100%; max-width: 900px; position: relative; }
 
         .video-box { 
-            width: 100%; position: relative; border-radius: 25px; 
-            border: 3px solid rgba(255,255,255,0.8); overflow: hidden; 
-            background: #000; box-shadow: none;
-            aspect-ratio: 16 / 9;
+            width: 100%; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15); background: #000;
+            aspect-ratio: 16/9; border: 1px solid #ddd; position: relative;
         }
+        .video-box iframe { width: 100%; height: 100%; border: none; }
         
-        .video-box iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            border: none;
-        }
-
         .video-label { 
-            position: absolute; top: 15px; left: 15px; z-index: 10; 
-            font-weight: 900; font-size: 9px; text-transform: uppercase; 
-            background: rgba(0,0,0,0.6); padding: 5px 12px; border-radius: 5px;
-            backdrop-filter: blur(5px); pointer-events: none;
+            position: absolute; bottom: 80px; left: 0; z-index: 10;
+            font-family: 'Barabara'; font-size: 12px; color: #fff;
+            background: #0038A8; padding: 8px 20px; 
+            box-shadow: 4px 0 0 #FFD300;
         }
 
-        .video-controls {
-            display: flex; justify-content: center; gap: 20px; padding: 5px 0;
-        }
-
+        .video-controls { display: flex; justify-content: flex-end; gap: 10px; margin-top: -25px; position: relative; z-index: 20; padding-right: 20px; }
         .video-nav-btn {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white; width: 50px; height: 50px; border-radius: 50%;
-            font-size: 18px; cursor: pointer; display: flex;
-            align-items: center; justify-content: center; transition: 0.3s ease;
+            background: #fff; border: 1px solid #ddd; width: 50px; height: 50px;
+            cursor: pointer; font-size: 20px; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .preview-row { display: flex; gap: 15px; width: 100%; }
+        /* --- PREVIEW CARDS (DOT OVERLAY STYLE) --- */
+        .preview-row { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 20px; width: 100%; margin-top: 40px; 
+        }
         
         .preview-card {
-            flex: 1; 
-            /* HIGHER OPACITY & 50PX BLUR */
-            background: rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(50px); 
-            -webkit-backdrop-filter: blur(50px);
-            border-radius: 25px; padding: 15px; border: 1px solid rgba(255, 255, 255, 0.2);
-            text-decoration: none; color: white; transition: 0.3s;
+            position: relative; height: 250px; border-radius: 8px; 
+            overflow: hidden; text-decoration: none;
+            transition: 0.4s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.08);
         }
-        .preview-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.3); }
-        .preview-card img { 
-            width: 100%; height: 100px; object-fit: cover; 
-            border-radius: 15px; margin: 10px 0; 
+        .preview-card:hover { transform: translateY(-8px); }
+        .preview-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .preview-card:hover img { transform: scale(1.1); }
+        
+        .card-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            color: #fff; display: flex; flex-direction: column; justify-content: flex-end;
+            height: 70%;
         }
-        .preview-card h3 { font-size: 14px; font-weight: 800; text-transform: uppercase; }
-        .preview-card .label { font-size: 8px; font-weight: 700; opacity: 0.7; letter-spacing: 1px; }
+        .preview-card h3 { font-family: 'Barabara'; font-size: 22px; margin-bottom: 2px; }
+        .preview-card .label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: #FFD300; letter-spacing: 1px; }
 
-        @media (max-width: 480px) {
-            .preview-row { flex-direction: column; }
-            .main-title { font-size: 50px; }
+        @media (min-width: 1024px) {
+            .hero-container { flex-direction: row; text-align: left; padding: 80px 10%; justify-content: space-between; }
+            .top-left-logo { width: 100px; }
+            .media-group { max-width: 600px; }
         }
     </style>
 </head>
 <body>
 
-    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+    <div class="top-accent"></div>
+    <img src="ariya.jpg" alt="Ariya" class="top-left-logo">
 
-    <div class="logo-wrapper">
+    <header>
         <a href="index.html">
-            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+            <img src="AlabatLogo.png" alt="Alabat Tourism" class="nav-logo">
         </a>
-    </div>
+    </header>
 
     <nav>
         <div class="nav-container">
             <div class="nav-slider" id="navSlider"></div>
-            <a href="index.html" class="active" id="activeLink">HOME</a>
-            <a href="about.html">ABOUT</a>
-            <a href="destinations.html">DESTINATIONS</a>
-            <a href="products.html">PRODUCTS</a>
-            <a href="contact.html">CONTACT</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active" id="activeLink">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="destinations.html">DESTINATIONS</a></li>
+                <li><a href="products.html">PRODUCTS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
         </div>
     </nav>
 
     <div class="hero-container">
         <div class="content">
             <h1 class="main-title">TARA NA SA<br>ALABAT!</h1>
-            <p class="sub-title">The hidden gem of Quezon!</p>
+            <p class="sub-title">Discover the hidden gem of Quezon Province. Experience pristine nature, local culture, and organic wonders.</p>
             <a href="about.html" class="btn-explore">EXPLORE NOW &rarr;</a>
         </div>
 
         <div class="media-group">
             <div class="video-box">
-                <div class="video-label">ISLAND PREVIEW</div>
+                <div class="video-label" id="videoLabel">ISLAND PREVIEW</div>
                 <iframe 
                     id="heroVideo"
                     src="https://www.youtube.com/embed/pSD9s5_IVJk?autoplay=1&mute=0&loop=1&playlist=pSD9s5_IVJk" 
@@ -204,25 +207,31 @@
             </div>
 
             <div class="video-controls">
-                <button class="video-nav-btn" onclick="prevVideo()" aria-label="Previous Video">&#10094;</button>
-                <button class="video-nav-btn" onclick="nextVideo()" aria-label="Next Video">&#10095;</button>
+                <button class="video-nav-btn" onclick="prevVideo()">&#10094;</button>
+                <button class="video-nav-btn" onclick="nextVideo()">&#10095;</button>
             </div>
 
             <div class="preview-row">
                 <a href="destinations.html" class="preview-card">
-                    <p class="label">DESTINATIONS</p>
                     <img src="pulongbato.jpg" alt="Pulong Bato">
-                    <h3>Pulong Bato</h3>
+                    <div class="card-overlay">
+                        <p class="label">Destinations</p>
+                        <h3>Pulong Bato</h3>
+                    </div>
                 </a>
 
                 <a href="products.html" class="preview-card">
-                    <p class="label">LOCAL PRODUCTS</p>
                     <img src="coco-sugar.jpg" alt="Coco Sugar">
-                    <h3>Coco Sugar</h3>
+                    <div class="card-overlay">
+                        <p class="label">Local Products</p>
+                        <h3>Coco Sugar</h3>
+                    </div>
                 </a>
             </div>
         </div>
     </div>
+
+    
 
     <script>
         function updateNavSlider() {
@@ -237,12 +246,16 @@
         window.addEventListener('resize', updateNavSlider);
 
         const heroVideo = document.getElementById('heroVideo');
-        const playlist = ["pSD9s5_IVJk", "B7YRdNexH3c"];
+        const playlist = [
+            {id: "pSD9s5_IVJk", title: "ISLAND PREVIEW"}, 
+            {id: "B7YRdNexH3c", title: "ALABAT ADVENTURE"}
+        ];
         let vIdx = 0;
 
         function updateVideo() {
-            const newId = playlist[vIdx];
-            heroVideo.src = `https://www.youtube.com/embed/${newId}?autoplay=1&mute=0&loop=1&playlist=${newId}`;
+            const vid = playlist[vIdx];
+            heroVideo.src = `https://www.youtube.com/embed/${vid.id}?autoplay=1&mute=0&loop=1&playlist=${vid.id}`;
+            document.getElementById('videoLabel').innerText = vid.title;
         }
 
         function nextVideo() {
