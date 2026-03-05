@@ -255,7 +255,6 @@
         function updateVideo() {
             const vid = playlist[vIdx];
             heroVideo.src = `https://www.youtube.com/embed/${vid.id}?autoplay=1&mute=0&loop=1&playlist=${vid.id}`;
-            document.getElementById('videoLabel').innerText = vid.title;
         }
 
         function nextVideo() {
