@@ -25,6 +25,24 @@
             align-items: center;
             min-height: 100vh;
         }
+        /* --- BACKGROUND PHOTO EFFECT --- */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    /* 1. Changed to ariya.png */
+    background: url('ariya.png') no-repeat center center fixed;
+    /* 2. Changed 'cover' to 'contain' so the logo fits the screen without cropping */
+    background-size: contain; 
+    /* 3. Added a small padding so the logo doesn't touch the screen edges on mobile */
+    background-origin: content-box;
+    padding: 10%; 
+    opacity: 0.15; 
+    z-index: -1;
+}
 
         /* --- BRANDED PATTERN TOP BAR (STANDARDIZED) --- */
         .top-accent {
