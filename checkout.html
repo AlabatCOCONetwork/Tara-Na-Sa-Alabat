@@ -7,195 +7,252 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        /* --- LOCAL FONT --- */
+        @font-face {
+            font-family: 'Barabara';
+            src: url('BARABARA-final.otf') format('opentype');
+            font-weight: normal; font-style: normal; font-display: swap;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('background.jpg') no-repeat center center fixed; 
-            background-size: cover; color: white; min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
+            background-color: #f8f9fa;
+            color: #222;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        /* --- NAVIGATION & LOGO --- */
-        .top-left-logo {
-            position: absolute; top: 20px; left: 20px; width: 100px; 
-            z-index: 2000; opacity: 0.8;
+        /* --- PHILIPPINE FLAG TOP BAR --- */
+        .top-accent {
+            height: 6px;
+            background: linear-gradient(90deg, #0038A8 25%, #CE1126 25%, #CE1126 50%, #FFD300 50%, #FFD300 75%, #00AF66 75%);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 3000;
         }
 
-        .logo-wrapper { display: flex; justify-content: center; padding-top: 40px; width: 100%; }
-        .nav-logo { height: 60px; filter: drop-shadow(0 0 10px rgba(0,174,239,0.3)); }
+        /* --- HEADER AREA --- */
+        header {
+            padding: 50px 20px 15px;
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.95)), url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+        }
+        .nav-logo { height: 60px; width: auto; }
+        .top-left-logo { width: 55px; position: absolute; top: 20px; left: 15px; z-index: 2000; }
 
+        /* --- STICKY NAV --- */
         nav { 
-            display: flex; justify-content: center; padding: 15px; position: sticky; 
-            top: 0; z-index: 1000; width: 100%;
+            position: sticky; top: 6px; z-index: 1000; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            width: 100%;
         }
-        
         .nav-container {
-            position: relative; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
-            padding: 5px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex; align-items: center; max-width: 95vw; overflow-x: auto; scrollbar-width: none;
+            position: relative; display: flex; 
+            overflow-x: auto; scrollbar-width: none;
+            padding: 0 15px;
+            justify-content: center;
         }
         .nav-container::-webkit-scrollbar { display: none; }
-
-        .nav-links { display: flex; list-style: none; position: relative; z-index: 2; }
-        .nav-links a { 
-            color: white; text-decoration: none; font-size: 10px; font-weight: 700; 
-            text-transform: uppercase; padding: 10px 18px; display: inline-block; 
-            transition: 0.3s; opacity: 0.6; white-space: nowrap;
+        
+        .nav-links { display: flex; list-style: none; gap: 5px; }
+        .nav-links a {
+            position: relative; z-index: 2;
+            text-decoration: none; color: #0038A8; 
+            font-family: 'Barabara', sans-serif; font-size: 13px;
+            padding: 10px 16px; white-space: nowrap; transition: 0.3s;
         }
-        .nav-links a.active { opacity: 1; }
 
         .nav-slider {
-            position: absolute; height: calc(100% - 10px);
-            background: rgba(0, 174, 239, 0.5); border-radius: 50px;
-            top: 5px; z-index: 1; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: absolute; background: #FFD300;
+            box-shadow: 2px 2px 0px #CE1126; border-radius: 5px;
+            z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* --- CHECKOUT CARD --- */
+        /* --- CHECKOUT CONTAINER --- */
+        .checkout-container {
+            width: 95%;
+            max-width: 700px;
+            padding: 40px 0 80px;
+        }
+
         .checkout-card {
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(25px);
-            width: 90%; max-width: 600px; border-radius: 35px;
-            padding: 30px; border: 1px solid rgba(255,255,255,0.1);
-            margin: 30px 0 60px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
         }
 
-        .section-label { font-size: 11px; font-weight: 900; color: #00AEEF; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; display: block; }
+        .section-label { 
+            font-family: 'Barabara';
+            font-size: 14px; 
+            color: #CE1126; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            margin-bottom: 20px; 
+            display: block; 
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
 
-        .item-row { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .item-row img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; }
+        .item-row { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f5f5f5; }
+        .item-row img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
         .item-info { flex: 1; }
-        .item-info h3 { font-size: 14px; font-weight: 900; text-transform: uppercase; }
-        .item-info p { font-size: 12px; color: #00AEEF; font-weight: 700; }
-        .item-qty { font-weight: 900; font-size: 18px; color: white; }
+        .item-info h3 { font-size: 15px; font-weight: 700; color: #0038A8; }
+        .item-info p { font-size: 13px; color: #666; }
+        .item-qty { font-family: 'Barabara'; font-size: 18px; color: #CE1126; }
 
         /* --- INPUTS --- */
-        .form-group { margin: 25px 0; }
+        .form-group { margin: 30px 0; }
         .recipient-input { 
-            width: 100%; background: rgba(255,255,255,0.05); color: white; 
-            border: 1px solid rgba(255,255,255,0.2); padding: 15px; border-radius: 15px; 
-            font-weight: 700; outline: none; transition: 0.3s;
+            width: 100%; background: #f9f9f9; color: #222; 
+            border: 1px solid #ddd; padding: 18px; border-radius: 8px; 
+            font-weight: 600; font-size: 16px; outline: none; transition: 0.3s;
         }
-        .recipient-input:focus { border-color: #00AEEF; background: rgba(255,255,255,0.1); }
+        .recipient-input:focus { border-color: #0038A8; background: #fff; }
 
-        .payment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .payment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         .option-tile {
-            padding: 15px; background: rgba(255, 255, 255, 0.05);
-            border: 2px solid transparent; border-radius: 18px;
+            padding: 20px; background: #f9f9f9;
+            border: 2px solid #eee; border-radius: 10px;
             cursor: pointer; text-align: center; transition: 0.3s;
         }
-        .option-tile span { font-size: 11px; font-weight: 900; text-transform: uppercase; opacity: 0.6; }
-        .option-tile.active { background: rgba(0, 174, 239, 0.2); border-color: #00AEEF; }
-        .option-tile.active span { opacity: 1; color: #00AEEF; }
+        .option-tile span { font-family: 'Barabara'; font-size: 12px; color: #666; }
+        .option-tile.active { background: #fff; border-color: #0038A8; box-shadow: 0 5px 15px rgba(0,56,168,0.1); }
+        .option-tile.active span { color: #0038A8; }
 
         #online-payment-area { 
-            display: none; text-align: center; margin-top: 20px; 
-            background: white; color: black; padding: 20px; border-radius: 25px; 
+            display: none; text-align: center; margin-top: 25px; 
+            background: #f0f7ff; padding: 25px; border-radius: 12px; 
+            border: 1px dashed #0038A8;
         }
-        #online-payment-area img { width: 100%; max-width: 200px; margin-bottom: 10px; }
+        #online-payment-area img { width: 100%; max-width: 180px; margin: 15px 0; border-radius: 10px; }
 
-        .total-box { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; border-top: 2px solid rgba(255,255,255,0.1); padding-top: 20px; }
-        .total-box h2 { font-size: 28px; font-weight: 900; color: #00AEEF; }
+        .total-box { 
+            display: flex; justify-content: space-between; align-items: center; 
+            margin-top: 40px; padding-top: 25px; border-top: 3px solid #0038A8; 
+        }
+        .total-box h2 { font-family: 'Barabara'; font-size: 32px; color: #0038A8; }
 
         .place-order-btn {
-            background: #00AEEF; color: white; border: none; padding: 20px;
-            border-radius: 50px; font-weight: 900; font-size: 16px; cursor: pointer;
-            margin-top: 20px; transition: 0.3s; width: 100%; text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(0,174,239,0.3);
+            background: #CE1126; color: white; border: none; padding: 22px;
+            border-radius: 6px; font-family: 'Barabara'; font-size: 18px; cursor: pointer;
+            margin-top: 25px; transition: 0.3s; width: 100%;
+            box-shadow: 4px 4px 0px #FFD300;
         }
-        .place-order-btn:hover { transform: scale(1.02); filter: brightness(1.1); }
+        .place-order-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
         /* --- RECEIPT MODAL --- */
         #receipt-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 5000; padding: 20px;
+            background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 5000; padding: 20px;
         }
         .receipt-card { 
-            background: white; color: black; padding: 40px 30px; border-radius: 35px; 
-            width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            background: white; color: black; padding: 40px 30px; border-radius: 15px; 
+            width: 100%; max-width: 420px; text-align: center; position: relative;
         }
-        .order-num-box { background: #f0f0f0; padding: 20px; border-radius: 20px; margin: 20px 0; border: 2px dashed #00AEEF; }
-        .order-num-box span { font-size: 10px; font-weight: 900; color: #888; }
-        .order-num-box h3 { font-family: monospace; font-size: 32px; color: #111; }
+        .receipt-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px;
+            background: linear-gradient(90deg, #0038A8, #CE1126, #FFD300); border-radius: 15px 15px 0 0;
+        }
+        .order-num-box { background: #f8f8f8; padding: 25px; border-radius: 10px; margin: 25px 0; border: 2px dashed #ddd; }
+        .order-num-box span { font-size: 11px; font-weight: 800; color: #999; letter-spacing: 1px; }
+        .order-num-box h3 { font-family: monospace; font-size: 34px; color: #0038A8; margin-top: 5px; }
 
         @media (min-width: 1024px) {
-            .top-left-logo { width: 140px; }
             .nav-logo { height: 80px; }
         }
     </style>
 </head>
 <body>
-    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+    <div class="top-accent"></div>
+    <img src="ariya.jpg" alt="Ariya Logo" class="top-left-logo">
 
-    <div class="logo-wrapper">
-        <a href="index.html"><img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo"></a>
-    </div>
+    <header>
+        <a href="index.html"><img src="AlabatLogo.png" alt="Alabat Tourism" class="nav-logo"></a>
+    </header>
 
     <nav>
         <div class="nav-container">
             <div class="nav-slider" id="navSlider"></div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="destinations.html">Destinations</a></li>
-                <li><a href="products.html" class="active" id="activeLink">Products</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="destinations.html">DESTINATIONS</a></li>
+                <li><a href="products.html" class="active" id="activeLink">PRODUCTS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="checkout-card">
-        <span class="section-label">Order Summary</span>
-        <div id="checkout-list"></div>
+    <div class="checkout-container">
+        <div class="checkout-card">
+            <span class="section-label">Order Summary</span>
+            <div id="checkout-list"></div>
 
-        <div class="form-group">
-            <span class="section-label">Recipient Details</span>
-            <input type="text" id="recipientName" class="recipient-input" placeholder="Your Full Name">
-        </div>
-
-        <div class="form-group">
-            <span class="section-label">Payment Method</span>
-            <div class="payment-options">
-                <div class="option-tile active" id="opt-inperson" onclick="setPayment('In-Person')">
-                    <span>Pay at Booth</span>
-                </div>
-                <div class="option-tile" id="opt-online" onclick="setPayment('Online')">
-                    <span>GCash / Online</span>
-                </div>
+            <div class="form-group">
+                <span class="section-label">Recipient Details</span>
+                <input type="text" id="recipientName" class="recipient-input" placeholder="Full Name">
             </div>
-            <input type="hidden" id="paymentMethod" value="In-Person">
-        </div>
 
-        <div id="online-payment-area">
-            <p style="font-weight: 900; margin-bottom: 10px; font-size: 12px;">SCAN TO PAY VIA GCASH</p>
-            <img src="gcashcode.jpg" alt="GCash QR Code">
-            <input type="text" id="transactionNo" class="recipient-input" placeholder="Ref Number" style="color: black; border-color: #ddd;">
-        </div>
+            <div class="form-group">
+                <span class="section-label">Payment Method</span>
+                <div class="payment-options">
+                    <div class="option-tile active" id="opt-inperson" onclick="setPayment('In-Person')">
+                        <span>PAY AT BOOTH</span>
+                    </div>
+                    <div class="option-tile" id="opt-online" onclick="setPayment('Online')">
+                        <span>GCASH ONLINE</span>
+                    </div>
+                </div>
+                <input type="hidden" id="paymentMethod" value="In-Person">
+            </div>
 
-        <div class="total-box">
-            <span style="font-weight: 900; opacity: 0.8;">GRAND TOTAL</span>
-            <h2 id="grand-total">₱0.00</h2>
-        </div>
+            <div id="online-payment-area">
+                <p style="font-weight: 800; font-size: 13px; color: #0038A8;">SCAN TO PAY VIA GCASH</p>
+                <img src="gcashcode.jpg" alt="GCash QR Code">
+                <input type="text" id="transactionNo" class="recipient-input" placeholder="Reference Number" style="background: white;">
+            </div>
 
-        <button class="place-order-btn" onclick="processOrder()">Confirm Order</button>
+            <div class="total-box">
+                <span style="font-family: 'Barabara'; color: #666;">TOTAL</span>
+                <h2 id="grand-total">₱0.00</h2>
+            </div>
+
+            <button class="place-order-btn" onclick="processOrder()">CONFIRM PURCHASE</button>
+        </div>
     </div>
 
     <div id="receipt-modal">
         <div class="receipt-card">
-            <h2 style="font-weight: 900;">THANK YOU!</h2>
-            <p style="font-size: 14px; opacity: 0.7; margin-top: 5px;">Show this to the claiming station.</p>
+            <h2 style="font-family: 'Barabara'; font-size: 28px; color: #0038A8;">ORDER CONFIRMED!</h2>
+            <p style="font-size: 14px; color: #666; margin-top: 5px;">Present this digital stub at the claiming area.</p>
             
             <div class="order-num-box">
-                <span>REFERENCE NUMBER</span>
+                <span>STUB REFERENCE</span>
                 <h3 id="receiptOrderNum">ORD-000000</h3>
             </div>
 
-            <p id="receiptRecipient" style="font-weight: 800; text-transform: uppercase; margin-bottom: 20px;"></p>
+            <p id="receiptRecipient" style="font-weight: 800; text-transform: uppercase; margin-bottom: 25px; color: #CE1126;"></p>
             
-            <div style="background: #00AEEF; color: white; padding: 15px; border-radius: 15px; font-weight: 900;">
-                CLAIM AT BOOTH No. 23
+            <div style="background: #FFD300; color: #0038A8; padding: 18px; border-radius: 8px; font-family: 'Barabara'; font-size: 14px; border: 2px solid #0038A8;">
+                CLAIM AT TOURISM BOOTH #23
             </div>
 
-            <button onclick="window.location.href='index.html'" class="place-order-btn" style="background: black;">Back to Home</button>
+            <button onclick="window.location.href='index.html'" class="place-order-btn" style="background: #0038A8; box-shadow: 4px 4px 0px #CE1126;">RETURN TO HOME</button>
         </div>
     </div>
 
@@ -217,7 +274,7 @@
 
         function loadItems() {
             if (cart.length === 0) {
-                listDiv.innerHTML = "<p style='text-align:center; padding: 20px; opacity:0.5;'>Your basket is empty.</p>";
+                listDiv.innerHTML = "<p style='text-align:center; padding: 40px; color:#999;'>Your cart is empty.</p>";
                 return;
             }
             let totalCash = 0;
@@ -249,10 +306,10 @@
             const method = document.getElementById('paymentMethod').value;
             const txNo = document.getElementById('transactionNo').value;
             
-            if (!recipient.trim()) return alert("Please enter your name.");
+            if (!recipient.trim()) return alert("Please provide a name for the claim stub.");
             if (method === 'Online' && !txNo.trim()) return alert("Please enter the GCash reference number.");
 
-            const orderId = "ORD-" + Math.floor(100000 + Math.random() * 900000);
+            const orderId = "ALB-" + Math.floor(100000 + Math.random() * 900000);
 
             document.getElementById('receiptRecipient').innerText = recipient;
             document.getElementById('receiptOrderNum').innerText = orderId; 
