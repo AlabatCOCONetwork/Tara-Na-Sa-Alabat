@@ -11,9 +11,7 @@
         @font-face {
             font-family: 'Barabara';
             src: url('BARABARA-final.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
+            font-weight: normal; font-style: normal; font-display: swap;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,7 +21,7 @@
             color: #222; 
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         /* --- PHILIPPINE FLAG TOP BAR --- */
@@ -36,124 +34,106 @@
             z-index: 3000;
         }
 
-        /* --- MOBILE-FIRST LOGO AREA --- */
+        /* --- HEADER AREA --- */
         header {
             padding: 50px 20px 15px;
             display: flex;
             justify-content: center;
-            background: #fff;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), url('farmersbg.png');
+            background-size: cover;
+            background-position: center;
         }
         .nav-logo { height: 60px; width: auto; }
         .top-left-logo { width: 55px; position: absolute; top: 20px; left: 15px; z-index: 2000; }
 
-        /* --- STICKY MOBILE NAV --- */
+        /* --- STICKY NAV --- */
         nav { 
-            position: sticky; 
-            top: 6px; 
-            z-index: 1000; 
+            position: sticky; top: 6px; z-index: 1000; 
             background: rgba(255, 255, 255, 0.9); 
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #eee;
             padding: 10px 0;
         }
         .nav-container {
-            position: relative;
-            display: flex; 
-            gap: 5px; 
-            overflow-x: auto; /* Allow swiping on mobile */
-            justify-content: flex-start; 
-            scrollbar-width: none;
+            position: relative; display: flex; 
+            overflow-x: auto; scrollbar-width: none;
             padding: 0 15px;
         }
         .nav-container::-webkit-scrollbar { display: none; }
         
-        @media (min-width: 768px) {
-            .nav-container { justify-content: center; }
-            .nav-logo { height: 80px; }
-        }
-
-        .nav-container a {
-            position: relative; 
-            z-index: 2;
-            text-decoration: none; 
-            color: #0038A8; 
-            font-family: 'Barabara', sans-serif; 
-            font-size: 13px;
-            padding: 10px 16px; 
-            white-space: nowrap;
-            transition: 0.3s;
+        .nav-links { display: flex; list-style: none; gap: 5px; }
+        .nav-links a {
+            position: relative; z-index: 2;
+            text-decoration: none; color: #0038A8; 
+            font-family: 'Barabara', sans-serif; font-size: 13px;
+            padding: 10px 16px; white-space: nowrap; transition: 0.3s;
         }
 
         .nav-slider {
-            position: absolute;
-            background: #FFD300;
-            box-shadow: 2px 2px 0px #CE1126;
-            border-radius: 5px;
-            z-index: 1;
+            position: absolute; background: #FFD300;
+            box-shadow: 2px 2px 0px #CE1126; border-radius: 5px;
+            z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            height: 35px;
-            top: 50%;
-            transform: translateY(-50%);
         }
 
         /* --- HERO --- */
-        .hero { padding: 20px; text-align: center; }
+        .hero { padding: 30px 20px 10px; text-align: center; }
         .hero-img { 
-            width: 100%; 
-            max-width: 400px; 
+            width: 80%; max-width: 300px; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
             animation: slideUp 0.8s ease forwards;
         }
         .hero-sub { 
             font-family: 'Barabara', sans-serif;
-            color: #CE1126; font-size: 18px; margin-top: 10px; letter-spacing: 2px;
+            color: #CE1126; font-size: 16px; margin-top: 10px; letter-spacing: 2px;
         }
 
-        /* --- BENTO GRID (MOBILE FIRST) --- */
+        /* --- BENTO GRID GALLERY --- */
         .grid-container {
             padding: 15px;
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         .about-photo {
-            width: 100%; height: 140px; object-fit: cover; border-radius: 10px;
-            cursor: pointer; border: 3px solid #fff; transition: 0.3s;
+            width: 100%; height: 140px; object-fit: cover; border-radius: 12px;
+            cursor: pointer; border: 2px solid #fff; transition: 0.3s;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            animation: slideUp 0.8s ease forwards;
         }
-        .about-photo:first-child { grid-column: span 2; height: 200px; } /* Featured top img */
+        .about-photo:first-child { grid-column: span 2; height: 180px; }
 
         @media (min-width: 768px) {
-            .grid-container { grid-template-columns: repeat(4, 1fr); gap: 15px; }
-            .about-photo { height: 220px; }
-            .about-photo:first-child { grid-column: span 2; grid-row: span 2; height: 455px; }
+            .grid-container { grid-template-columns: repeat(4, 1fr); }
+            .about-photo { height: 200px; }
+            .about-photo:first-child { grid-column: span 2; grid-row: span 2; height: 410px; }
         }
 
-        /* --- CONTENT CARD --- */
+        /* --- CONTENT SECTION --- */
         .content-card {
-            padding: 30px 20px;
+            padding: 20px;
             max-width: 800px;
             margin: 0 auto 50px;
         }
         h2 { 
             font-family: 'Barabara', sans-serif; 
-            color: #0038A8; font-size: 26px; 
-            margin: 30px 0 10px; 
+            color: #0038A8; font-size: 24px; 
+            margin: 40px 0 15px; 
             display: flex; align-items: center; gap: 10px;
         }
-        h2::before { content: ''; width: 6px; height: 26px; background: #FFD300; border-radius: 3px; }
+        h2::before { content: ''; width: 6px; height: 24px; background: #FFD300; border-radius: 3px; box-shadow: 2px 2px 0 #CE1126; }
         
-        p { font-size: 16px; color: #444; margin-bottom: 15px; }
+        p { font-size: 15px; color: #444; margin-bottom: 15px; }
 
         .highlight-box {
-            background: #fdf6e3; border-radius: 12px; padding: 25px;
-            border-bottom: 4px solid #FFD300; color: #0038A8;
-            font-weight: 600; font-size: 17px; margin: 25px 0;
+            background: #fff9e6; border-radius: 15px; padding: 25px;
+            border-left: 5px solid #FFD300; color: #0038A8;
+            font-weight: 600; font-size: 16px; margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(255, 211, 0, 0.1);
         }
 
-        /* --- MODAL (Full Screen Mobile) --- */
+        /* --- MODAL --- */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; display: none; 
@@ -161,10 +141,10 @@
             z-index: 5000; padding: 20px;
         }
         .modal.active { display: flex; }
-        .modal-content { width: 100%; max-height: 60vh; object-fit: contain; border-radius: 10px; border: 4px solid #FFD300; }
-        .modal-details { text-align: center; margin-top: 20px; }
-        .modal-details h3 { font-family: 'Barabara'; color: #0038A8; font-size: 22px; }
-        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 35px; color: #CE1126; cursor: pointer; font-family: 'Barabara'; }
+        .modal-content { width: 100%; max-height: 50vh; object-fit: contain; border-radius: 15px; border: 4px solid #FFD300; }
+        .modal-details { text-align: center; margin-top: 25px; }
+        .modal-details h3 { font-family: 'Barabara'; color: #0038A8; font-size: 24px; }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 35px; color: #CE1126; cursor: pointer; font-family: 'Barabara'; border: none; background: none; }
 
         @keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
     </style>
@@ -183,11 +163,13 @@
     <nav>
         <div class="nav-container">
             <div class="nav-slider" id="navSlider"></div>
-            <a href="index.html">HOME</a>
-            <a href="about.html" class="active" id="activeLink">ABOUT</a>
-            <a href="destinations.html">DESTINATIONS</a>
-            <a href="products.html">PRODUCTS</a>
-            <a href="contact.html">CONTACT</a>
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html" id="activeLink">ABOUT</a></li>
+                <li><a href="destinations.html">DESTINATIONS</a></li>
+                <li><a href="products.html">PRODUCTS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
         </div>
     </nav>
 
@@ -199,7 +181,7 @@
     <div class="grid-container">
         <img src="farmersbg.png" class="about-photo" onclick="openZoom(this, 'Farmers of Alabat', 'Hardworking locals processing organic goods.')">
         <img src="PulongBatoo.png" class="about-photo" onclick="openZoom(this, 'Pulong Bato', 'Natural rock formation in Villa Norte.')">
-        <img src="tumiispeak.jpg" class="about-photo" onclick="openZoom(this, 'Tumii Peak', 'The highest point offering a 360 view.')">
+        <img src="tumiispeak.jpg" class="about-photo" onclick="openZoom(this, 'Tumiis Peak', 'The highest point offering a 360 view.')">
         <img src="alabatcove.jpg" class="about-photo" onclick="openZoom(this, 'Alabat Cove', 'Perfect area for witnessing the sunset.')">
         <img src="background.jpg" class="about-photo" onclick="openZoom(this, 'Island Overview', 'Lush greenery and blue waters.')">
     </div>
@@ -208,31 +190,33 @@
         <h2>History of Alabat</h2>
         <p>Alabat, officially the <strong>Municipality of Alabat</strong>, is a peaceful island town known for its hospitality and rich natural resources.</p>
         
-        <p>The town is home to a few speakers of the critically endangered <strong>Inagta Alabat language</strong>, listed by UNESCO.</p>  
+        <p>The town is home to a few speakers of the critically endangered <strong>Inagta Alabat language</strong>, listed by UNESCO as a vital part of Philippine heritage.</p>  
 
         <div class="highlight-box">
-            Founded in 1882 by a Spanish priest, the town originally built an ermita that honours Our Lady of Monte Carmelo.
+            Founded in 1882 by a Spanish priest, the town originally built an ermita that honours Our Lady of Monte Carmelo, who remains the town's patroness today.
         </div>
         
-        <p>Its first name was <strong>Gordo</strong>, meaning "fat", due to the island's shape. It was later changed to Gordon, Barcelona, and finally Alabat in 1900.</p>
+        <p>Its first name was <strong>Gordo</strong>, meaning "fat", due to the island's unique shape. It was later changed to Gordon, Barcelona, and finally Alabat in 1900.</p>
         
         <h2>Etymology</h2>
-        <p>The name Alabat came from the word <strong>Alâbât</strong> (local Tagalog word for balustrade or balcony).</p>
+        <p>The name Alabat came from the word <strong>Alâbât</strong>, a local Tagalog term for a balustrade or balcony, signifying the island's welcoming nature.</p>
 
-        <p>Another folklore says the name was from Muslim origins <strong>Allah-bat</strong>, which means <strong>Bathala</strong> (God).</p>
+        <p>Another folklore suggests the name has Muslim origins, <strong>Allah-bat</strong>, which translates to <strong>Bathala</strong> (God), reflecting the deep spirituality of its early inhabitants.</p>
     </div>
 
     <div class="modal" id="zoomModal">
-        <span class="close-btn" onclick="closeZoom()">×</span>
-        <img class="modal-content" id="modalImg">
-        <div class="modal-details">
-            <h3 id="modalTitle"></h3>
-            <p id="modalDesc"></p>
+        <button class="close-btn" onclick="closeZoom()">✕</button>
+        <div class="modal-card">
+            <img class="modal-content" id="modalImg">
+            <div class="modal-details">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc"></p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Maintain Navigation Slider functionality
+        // Nav Slider Logic
         function updateNavSlider() {
             const activeLink = document.getElementById('activeLink');
             const slider = document.getElementById('navSlider');
@@ -244,7 +228,7 @@
         window.addEventListener('load', updateNavSlider);
         window.addEventListener('resize', updateNavSlider);
 
-        // Zoom Logic
+        // Modal Logic
         const modal = document.getElementById('zoomModal');
         const modalImg = document.getElementById('modalImg');
         const modalTitle = document.getElementById('modalTitle');
@@ -255,10 +239,12 @@
             modalImg.src = imgElement.src;
             modalTitle.innerText = title;
             modalDesc.innerText = description;
+            document.body.style.overflow = 'hidden'; // Stop scroll
         }
 
         function closeZoom() {
             modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Resume scroll
         }
     </script>
 </body>
