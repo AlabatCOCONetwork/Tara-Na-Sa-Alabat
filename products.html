@@ -37,24 +37,7 @@
             border-bottom: 0px solid #fff;
         }
 
-        /* --- HEADER AREA (FIXED HEIGHT) --- */
-        header {
-            height: 125px; /* Fixed height to prevent jumping */
-            padding-top: 40px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), url('farmersbg.png');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        .nav-logo { height: 60px; width: auto; }
-
-        /* --- SIDE LOGOS (LOCKED POSITION) --- */
-        .top-left-logo { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
-        .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
-/* --- HEADER & BRANDING (STANDARDIZED) --- */
+        /* --- HEADER AREA --- */
         header {
             height: 125px;
             padding-top: 40px; 
@@ -72,7 +55,7 @@
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
+        /* --- STICKY NAVIGATION --- */
         nav { 
             position: sticky; 
             top: 40px; 
@@ -106,24 +89,19 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Mobile Adjustments (Uniform across all pages) */
-        @media (max-width: 480px) {
-            header { height: 110px; }
-            .top-left-logo { width: 45px; top: 50px; }
-            .top-right-logo { width: 60px; top: 45px; }
-            .nav-logo { height: 45px; }
-            nav { height: 50px; }
-            .nav-links a { font-size: 10px; padding: 10px 6px; }
-            .nav-slider { height: 30px; }
+        /* Section Header Layout for Specialties + Cart */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
-
 
         .cart-trigger {
             background: #0038A8; width: 44px; height: 44px; border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
             position: relative; cursor: pointer;
             box-shadow: 2px 2px 0px #CE1126; flex-shrink: 0;
-            margin-left: 10px;
         }
         .cart-count {
             position: absolute; top: -8px; right: -8px; background: #CE1126;
@@ -155,32 +133,21 @@
         }
         .product-card:hover { border-color: #FFD300; transform: translateY(-3px); }
 
-        /* Left side: Image + Price below */
         .card-left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
+            display: flex; flex-direction: column; align-items: center;
+            gap: 8px; flex-shrink: 0;
         }
         .product-card img { width: 85px; height: 85px; border-radius: 10px; object-fit: cover; }
         .list-price { font-weight: 800; color: #CE1126; font-size: 14px; font-family: 'Barabara'; }
 
-        /* Middle side: Name + Desc below */
         .card-mid {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow: hidden;
+            flex: 1; display: flex; flex-direction: column;
+            justify-content: center; overflow: hidden;
         }
-        .product-name { font-family: 'Barabara', sans-serif; color: #0038A8; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
-        .product-description { 
-            font-size: 12px; color: #666; 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
-        }
+        .product-name { font-family: 'Barabara', sans-serif; color: #0038A8; font-size: 15px; text-transform: uppercase; margin-bottom: 2px; }
+        .product-maker { font-size: 11px; font-weight: 700; color: #CE1126; margin-bottom: 5px; font-style: italic; }
+        .product-description { font-size: 12px; color: #666; line-height: 1.4; }
 
-        /* Right side: Button */
         .add-cart-btn {
             background: #FFD300; color: #0038A8; width: 40px; height: 40px;
             border-radius: 8px; border: none; font-weight: 900; font-size: 20px;
@@ -216,6 +183,16 @@
             .main-content { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; padding: 60px 5%; align-items: start; }
             .video-side { position: sticky; top: 120px; }
         }
+
+        @media (max-width: 480px) {
+            header { height: 110px; }
+            .top-left-logo { width: 45px; top: 50px; }
+            .top-right-logo { width: 60px; top: 45px; }
+            .nav-logo { height: 45px; }
+            nav { height: 50px; }
+            .nav-links a { font-size: 10px; padding: 10px 6px; }
+            .nav-slider { height: 30px; }
+        }
     </style>
 </head>
 <body>
@@ -239,10 +216,6 @@
                 <li><a href="contact.html">CONTACT</a></li>
             </ul>
         </div>
-        <div class="cart-trigger" onclick="toggleCart()">
-            <span style="font-size: 18px;">🛒</span>
-            <div class="cart-count" id="cart-badge">0</div>
-        </div>
     </nav>
 
     <div class="main-content">
@@ -255,7 +228,13 @@
         </div>
 
         <div class="product-grid-side">
-            <h2 style="font-family:'Barabara'; color:#0038A8; margin-bottom: 20px;">ISLAND SPECIALTIES</h2>
+            <div class="section-header">
+                <h2 style="font-family:'Barabara'; color:#0038A8;">ISLAND SPECIALTIES</h2>
+                <div class="cart-trigger" onclick="toggleCart()">
+                    <span style="font-size: 18px;">🛒</span>
+                    <div class="cart-count" id="cart-badge">0</div>
+                </div>
+            </div>
             <div class="product-list" id="products-list"></div>
         </div>
     </div>
@@ -286,6 +265,7 @@
                     </div>
                     <div class="card-mid">
                         <h3 class="product-name">${prod.name}</h3>
+                        <p class="product-maker">100% natural made by Ate Eva</p>
                         <p class="product-description">${prod.desc}</p>
                     </div>
                     <button class="add-cart-btn" onclick="addToCart('${prod.name}', '${prod.price}')">+</button>
