@@ -29,14 +29,14 @@
         /* --- BRANDED PATTERN TOP BAR (STANDARDIZED) --- */
         .top-accent {
             height: 40px;
-            background-image: url('topper.png');
+            background-image: url('image_8311da.png');
             background-size: auto 100%;
             background-repeat: repeat-x;
             width: 100%;
             position: fixed;
             top: 0;
             z-index: 4000;
-            border-bottom: 0px solid #fff;
+            border-bottom: 2px solid #fff;
         }
 
         /* --- HEADER & BRANDING (STANDARDIZED) --- */
@@ -57,7 +57,7 @@
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-         /* --- STICKY NAVIGATION (STANDARDIZED) --- */
+        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
             position: sticky; 
             top: 40px; 
@@ -72,9 +72,7 @@
         .nav-container {
             position: relative; flex: 1; display: flex; 
             justify-content: center;
-            overflow-x: auto; scrollbar-width: none;
         }
-        .nav-container::-webkit-scrollbar { display: none; }
         
         .nav-links { display: flex; list-style: none; gap: 5px; }
         .nav-links a {
@@ -89,6 +87,7 @@
             box-shadow: 2px 2px 0px #CE1126; border-radius: 5px;
             z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
 
         /* MOBILE TWEAKS */
         @media (max-width: 480px) {
@@ -195,7 +194,7 @@
 <body>
     <div class="top-accent"></div>
     <img src="ariya.jpg" alt="Ariya Logo" class="ariya-badge">
-    <img src="niyogyuganlogo.png" alt="Niyogyugan" class="top-right-logo">
+    <img src="niyogyuganlogo.jpg" alt="Niyogyugan" class="top-right-logo">
 
     <header>
         <a href="index.html"><img src="AlabatLogo.png" alt="Alabat Tourism" class="nav-logo"></a>
