@@ -7,7 +7,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         
-        /* --- MASTER FONT --- */
         @font-face {
             font-family: 'Barabara';
             src: url('BARABARA-final.otf') format('opentype');
@@ -26,7 +25,6 @@
             align-items: center;
         }
 
-        /* --- 1. TOP BAR (PATTERN) --- */
         .top-accent {
             height: 40px;
             background-image: url('topper.png');
@@ -39,7 +37,6 @@
             border-bottom: 2px solid #fff;
         }
 
-        /* --- 2. HEADER & BRANDING --- */
         header {
             height: 125px;
             padding-top: 40px; 
@@ -57,7 +54,7 @@
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- 3. STICKY NAV + CART --- */
+        /* --- FIXED SCROLLABLE NAV --- */
         nav { 
             position: sticky; 
             top: 40px; 
@@ -71,13 +68,19 @@
             padding: 0 15px;
         }
         .nav-container {
-            position: relative; flex: 1; display: flex; 
-            justify-content: center;
-            overflow-x: auto; scrollbar-width: none;
+            position: relative; 
+            flex: 1; 
+            display: flex; 
+            overflow-x: auto; 
+            scrollbar-width: none; /* Firefox */
         }
-        .nav-container::-webkit-scrollbar { display: none; }
+        .nav-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
         
-        .nav-links { display: flex; list-style: none; gap: 5px; }
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 5px; 
+        }
         .nav-links a {
             position: relative; z-index: 2;
             text-decoration: none; color: #0038A8; 
@@ -97,6 +100,7 @@
             display: flex; align-items: center; justify-content: center;
             position: relative; cursor: pointer;
             box-shadow: 2px 2px 0px #CE1126; flex-shrink: 0;
+            margin-left: 10px;
         }
         .cart-count {
             position: absolute; top: -8px; right: -8px; background: #CE1126;
@@ -105,7 +109,6 @@
             justify-content: center; border: 2px solid #fff;
         }
 
-        /* --- 4. MAIN LAYOUT --- */
         .main-content { 
             padding: 40px 20px; 
             max-width: 1200px; 
@@ -114,13 +117,52 @@
             flex-direction: column;
             gap: 40px;
         }
-        
-        .made-with-love { 
-            font-family: 'Barabara', sans-serif; 
-            color: #0038A8; font-size: clamp(32px, 6vw, 52px); line-height: 1.1; 
-            text-align: center;
+
+        /* --- PRODUCT REDESIGN --- */
+        .product-list { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 20px; 
+            padding-bottom: 60px;
         }
-        .made-with-love span { color: #CE1126; }
+        .product-card {
+            background: #fff; border-radius: 15px; padding: 15px;
+            display: flex; gap: 15px; align-items: center;
+            border: 1px solid #eee; transition: 0.3s; cursor: pointer;
+        }
+        .product-card:hover { border-color: #FFD300; transform: translateY(-3px); }
+
+        /* Left side: Image + Price below */
+        .card-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .product-card img { width: 85px; height: 85px; border-radius: 10px; object-fit: cover; }
+        .list-price { font-weight: 800; color: #CE1126; font-size: 14px; font-family: 'Barabara'; }
+
+        /* Middle side: Name + Desc below */
+        .card-mid {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .product-name { font-family: 'Barabara', sans-serif; color: #0038A8; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+        .product-description { 
+            font-size: 12px; color: #666; 
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
+        }
+
+        /* Right side: Button */
+        .add-cart-btn {
+            background: #FFD300; color: #0038A8; width: 40px; height: 40px;
+            border-radius: 8px; border: none; font-weight: 900; font-size: 20px;
+            cursor: pointer; box-shadow: 2px 2px 0px #CE1126; flex-shrink: 0;
+        }
 
         /* Video Section */
         .video-side { width: 100%; max-width: 700px; margin: 0 auto; }
@@ -129,104 +171,27 @@
             box-shadow: 0 15px 45px rgba(0,0,0,0.1); border: 8px solid #fff;
             background: #000; position: relative;
         }
-        .video-frame iframe { width: 100%; height: 100%; }
-
+        .video-frame iframe { width: 100%; height: 100%; border:none; }
         .video-label { 
-            position: absolute; top: 20px; left: 20px; z-index: 10;
-            font-family: 'Barabara'; font-size: 12px; color: #fff;
-            background: rgba(0, 56, 168, 0.9); padding: 8px 15px; 
-            border-radius: 4px; pointer-events: none;
+            position: absolute; top: 15px; left: 15px; z-index: 10;
+            font-family: 'Barabara'; font-size: 11px; color: #fff;
+            background: rgba(0, 56, 168, 0.9); padding: 6px 12px; border-radius: 4px;
         }
 
-        /* Minimalist Controls */
-        .video-controls { 
-            display: flex; justify-content: center; gap: 15px; margin-top: 20px; 
-        }
-        .video-nav-btn {
-            background: #fff; border: 1px solid #ddd; width: 45px; height: 45px;
-            cursor: pointer; font-size: 16px; transition: 0.3s;
-            display: flex; align-items: center; justify-content: center;
-            color: #0038A8; border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        .video-nav-btn:hover { background: #FFD300; border-color: #FFD300; transform: translateY(-2px); }
-
-        /* --- 5. PRODUCT GRID --- */
-        .product-list { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-            gap: 20px; 
-            padding-bottom: 60px;
-        }
-        .product-card {
-            background: #fff; border-radius: 15px; padding: 20px;
-            display: flex; gap: 18px; align-items: center;
-            border: 1px solid #eee; transition: 0.3s; cursor: pointer;
-        }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); border-color: #FFD300; }
-        .product-card img { width: 90px; height: 90px; border-radius: 12px; object-fit: cover; background: #f9f9f9; }
-        .product-info { flex: 1; }
-        .product-name { font-family: 'Barabara', sans-serif; color: #0038A8; font-size: 15px; text-transform: uppercase; }
-        .product-description { font-size: 12px; color: #666; margin: 4px 0; line-height: 1.3; }
-        .list-price { font-weight: 800; color: #CE1126; font-size: 17px; font-family: 'Barabara'; }
-
-        .add-cart-btn {
-            background: #FFD300; color: #0038A8; width: 44px; height: 44px;
-            border-radius: 10px; border: none; font-weight: 900; font-size: 24px;
-            cursor: pointer; box-shadow: 3px 3px 0px #CE1126; transition: 0.1s;
-        }
-        .add-cart-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #CE1126; }
-
-        /* --- 6. CART SIDEBAR --- */
+        /* Cart Sidebar */
         .cart-sidebar {
             position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px;
-            height: 100vh; background: #fff; z-index: 5000; padding: 0;
-            box-shadow: -15px 0 40px rgba(0,0,0,0.15); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex; flex-direction: column;
+            height: 100vh; background: #fff; z-index: 5000; transition: 0.4s;
+            display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.1);
         }
         .cart-sidebar.active { right: 0; }
-        .cart-header {
-            padding: 30px 20px; background: #0038A8; color: white;
-            font-family: 'Barabara'; font-size: 22px; display: flex; justify-content: space-between;
-            position: relative;
-        }
-        .cart-header::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 5px;
-            background: linear-gradient(90deg, #CE1126 50%, #FFD300 50%);
-        }
-        .cart-body { flex: 1; overflow-y: auto; padding: 25px; }
-        .cart-footer { border-top: 1px solid #eee; padding: 30px 20px; background: #fcfcfc; }
+        .cart-header { padding: 25px; background: #0038A8; color: white; font-family: 'Barabara'; display: flex; justify-content: space-between; }
+        .cart-body { flex: 1; overflow-y: auto; padding: 20px; }
+        .cart-footer { padding: 25px; border-top: 1px solid #eee; }
 
-        /* --- 7. ZOOM MODAL --- */
-        .zoom-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.98); display: none; z-index: 6000;
-            padding: 20px; justify-content: center; align-items: center;
-        }
-        .zoom-overlay.active { display: flex; }
-        .zoom-content { max-width: 500px; width: 100%; text-align: center; }
-        .zoom-content img { width: 100%; border-radius: 20px; border: 6px solid #FFD300; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .zoom-content h2 { font-family: 'Barabara', sans-serif; color: #0038A8; margin-top: 25px; font-size: 28px; }
-        .close-zoom-btn { 
-            margin-top: 25px; background: #CE1126; color: white; border: none;
-            padding: 14px 45px; border-radius: 6px; font-family: 'Barabara'; cursor: pointer;
-            box-shadow: 4px 4px 0px #FFD300; transition: 0.2s;
-        }
-
-        /* Desktop Adjustments */
         @media (min-width: 1024px) {
-            .main-content { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; padding: 60px 5%; align-items: start; }
-            .video-side { position: sticky; top: 120px; margin: 0; }
-            .made-with-love { text-align: left; margin-bottom: 20px; }
-        }
-
-        @media (max-width: 480px) {
-            header { height: 110px; }
-            .ariya-badge { width: 45px; top: 50px; }
-            .nav-logo { height: 45px; }
-            nav { height: 55px; }
-            .nav-links a { font-size: 11px; padding: 10px 8px; }
-            .product-card { flex-direction: column; text-align: center; }
+            .main-content { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; padding: 60px 5%; align-items: start; }
+            .video-side { position: sticky; top: 120px; }
         }
     </style>
 </head>
@@ -252,167 +217,79 @@
             </ul>
         </div>
         <div class="cart-trigger" onclick="toggleCart()">
-            <span style="font-size: 20px;">🛒</span>
+            <span style="font-size: 18px;">🛒</span>
             <div class="cart-count" id="cart-badge">0</div>
         </div>
     </nav>
 
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            YOUR BASKET <span onclick="toggleCart()" style="cursor:pointer; font-family:sans-serif;">✕</span>
-        </div>
-        <div class="cart-body" id="cart-items-list"></div>
-        <div class="cart-footer">
-            <div style="display:flex; justify-content:space-between; font-weight:800; margin-bottom:20px; color:#0038A8;">
-                <span style="font-family:'Barabara'; letter-spacing:1px;">TOTAL</span>
-                <span id="cart-total-amount" style="font-size:22px; font-family:'Barabara';">₱0.00</span>
-            </div>
-            <button onclick="location.href='checkout.html'" style="width:100%; background:#CE1126; color:white; padding:20px; border-radius:8px; border:none; font-family:'Barabara'; font-size:18px; cursor:pointer; box-shadow:4px 4px 0px #FFD300;">PROCEED TO CHECKOUT</button>
-        </div>
-    </div>
-
     <div class="main-content">
         <div class="video-side">
-            <h1 class="made-with-love">MADE WITH <span>LOVE</span><br>JUST FOR YOU!</h1>
-            <p style="margin-bottom: 30px; color: #666; font-size: 15px; text-align: center;" class="hide-mobile">Watch how we prepare Alabat's finest delicacies.</p>
-            
+            <h1 style="font-family:'Barabara'; color:#0038A8; text-align:center; font-size: 32px; margin-bottom: 20px;">MADE WITH <span style="color:#CE1126">LOVE</span></h1>
             <div class="video-frame">
-                <div class="video-label" id="videoTitle">OUR PROCESS</div>
-                <iframe id="processVideo" 
-                        src="https://www.youtube.com/embed/TdZzwAT-FFw?autoplay=0&loop=1&playlist=TdZzwAT-FFw" 
-                        allow="autoplay; encrypted-media" allowfullscreen>
-                </iframe>
-            </div>
-            <div class="video-controls">
-                <button class="video-nav-btn" onclick="prevVideo()">&#10094;</button>
-                <button class="video-nav-btn" onclick="nextVideo()">&#10095;</button>
+                <div class="video-label">OUR PROCESS</div>
+                <iframe src="https://www.youtube.com/embed/TdZzwAT-FFw" allowfullscreen></iframe>
             </div>
         </div>
 
         <div class="product-grid-side">
-            <h2 style="font-family:'Barabara'; color:#0038A8; margin-bottom: 25px; text-transform: uppercase;">Island Specialties</h2>
+            <h2 style="font-family:'Barabara'; color:#0038A8; margin-bottom: 20px;">ISLAND SPECIALTIES</h2>
             <div class="product-list" id="products-list"></div>
         </div>
     </div>
 
-    <div class="zoom-overlay" id="zoomOverlay" onclick="closeZoom()">
-        <div class="zoom-content" onclick="event.stopPropagation()">
-            <img id="zoomImg" src="">
-            <h2 id="zoomTitle"></h2>
-            <p id="zoomBody" style="margin: 20px 0; color: #555; line-height: 1.6; font-size: 16px;"></p>
-            <h3 id="zoomPrice" style="color:#CE1126; font-size:32px; font-family:'Barabara';"></h3>
-            <button class="close-zoom-btn" onclick="closeZoom()">RETURN TO SHOP</button>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">YOUR BASKET <span onclick="toggleCart()" style="cursor:pointer;">✕</span></div>
+        <div class="cart-body" id="cart-items-list"></div>
+        <div class="cart-footer">
+            <button style="width:100%; background:#CE1126; color:white; padding:15px; border-radius:8px; border:none; font-family:'Barabara'; cursor:pointer;">CHECKOUT</button>
         </div>
     </div>
 
     <script>
-        // Nav Slider
-        const shade = document.getElementById('navShade');
-        const activeLink = document.getElementById('activeLink');
-        function moveShade(el) {
-            if (el && shade) {
-                shade.style.width = el.offsetWidth + 'px';
-                shade.style.left = el.offsetLeft + 'px';
-            }
-        }
-        window.addEventListener('load', () => moveShade(activeLink));
-        window.addEventListener('resize', () => moveShade(activeLink));
-
-        // Video Controller
-        const vTitle = document.getElementById('videoTitle');
-        const videoFrame = document.getElementById('processVideo');
-        const myVideos = [
-            { id: "TdZzwAT-FFw", title: "HANDMADE QUALITY" },
-            { id: "Na-BqhLr-PA", title: "LOCAL HARVEST" },
-            { id: "qLVsOpQ2sUM", title: "ISLAND FLAVORS" },
-            { id: "y2l_bqQWGEM", title: "ALABAT TRADITION" }
-        ];
-        let vIdx = 0;
-        
-        function updateVideo() { 
-            const vid = myVideos[vIdx];
-            videoFrame.src = `https://www.youtube.com/embed/${vid.id}?autoplay=1&loop=1&playlist=${vid.id}`; 
-            vTitle.innerText = vid.title;
-        }
-        function nextVideo() { vIdx = (vIdx + 1) % myVideos.length; updateVideo(); }
-        function prevVideo() { vIdx = (vIdx - 1 + myVideos.length) % myVideos.length; updateVideo(); }
-
-        // Data & Rendering
         const inventory = [
             { name: "BALAT LITSON", price: "₱100.00", img: "balatlitchon.jpg", desc: "Alabat's signature crispy bread snack! A local favorite with the perfect crunch." },
             { name: "BANANA CHIPS", price: "₱120.00", img: "bananachips.jpg", desc: "Crispy Saba slices glazed with natural coco honey for a healthy, sweet treat." },
-            { name: "PURE HONEY", price: "₱350.00", img: "honey.jpg", desc: "Raw, organic honey harvested from local stingless bees in the mountains of Alabat." },
-            { name: "70% DARK CHOCOLATE", price: "₱220.00", img: "darkchocolate.jpg", desc: "Premium Alabat cocoa blended with healthy coco sugar for guilt-free indulgence." },
-            { name: "PEANUT BUTTER", price: "₱160.00", img: "peanutbutter.jpg", desc: "Creamy, homemade, and naturally sweet peanut spread with no preservatives." },
-            { name: "ATSARA PAPAYA", price: "₱140.00", img: "atsara.jpg", desc: "Traditional Filipino pickled papaya with a tropical twist, perfect for fried dishes." },
-            { name: "ATSARA UBOD", price: "₱160.00", img: "atsarau.jpg", desc: "A rare island delicacy made from fresh heart of palm, unique to Quezon province." },
-            { name: "COCO SUGAR", price: "₱180.00", img: "coco-sugar.jpg", desc: "Low-glycemic, organic sweetener processed from Alabat's coconut flower sap." },
-            { name: "CACAO BRITTLE", price: "₱150.00", img: "kakaobrittle.jpg", desc: "Thin, crunchy, and intensely flavored cacao treat that melts in your mouth." },
-            { name: "CACAO TABLEA", price: "₱120.00", img: "kakaotablea.jpg", desc: "Traditional chocolate tablets for authentic Filipino Sikwate (hot chocolate)." },
-            { name: "LIPOTE WINE", price: "₱280.00", img: "lipote.jpg", desc: "Exotic, antioxidant-rich wine made from wild Lipote berries found on the island." },
-            { name: "VIRGIN COCONUT OIL", price: "₱250.00", img: "vco.jpg", desc: "Cold-pressed, high-quality oil for health, cooking, and natural skin care." }
+            { name: "PURE HONEY", price: "₱350.00", img: "honey.jpg", desc: "Raw, organic honey harvested from local stingless bees." },
+            { name: "DARK CHOCOLATE", price: "₱220.00", img: "darkchocolate.jpg", desc: "Premium Alabat cocoa blended with healthy coco sugar." }
         ];
 
         function renderProducts() {
             const listDiv = document.getElementById('products-list');
-            listDiv.innerHTML = inventory.map((prod, index) => {
-                return `
-                    <div class="product-card" onclick="openZoom(${index})">
+            listDiv.innerHTML = inventory.map((prod, index) => `
+                <div class="product-card">
+                    <div class="card-left">
                         <img src="${prod.img}">
-                        <div class="product-info">
-                            <h3 class="product-name">${prod.name}</h3>
-                            <p class="product-description">${prod.desc.substring(0, 50)}...</p>
-                            <span class="list-price">${prod.price}</span>
-                        </div>
-                        <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('${prod.name}', '${prod.img}', '${prod.price}')">+</button>
-                    </div>`;
-            }).join('');
-        }
-
-        // Cart Logic
-        let cart = JSON.parse(localStorage.getItem('alabat_cart')) || [];
-        function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); }
-        
-        function addToCart(name, img, price) {
-            const item = cart.find(i => i.name === name);
-            if (item) item.quantity++; else cart.push({ name, img, price, quantity: 1 });
-            updateCart();
-            if(!document.getElementById('cartSidebar').classList.contains('active')) toggleCart();
-        }
-
-        function updateCart() {
-            localStorage.setItem('alabat_cart', JSON.stringify(cart));
-            document.getElementById('cart-badge').innerText = cart.reduce((s, i) => s + i.quantity, 0);
-            const list = document.getElementById('cart-items-list');
-            let total = 0;
-            list.innerHTML = cart.map(i => {
-                total += parseFloat(i.price.replace(/[₱,]/g, '')) * i.quantity;
-                return `
-                <div style="display:flex; align-items:center; gap:15px; margin-bottom:18px; border-bottom:1px solid #f8f8f8; padding-bottom:15px;">
-                    <img src="${i.img}" style="width:55px; height:55px; border-radius:8px; object-fit:cover;">
-                    <div style="flex:1">
-                        <h4 style="font-size:14px; color:#0038A8; font-family:'Barabara';">${i.name}</h4>
-                        <p style="font-size:13px; color:#CE1126; font-weight:800;">${i.price} x ${i.quantity}</p>
+                        <span class="list-price">${prod.price}</span>
                     </div>
-                </div>`;
-            }).join('');
-            document.getElementById('cart-total-amount').innerText = `₱${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+                    <div class="card-mid">
+                        <h3 class="product-name">${prod.name}</h3>
+                        <p class="product-description">${prod.desc}</p>
+                    </div>
+                    <button class="add-cart-btn" onclick="addToCart('${prod.name}', '${prod.price}')">+</button>
+                </div>
+            `).join('');
         }
 
-        // Zoom Modal Logic
-        function openZoom(idx) {
-            const p = inventory[idx];
-            document.getElementById('zoomImg').src = p.img;
-            document.getElementById('zoomTitle').innerText = p.name;
-            document.getElementById('zoomBody').innerText = p.desc;
-            document.getElementById('zoomPrice').innerText = p.price;
-            document.getElementById('zoomOverlay').classList.add('active');
+        let cartCount = 0;
+        function addToCart(name, price) {
+            cartCount++;
+            document.getElementById('cart-badge').innerText = cartCount;
         }
-        function closeZoom() { document.getElementById('zoomOverlay').classList.remove('active'); }
+
+        function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); }
+
+        const shade = document.getElementById('navShade');
+        const activeLink = document.getElementById('activeLink');
+        function moveShade(el) {
+            if (el) {
+                shade.style.width = el.offsetWidth + 'px';
+                shade.style.left = el.offsetLeft + 'px';
+            }
+        }
 
         window.addEventListener('load', () => {
             renderProducts();
-            updateCart();
+            moveShade(activeLink);
         });
     </script>
 </body>
