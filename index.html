@@ -23,15 +23,14 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* --- LOGO --- */
+        /* --- LOGO (Animations Removed) --- */
         .top-left-logo {
             position: absolute; top: 20px; left: 20px; width: 100px; 
-            z-index: 2000; animation: slideUp 1s ease forwards;
+            z-index: 2000;
         }
 
         .logo-wrapper {
             display: flex; justify-content: center; padding-top: 40px; width: 100%;
-            animation: slideUp 1s ease forwards;
         }
         .nav-logo { height: 60px; width: auto; filter: drop-shadow(0 0 10px rgba(0,174,239,0.3)); }
 
@@ -100,7 +99,6 @@
             border: 3px solid rgba(255,255,255,0.8); overflow: hidden; 
             background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             aspect-ratio: 16 / 9;
-            cursor: pointer;
         }
         
         .video-box iframe {
@@ -114,6 +112,19 @@
             background: rgba(0,0,0,0.6); padding: 5px 12px; border-radius: 5px;
             backdrop-filter: blur(5px); pointer-events: none;
         }
+
+        /* --- VIDEO CONTROLS --- */
+        .video-nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            z-index: 15; background: rgba(0, 174, 239, 0.7); color: white;
+            border: none; width: 45px; height: 45px; border-radius: 50%;
+            font-weight: bold; font-size: 20px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(5px); transition: 0.3s;
+        }
+        .video-nav-btn:active { transform: translateY(-50%) scale(0.9); background: #00AEEF; }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
 
         .preview-row { display: flex; gap: 15px; width: 100%; }
         
@@ -133,6 +144,7 @@
         @media (max-width: 480px) {
             .preview-row { flex-direction: column; }
             .main-title { font-size: 50px; }
+            .video-nav-btn { width: 50px; height: 50px; font-size: 24px; } /* Bigger for mobile thumbs */
         }
     </style>
 </head>
@@ -165,8 +177,12 @@
         </div>
 
         <div class="media-group">
-            <div class="video-box" onclick="changeVideo()">
+            <div class="video-box">
                 <div class="video-label">ISLAND PREVIEW</div>
+                
+                <button class="video-nav-btn prev-btn" onclick="prevVideo()">&#10094;</button>
+                <button class="video-nav-btn next-btn" onclick="nextVideo()">&#10095;</button>
+
                 <iframe 
                     id="heroVideo"
                     src="https://www.youtube.com/embed/pSD9s5_IVJk?autoplay=1&mute=0&loop=1&playlist=pSD9s5_IVJk" 
@@ -204,17 +220,24 @@
         window.addEventListener('load', updateNavSlider);
         window.addEventListener('resize', updateNavSlider);
 
-        // --- YOUTUBE VIDEO TOGGLE ---
+        // --- YOUTUBE VIDEO CONTROLS ---
         const heroVideo = document.getElementById('heroVideo');
-        // Added the new video ID "TdZzwAT-FFw" to the list
         const playlist = ["pSD9s5_IVJk", "TdZzwAT-FFw"];
         let vIdx = 0;
 
-        function changeVideo() {
-            vIdx = (vIdx + 1) % playlist.length;
+        function updateVideo() {
             const newId = playlist[vIdx];
-            // Mute=0 ensures it plays with sound when clicked
             heroVideo.src = `https://www.youtube.com/embed/${newId}?autoplay=1&mute=0&loop=1&playlist=${newId}`;
+        }
+
+        function nextVideo() {
+            vIdx = (vIdx + 1) % playlist.length;
+            updateVideo();
+        }
+
+        function prevVideo() {
+            vIdx = (vIdx - 1 + playlist.length) % playlist.length;
+            updateVideo();
         }
     </script>
 </body>
