@@ -23,17 +23,16 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* --- LOGO --- */
+        /* --- LOGO (Animations and Glow Removed) --- */
         .top-left-logo {
             position: absolute; top: 20px; left: 20px; width: 100px; 
-            z-index: 2000; animation: slideUp 1s ease forwards;
+            z-index: 2000;
         }
 
         .logo-wrapper {
             display: flex; justify-content: center; padding-top: 40px; width: 100%;
-            animation: slideUp 1s ease forwards;
         }
-        .nav-logo { height: 60px; width: auto; filter: drop-shadow(0 0 10px rgba(0,174,239,0.3)); }
+        .nav-logo { height: 60px; width: auto; filter: none; }
 
         /* --- NAVIGATION --- */
         nav { display: flex; justify-content: center; padding: 15px; position: sticky; top: 0; z-index: 1000; width: 100%; }
