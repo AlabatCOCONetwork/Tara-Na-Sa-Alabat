@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Alabat Tourism</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        /* --- LOCAL BARABARA FONT --- */
+        /* --- LOCAL FONT --- */
         @font-face {
             font-family: 'Barabara';
             src: url('BARABARA-final.otf') format('opentype');
@@ -23,12 +23,12 @@
             color: #222; 
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- FESTIVE DOT TOP ACCENT --- */
+        /* --- PHILIPPINE FLAG TOP BAR --- */
         .top-accent {
-            height: 8px;
+            height: 6px;
             background: linear-gradient(90deg, #0038A8 25%, #CE1126 25%, #CE1126 50%, #FFD300 50%, #FFD300 75%, #00AF66 75%);
             width: 100%;
             position: fixed;
@@ -36,141 +36,147 @@
             z-index: 3000;
         }
 
-        /* --- LOGO SECTION --- */
+        /* --- MOBILE-FIRST LOGO AREA --- */
         header {
-            padding: 60px 20px 20px;
+            padding: 50px 20px 15px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
             background: #fff;
         }
-        .nav-logo { height: 80px; width: auto; }
-        .top-left-logo { width: 70px; position: absolute; top: 25px; left: 20px; z-index: 2000; }
+        .nav-logo { height: 60px; width: auto; }
+        .top-left-logo { width: 55px; position: absolute; top: 20px; left: 15px; z-index: 2000; }
 
-        /* --- NAVIGATION --- */
+        /* --- STICKY MOBILE NAV --- */
         nav { 
-            position: sticky; top: 8px; z-index: 1000; 
-            background: rgba(255, 255, 255, 0.95); 
-            border-bottom: 2px solid #f1f1f1;
-            padding: 12px 0;
+            position: sticky; 
+            top: 6px; 
+            z-index: 1000; 
+            background: rgba(255, 255, 255, 0.9); 
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
         }
         .nav-container {
             position: relative;
-            display: flex; gap: 8px; overflow-x: auto;
-            justify-content: center; scrollbar-width: none;
+            display: flex; 
+            gap: 5px; 
+            overflow-x: auto; /* Allow swiping on mobile */
+            justify-content: flex-start; 
+            scrollbar-width: none;
             padding: 0 15px;
         }
         .nav-container::-webkit-scrollbar { display: none; }
         
+        @media (min-width: 768px) {
+            .nav-container { justify-content: center; }
+            .nav-logo { height: 80px; }
+        }
+
         .nav-container a {
-            position: relative; z-index: 2;
+            position: relative; 
+            z-index: 2;
             text-decoration: none; 
             color: #0038A8; 
             font-family: 'Barabara', sans-serif; 
-            font-size: 14px;
-            padding: 8px 16px; 
-            border-radius: 4px;
-            transition: 0.2s;
+            font-size: 13px;
+            padding: 10px 16px; 
             white-space: nowrap;
+            transition: 0.3s;
         }
-        .nav-container a.active { color: #0038A8; }
 
-        /* Navigation Slider Logic Maintained */
         .nav-slider {
             position: absolute;
             background: #FFD300;
             box-shadow: 2px 2px 0px #CE1126;
-            border-radius: 4px;
+            border-radius: 5px;
             z-index: 1;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            height: 34px; /* Matches link height */
+            height: 35px;
             top: 50%;
             transform: translateY(-50%);
         }
 
         /* --- HERO --- */
-        .hero { padding: 40px 20px; text-align: center; background: #fff; }
+        .hero { padding: 20px; text-align: center; }
         .hero-img { 
-            width: 100%; max-width: 500px; 
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
-            animation: slideUp 1s ease forwards;
+            width: 100%; 
+            max-width: 400px; 
+            animation: slideUp 0.8s ease forwards;
         }
         .hero-sub { 
             font-family: 'Barabara', sans-serif;
-            color: #CE1126; font-size: 22px; margin-top: 15px; letter-spacing: 2px;
-            animation: slideUp 1s ease 0.2s forwards; opacity: 0;
+            color: #CE1126; font-size: 18px; margin-top: 10px; letter-spacing: 2px;
         }
 
-        /* --- BENTO GRID GALLERY --- */
-        .slider-container { padding: 20px; max-width: 1100px; margin: 0 auto; }
-        .slider-wrapper {
+        /* --- BENTO GRID (MOBILE FIRST) --- */
+        .grid-container {
+            padding: 15px;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+            gap: 10px;
+            max-width: 1100px;
+            margin: 0 auto;
         }
         .about-photo {
-            width: 100%; height: 160px; object-fit: cover; border-radius: 12px;
-            cursor: pointer; border: 4px solid #fff; transition: 0.4s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            animation: slideUp 1s ease 0.4s forwards; opacity: 0;
+            width: 100%; height: 140px; object-fit: cover; border-radius: 10px;
+            cursor: pointer; border: 3px solid #fff; transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            animation: slideUp 0.8s ease forwards;
         }
-        .about-photo:hover { transform: scale(1.03); border-color: #FFD300; }
-        .about-photo:first-child { grid-column: span 2; height: 220px; }
+        .about-photo:first-child { grid-column: span 2; height: 200px; } /* Featured top img */
 
         @media (min-width: 768px) {
-            .slider-wrapper { grid-template-columns: repeat(4, 1fr); }
+            .grid-container { grid-template-columns: repeat(4, 1fr); gap: 15px; }
             .about-photo { height: 220px; }
-            .about-photo:first-child { grid-column: span 2; grid-row: span 2; height: 452px; }
+            .about-photo:first-child { grid-column: span 2; grid-row: span 2; height: 455px; }
         }
 
         /* --- CONTENT CARD --- */
         .content-card {
-            background: #fff; padding: 40px 25px;
-            margin: 30px auto 60px; max-width: 850px;
-            border-radius: 25px; border: 1px solid #eee;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            animation: slideUp 1s ease 0.6s forwards; opacity: 0;
+            padding: 30px 20px;
+            max-width: 800px;
+            margin: 0 auto 50px;
         }
         h2 { 
             font-family: 'Barabara', sans-serif; 
-            color: #0038A8; font-size: 32px; 
-            margin: 35px 0 15px; border-left: 8px solid #FFD300; padding-left: 15px;
+            color: #0038A8; font-size: 26px; 
+            margin: 30px 0 10px; 
+            display: flex; align-items: center; gap: 10px;
         }
-        h2:first-child { margin-top: 0; }
-        p { font-size: 17px; color: #444; margin-bottom: 20px; }
+        h2::before { content: ''; width: 6px; height: 26px; background: #FFD300; border-radius: 3px; }
+        
+        p { font-size: 16px; color: #444; margin-bottom: 15px; }
 
         .highlight-box {
-            background: #FFF9E6; border-radius: 15px; padding: 30px;
-            border-bottom: 5px solid #FFD300; color: #0038A8;
-            font-weight: bold; font-size: 18px; margin: 30px 0;
+            background: #fdf6e3; border-radius: 12px; padding: 25px;
+            border-bottom: 4px solid #FFD300; color: #0038A8;
+            font-weight: 600; font-size: 17px; margin: 25px 0;
         }
 
-        /* --- MODAL --- */
+        /* --- MODAL (Full Screen Mobile) --- */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.98); display: none; 
+            background: #fff; display: none; 
             flex-direction: column; justify-content: center; align-items: center; 
             z-index: 5000; padding: 20px;
         }
         .modal.active { display: flex; }
-        .modal-content { width: 100%; max-width: 800px; border-radius: 20px; border: 6px solid #FFD300; animation: zoomIn 0.4s ease; }
+        .modal-content { width: 100%; max-height: 60vh; object-fit: contain; border-radius: 10px; border: 4px solid #FFD300; }
         .modal-details { text-align: center; margin-top: 20px; }
-        .modal-details h3 { font-family: 'Barabara'; color: #0038A8; font-size: 26px; margin-bottom: 5px; }
-        .modal-details p { color: #666; font-size: 16px; }
+        .modal-details h3 { font-family: 'Barabara'; color: #0038A8; font-size: 22px; }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 35px; color: #CE1126; cursor: pointer; font-family: 'Barabara'; }
 
-        @keyframes slideUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
-        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div class="top-accent"></div>
-    <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
+    <img src="ariya.jpg" alt="Ariya" class="top-left-logo">
 
     <header>
         <a href="index.html">
-            <img src="AlabatLogo.png" alt="Alabat Tourism Logo" class="nav-logo">
+            <img src="AlabatLogo.png" alt="Alabat Logo" class="nav-logo">
         </a>
     </header>
 
@@ -190,37 +196,34 @@
         <p class="hero-sub">QUEZON, PHILIPPINES</p>
     </section>
 
-    <div class="slider-container">
-        <div class="slider-wrapper">
-            <img src="farmersbg.png" class="about-photo" onclick="openZoom(this, 'Farmers of Alabat', 'The hardworking local farmers processing organic goods.')">
-            <img src="PulongBatoo.png" class="about-photo" onclick="openZoom(this, 'Pulong Bato', 'A natural rock formation and crystal clear waters of Villa Norte.')">
-            <img src="tumiispeak.jpg" class="about-photo" onclick="openZoom(this, 'Tumii Peak', 'The highest point in Alabat offering a 360-degree view of the island.')">
-            <img src="alabatcove.jpg" class="about-photo" onclick="openZoom(this, 'Alabat Cove', 'A serene coastal area perfect for witnessing the sunset.')">
-            <img src="background.jpg" class="about-photo" onclick="openZoom(this, 'Island Overview', 'A bird\'s eye view of the lush greenery and blue waters.')">
-        </div>
+    <div class="grid-container">
+        <img src="farmersbg.png" class="about-photo" onclick="openZoom(this, 'Farmers of Alabat', 'Hardworking locals processing organic goods.')">
+        <img src="PulongBatoo.png" class="about-photo" onclick="openZoom(this, 'Pulong Bato', 'Natural rock formation in Villa Norte.')">
+        <img src="tumiispeak.jpg" class="about-photo" onclick="openZoom(this, 'Tumii Peak', 'The highest point offering a 360 view.')">
+        <img src="alabatcove.jpg" class="about-photo" onclick="openZoom(this, 'Alabat Cove', 'Perfect area for witnessing the sunset.')">
+        <img src="background.jpg" class="about-photo" onclick="openZoom(this, 'Island Overview', 'Lush greenery and blue waters.')">
     </div>
 
     <div class="content-card">
         <h2>History of Alabat</h2>
-        <p>Alabat, officially the <strong>Municipality of Alabat</strong> (Tagalog: Bayan ng Alabat), is a municipality in the province of Quezon, Philippines. It is a peaceful island town known for its hospitality and rich natural resources.</p>
+        <p>Alabat, officially the <strong>Municipality of Alabat</strong>, is a peaceful island town known for its hospitality and rich natural resources.</p>
         
-        <p>The town is home to a few speakers of the critically endangered <strong>Inagta Alabat language</strong>, one of the most endangered languages in the world as listed by UNESCO.</p>  
+        <p>The town is home to a few speakers of the critically endangered <strong>Inagta Alabat language</strong>, listed by UNESCO.</p>  
 
         <div class="highlight-box">
-            Founded in the year 1882 by a Spanish priest from Gumaca, the town originally built an ermita that honours Our Lady of Monte Carmelo.
+            Founded in 1882 by a Spanish priest, the town originally built an ermita that honours Our Lady of Monte Carmelo.
         </div>
         
-        <p>Its first name was <strong>Gordo</strong>, meaning "fat", due to the island's shape. It was later changed to Gordon, Barcelona, and finally Alabat. The formal establishment of the town occurred in the year 1900.</p>
+        <p>Its first name was <strong>Gordo</strong>, meaning "fat", due to the island's shape. It was later changed to Gordon, Barcelona, and finally Alabat in 1900.</p>
         
         <h2>Etymology</h2>
-        <p>Before Spanish colonization, the mountains were already inhabited by the “Baluga” (aborigines). Nomadic by nature, they would clean patches of land, plant rice and vegetables, and hunt.</p>
-
         <p>The name Alabat came from the word <strong>Alâbât</strong> (local Tagalog word for balustrade or balcony).</p>
 
-        <p>Another local folklore says that the name 'Alabat' was from Muslim origins where Alabat comes from Allah-bat, and if the word is mixed up actually means <strong>Bathala</strong>, the local word for god.</p>
+        <p>Another folklore says the name was from Muslim origins <strong>Allah-bat</strong>, which means <strong>Bathala</strong> (God).</p>
     </div>
 
-    <div class="modal" id="zoomModal" onclick="closeZoom()">
+    <div class="modal" id="zoomModal">
+        <span class="close-btn" onclick="closeZoom()">×</span>
         <img class="modal-content" id="modalImg">
         <div class="modal-details">
             <h3 id="modalTitle"></h3>
@@ -229,7 +232,7 @@
     </div>
 
     <script>
-        // Original functionality maintained
+        // Maintain Navigation Slider functionality
         function updateNavSlider() {
             const activeLink = document.getElementById('activeLink');
             const slider = document.getElementById('navSlider');
@@ -241,6 +244,7 @@
         window.addEventListener('load', updateNavSlider);
         window.addEventListener('resize', updateNavSlider);
 
+        // Zoom Logic
         const modal = document.getElementById('zoomModal');
         const modalImg = document.getElementById('modalImg');
         const modalTitle = document.getElementById('modalTitle');
