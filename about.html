@@ -27,7 +27,7 @@
         /* --- BRANDED PATTERN TOP BAR --- */
         .top-accent {
             height: 40px;
-            background-image: url('topper.png');
+            background-image: url('image_8311da.png');
             background-size: auto 100%;
             background-repeat: repeat-x;
             width: 100%;
@@ -37,34 +37,44 @@
             border-bottom: 2px solid #fff;
         }
 
-        /* --- HEADER AREA --- */
+        /* --- HEADER AREA (FIXED HEIGHT) --- */
         header {
-            padding: 80px 20px 15px; /* Added top padding for the 40px bar */
+            height: 125px; /* Fixed height to prevent jumping */
+            padding-top: 40px; 
             display: flex;
+            align-items: center;
             justify-content: center;
             background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), url('farmersbg.png');
             background-size: cover;
             background-position: center;
+            position: relative;
         }
         .nav-logo { height: 60px; width: auto; }
-        .top-left-logo { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
 
-               /* --- STICKY NAV (NO SLIDE) --- */
+        /* --- SIDE LOGOS (LOCKED POSITION) --- */
+        .top-left-logo { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
+        .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
+
+        /* --- STICKY NAV --- */
         nav { 
-            position: sticky; top: 6px; z-index: 1000; 
+            position: sticky; 
+            top: 40px; /* Sticks exactly below pattern */
+            height: 60px; /* Fixed height */
+            z-index: 1000; 
             background: rgba(255, 255, 255, 0.9); 
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #eee;
-            padding: 10px 0;
+            display: flex;
+            align-items: center;
         }
         .nav-container {
             position: relative; display: flex; 
-            overflow: hidden;
-            padding: 0 5px;
+            width: 100%;
             justify-content: center;
+            padding: 0 5px;
         }
         
-        .nav-links { display: flex; list-style: none; gap: 5px; width: 100%; justify-content: center;}
+        .nav-links { display: flex; list-style: none; gap: 5px; }
         .nav-links a {
             position: relative; z-index: 2;
             text-decoration: none; color: #0038A8; 
@@ -79,45 +89,24 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Mobile Nav Tweak */
+        /* Mobile Adjustments (Uniform across all pages) */
         @media (max-width: 480px) {
-            .nav-links { gap: 2px; }
+            header { height: 110px; }
+            .top-left-logo { width: 45px; top: 50px; }
+            .top-right-logo { width: 60px; top: 45px; }
+            .nav-logo { height: 45px; }
+            nav { height: 50px; }
             .nav-links a { font-size: 10px; padding: 10px 6px; }
+            .nav-slider { height: 30px; }
         }
 
-        .nav-slider {
-            position: absolute; background: #FFD300;
-            box-shadow: 2px 2px 0px #CE1126; border-radius: 5px;
-            z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        /* --- HERO --- */
+        /* --- HERO & CONTENT --- */
         .hero { padding: 30px 20px 10px; text-align: center; }
-        .hero-img { 
-            width: 80%; max-width: 300px; 
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
-            animation: slideUp 0.8s ease forwards;
-        }
-        .hero-sub { 
-            font-family: 'Barabara', sans-serif;
-            color: #CE1126; font-size: 16px; margin-top: 10px; letter-spacing: 2px;
-        }
+        .hero-img { width: 80%; max-width: 300px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1)); animation: slideUp 0.8s ease forwards; }
+        .hero-sub { font-family: 'Barabara', sans-serif; color: #CE1126; font-size: 16px; margin-top: 10px; letter-spacing: 2px; }
 
-        /* --- BENTO GRID GALLERY --- */
-        .grid-container {
-            padding: 15px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .about-photo {
-            width: 100%; height: 140px; object-fit: cover; border-radius: 12px;
-            cursor: pointer; border: 2px solid #fff; transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
+        .grid-container { padding: 15px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 1000px; margin: 0 auto; }
+        .about-photo { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; cursor: pointer; border: 2px solid #fff; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
         .about-photo:first-child { grid-column: span 2; height: 180px; }
 
         @media (min-width: 768px) {
@@ -126,36 +115,14 @@
             .about-photo:first-child { grid-column: span 2; grid-row: span 2; height: 410px; }
         }
 
-        /* --- CONTENT SECTION --- */
-        .content-card {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto 50px;
-        }
-        h2 { 
-            font-family: 'Barabara', sans-serif; 
-            color: #0038A8; font-size: 24px; 
-            margin: 40px 0 15px; 
-            display: flex; align-items: center; gap: 10px;
-        }
+        .content-card { padding: 20px; max-width: 800px; margin: 0 auto 50px; }
+        h2 { font-family: 'Barabara', sans-serif; color: #0038A8; font-size: 24px; margin: 40px 0 15px; display: flex; align-items: center; gap: 10px; }
         h2::before { content: ''; width: 6px; height: 24px; background: #FFD300; border-radius: 3px; box-shadow: 2px 2px 0 #CE1126; }
-        
         p { font-size: 15px; color: #444; margin-bottom: 15px; }
-
-        .highlight-box {
-            background: #fff9e6; border-radius: 15px; padding: 25px;
-            border-left: 5px solid #FFD300; color: #0038A8;
-            font-weight: 600; font-size: 16px; margin: 30px 0;
-            box-shadow: 0 4px 15px rgba(255, 211, 0, 0.1);
-        }
+        .highlight-box { background: #fff9e6; border-radius: 15px; padding: 25px; border-left: 5px solid #FFD300; color: #0038A8; font-weight: 600; font-size: 16px; margin: 30px 0; box-shadow: 0 4px 15px rgba(255, 211, 0, 0.1); }
 
         /* --- MODAL --- */
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff; display: none; 
-            flex-direction: column; justify-content: center; align-items: center; 
-            z-index: 5000; padding: 20px;
-        }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 5000; padding: 20px; }
         .modal.active { display: flex; }
         .modal-content { width: 100%; max-height: 50vh; object-fit: contain; border-radius: 15px; border: 4px solid #FFD300; }
         .modal-details { text-align: center; margin-top: 25px; }
@@ -169,6 +136,7 @@
 
     <div class="top-accent"></div>
     <img src="ariya.jpg" alt="Ariya" class="top-left-logo">
+    <img src="niyogyuganlogo.jpg" alt="Niyogyugan" class="top-right-logo">
 
     <header>
         <a href="index.html">
@@ -205,19 +173,13 @@
     <div class="content-card">
         <h2>History of Alabat</h2>
         <p>Alabat, officially the <strong>Municipality of Alabat</strong>, is a peaceful island town known for its hospitality and rich natural resources.</p>
-        
         <p>The town is home to a few speakers of the critically endangered <strong>Inagta Alabat language</strong>, listed by UNESCO as a vital part of Philippine heritage.</p>  
-
         <div class="highlight-box">
             Founded in 1882 by a Spanish priest, the town originally built an ermita that honours Our Lady of Monte Carmelo, who remains the town's patroness today.
         </div>
-        
         <p>Its first name was <strong>Gordo</strong>, meaning "fat", due to the island's unique shape. It was later changed to Gordon, Barcelona, and finally Alabat in 1900.</p>
-        
         <h2>Etymology</h2>
         <p>The name Alabat came from the word <strong>Alâbât</strong>, a local Tagalog term for a balustrade or balcony, signifying the island's welcoming nature.</p>
-
-        <p>Another folklore suggests the name has Muslim origins, <strong>Allah-bat</strong>, which translates to <strong>Bathala</strong> (God), reflecting the deep spirituality of its early inhabitants.</p>
     </div>
 
     <div class="modal" id="zoomModal">
@@ -232,7 +194,6 @@
     </div>
 
     <script>
-        // Nav Slider Logic
         function updateNavSlider() {
             const activeLink = document.getElementById('activeLink');
             const slider = document.getElementById('navSlider');
@@ -244,7 +205,6 @@
         window.addEventListener('load', updateNavSlider);
         window.addEventListener('resize', updateNavSlider);
 
-        // Modal Logic
         const modal = document.getElementById('zoomModal');
         const modalImg = document.getElementById('modalImg');
         const modalTitle = document.getElementById('modalTitle');
@@ -255,12 +215,12 @@
             modalImg.src = imgElement.src;
             modalTitle.innerText = title;
             modalDesc.innerText = description;
-            document.body.style.overflow = 'hidden'; // Stop scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function closeZoom() {
             modal.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Resume scroll
+            document.body.style.overflow = 'auto';
         }
     </script>
 </body>
