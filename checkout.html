@@ -7,7 +7,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         
-        /* --- LOCAL FONT --- */
         @font-face {
             font-family: 'Barabara';
             src: url('BARABARA-final.otf') format('opentype');
@@ -25,80 +24,39 @@
             align-items: center;
             min-height: 100vh;
         }
-        /* --- BACKGROUND PHOTO EFFECT --- */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100vh; 
-    z-index: -1;
-    opacity: 0.15;
-    
-    /* This forces the center */
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    /* We use mask/background logic that is rock-solid */
-    background-image: url('ariya.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    
-    /* 'contain' ensures it fits the screen, 
-       '80%' ensures it doesn't touch the edges */
-    background-size: contain;
-    
-    /* Fix for mobile jumping/moving */
-    pointer-events: none;
-    will-change: transform;
-}
-        /* --- BACKGROUND PHOTO EFFECT --- */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    /* Use 100vh to lock it to the device screen height */
-    height: 100vh; 
-    
-    /* REMOVED 'fixed' from this line to prevent mobile jumping */
-    background: url('ariya.jpg') no-repeat center center; 
-    
-    background-size: contain;
-    background-origin: content-box;
-    padding: 10%;
-    opacity: 0.15;
-    z-index: -1;
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
+            opacity: 0.15;
+            display: flex; align-items: center; justify-content: center;
+            background-image: url('ariya.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+            pointer-events: none;
+            will-change: transform;
+        }
 
-    /* ADD THIS: Forces mobile browsers to stop moving the layer */
-    will-change: transform;
-    pointer-events: none;
-}
-
-        /* --- BRANDED PATTERN TOP BAR (STANDARDIZED) --- */
         .top-accent {
             height: 40px;
-            background-image: url('image_8311da.png');
+            background-image: url('topper.png');
             background-size: auto 100%;
             background-repeat: repeat-x;
             width: 100%;
             position: fixed;
             top: 0;
             z-index: 4000;
-            border-bottom: 2px solid #fff;
         }
 
-        /* --- HEADER & BRANDING (STANDARDIZED) --- */
         header {
             height: 125px;
             padding-top: 40px; 
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.98)), url('background.jpg');
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.98)), url('farmersbg.png');
             background-size: cover;
             background-position: center;
             width: 100%;
@@ -109,144 +67,84 @@ body::before {
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
-            position: sticky; 
-            top: 40px; 
-            height: 60px;
-            z-index: 3000; 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #eee;
-            width: 100%;
-            display: flex; align-items: center;
+            position: sticky; top: 40px; height: 60px; z-index: 3000; 
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee; width: 100%; display: flex; align-items: center;
         }
-        .nav-container {
-            position: relative; flex: 1; display: flex; 
-            justify-content: center;
-        }
-        
+        .nav-container { position: relative; flex: 1; display: flex; justify-content: center; }
         .nav-links { display: flex; list-style: none; gap: 5px; }
         .nav-links a {
-            position: relative; z-index: 2;
-            text-decoration: none; color: #0038A8; 
+            position: relative; z-index: 2; text-decoration: none; color: #0038A8; 
             font-family: 'Barabara', sans-serif; font-size: 13px;
             padding: 10px 16px; white-space: nowrap; transition: 0.3s;
         }
-
         .nav-slider {
-            position: absolute; background: #FFD300;
-            box-shadow: 2px 2px 0px #CE1126; border-radius: 5px;
-            z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
+            position: absolute; background: #FFD300; box-shadow: 2px 2px 0px #CE1126;
+            border-radius: 5px; z-index: 1; height: 35px; top: 50%; transform: translateY(-50%);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* MOBILE TWEAKS */
-        @media (max-width: 480px) {
-            header { height: 110px; }
-            .ariya-badge { width: 45px; top: 50px; }
-            .top-right-logo { width: 60px; top: 45px; }
-            .nav-logo { height: 45px; }
-            nav { height: 50px; }
-            .nav-links a { font-size: 10px; padding: 10px 6px; }
-        }
-
-        /* --- CHECKOUT CONTAINER --- */
-        .checkout-container {
-            width: 95%;
-            max-width: 700px;
-            padding: 40px 0 80px;
-        }
-
+        .checkout-container { width: 95%; max-width: 600px; padding: 40px 0 80px; }
         .checkout-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 35px;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+            background: #ffffff; border-radius: 12px; padding: 30px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.05); border: 1px solid #eee;
         }
 
         .section-label { 
-            font-family: 'Barabara';
-            font-size: 14px; 
-            color: #CE1126; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            margin-bottom: 20px; 
-            display: block; 
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
+            font-family: 'Barabara'; font-size: 14px; color: #CE1126; 
+            text-transform: uppercase; margin-bottom: 15px; display: block; 
+            border-bottom: 2px solid #f0f0f0; padding-bottom: 8px;
         }
 
-        .item-row { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f5f5f5; }
-        .item-row img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
-        .item-info { flex: 1; }
-        .item-info h3 { font-size: 15px; font-weight: 700; color: #0038A8; }
-        .item-info p { font-size: 13px; color: #666; }
-        .item-qty { font-family: 'Barabara'; font-size: 18px; color: #CE1126; }
+        .item-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f5f5f5; }
+        .item-info h3 { font-size: 14px; color: #0038A8; text-transform: uppercase; }
+        .item-price { font-weight: 700; color: #444; }
 
-        /* --- INPUTS --- */
-        .form-group { margin: 30px 0; }
+        .form-group { margin: 25px 0; }
         .recipient-input { 
-            width: 100%; background: #f9f9f9; color: #222; 
-            border: 1px solid #ddd; padding: 18px; border-radius: 8px; 
-            font-weight: 600; font-size: 16px; outline: none; transition: 0.3s;
+            width: 100%; background: #f9f9f9; border: 1px solid #ddd; 
+            padding: 15px; border-radius: 8px; font-weight: 600; outline: none;
         }
         .recipient-input:focus { border-color: #0038A8; background: #fff; }
 
-        .payment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .payment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .option-tile {
-            padding: 20px; background: #f9f9f9;
-            border: 2px solid #eee; border-radius: 10px;
-            cursor: pointer; text-align: center; transition: 0.3s;
+            padding: 15px; background: #f9f9f9; border: 2px solid #eee; 
+            border-radius: 10px; cursor: pointer; text-align: center;
         }
-        .option-tile span { font-family: 'Barabara'; font-size: 12px; color: #666; }
-        .option-tile.active { background: #fff; border-color: #0038A8; box-shadow: 0 5px 15px rgba(0,56,168,0.1); }
+        .option-tile span { font-family: 'Barabara'; font-size: 11px; color: #666; }
+        .option-tile.active { background: #fff; border-color: #0038A8; }
         .option-tile.active span { color: #0038A8; }
 
         #online-payment-area { 
-            display: none; text-align: center; margin-top: 25px; 
-            background: #f0f7ff; padding: 25px; border-radius: 12px; 
-            border: 1px dashed #0038A8;
+            display: none; text-align: center; margin-top: 20px; 
+            background: #f0f7ff; padding: 20px; border-radius: 12px; border: 1px dashed #0038A8;
         }
-        #online-payment-area img { width: 100%; max-width: 180px; margin: 15px 0; border-radius: 10px; }
+        #online-payment-area img { width: 100%; max-width: 180px; margin: 10px 0; border-radius: 10px; }
 
-        .total-box { 
-            display: flex; justify-content: space-between; align-items: center; 
-            margin-top: 40px; padding-top: 25px; border-top: 3px solid #0038A8; 
-        }
-        .total-box h2 { font-family: 'Barabara'; font-size: 32px; color: #0038A8; }
+        .total-box { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 20px; border-top: 3px solid #0038A8; }
+        .total-box h2 { font-family: 'Barabara'; font-size: 28px; color: #0038A8; }
 
         .place-order-btn {
-            background: #CE1126; color: white; border: none; padding: 22px;
+            background: #CE1126; color: white; border: none; padding: 20px;
             border-radius: 6px; font-family: 'Barabara'; font-size: 18px; cursor: pointer;
-            margin-top: 25px; transition: 0.3s; width: 100%;
-            box-shadow: 4px 4px 0px #FFD300;
+            margin-top: 20px; width: 100%; box-shadow: 4px 4px 0px #FFD300;
         }
-        .place-order-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-        /* --- RECEIPT MODAL --- */
         #receipt-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 5000; padding: 20px;
         }
-        .receipt-card { 
-            background: white; color: black; padding: 40px 30px; border-radius: 15px; 
-            width: 100%; max-width: 420px; text-align: center; position: relative;
-        }
-        .receipt-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px;
-            background: linear-gradient(90deg, #0038A8, #CE1126, #FFD300); border-radius: 15px 15px 0 0;
-        }
-        .order-num-box { background: #f8f8f8; padding: 25px; border-radius: 10px; margin: 25px 0; border: 2px dashed #ddd; }
-        .order-num-box span { font-size: 11px; font-weight: 800; color: #999; letter-spacing: 1px; }
-        .order-num-box h3 { font-family: monospace; font-size: 34px; color: #0038A8; margin-top: 5px; }
+        .receipt-card { background: white; padding: 40px 30px; border-radius: 15px; width: 100%; max-width: 400px; text-align: center; }
+        .order-num-box { background: #f8f8f8; padding: 20px; border-radius: 10px; margin: 20px 0; border: 2px dashed #ddd; }
+        .order-num-box h3 { font-family: monospace; font-size: 30px; color: #0038A8; }
     </style>
 </head>
 <body>
     <div class="top-accent"></div>
     <img src="ariya.jpg" alt="Ariya Logo" class="ariya-badge">
-    <img src="niyogyuganlogo.jpg" alt="Niyogyugan" class="top-right-logo">
+    <img src="niyogyuganlogo.png" alt="Niyogyugan" class="top-right-logo">
 
     <header>
         <a href="index.html"><img src="AlabatLogo.png" alt="Alabat Tourism" class="nav-logo"></a>
@@ -271,7 +169,7 @@ body::before {
             <div id="checkout-list"></div>
 
             <div class="form-group">
-                <span class="section-label">Recipient Details</span>
+                <span class="section-label">Your Details</span>
                 <input type="text" id="recipientName" class="recipient-input" placeholder="Full Name">
             </div>
 
@@ -289,7 +187,7 @@ body::before {
             </div>
 
             <div id="online-payment-area">
-                <p style="font-weight: 800; font-size: 13px; color: #0038A8;">SCAN TO PAY VIA GCASH</p>
+                <p style="font-weight: 800; font-size: 12px; color: #0038A8;">SCAN TO PAY VIA GCASH</p>
                 <img src="gcashcode.jpg" alt="GCash QR Code">
                 <input type="text" id="transactionNo" class="recipient-input" placeholder="Reference Number" style="background: white;">
             </div>
@@ -299,93 +197,115 @@ body::before {
                 <h2 id="grand-total">₱0.00</h2>
             </div>
 
-            <button class="place-order-btn" onclick="processOrder()">CONFIRM PURCHASE</button>
+            <button id="confirmBtn" class="place-order-btn" onclick="processOrder()">CONFIRM PURCHASE</button>
         </div>
     </div>
 
     <div id="receipt-modal">
         <div class="receipt-card">
-            <h2 style="font-family: 'Barabara'; font-size: 28px; color: #0038A8;">ORDER CONFIRMED!</h2>
-            <p style="font-size: 14px; color: #666; margin-top: 5px;">Present this digital stub at the claiming area.</p>
-            
+            <h2 style="font-family: 'Barabara'; font-size: 24px; color: #0038A8;">ORDER CONFIRMED!</h2>
             <div class="order-num-box">
                 <span>STUB REFERENCE</span>
                 <h3 id="receiptOrderNum">ORD-000000</h3>
             </div>
-
-            <p id="receiptRecipient" style="font-weight: 800; text-transform: uppercase; margin-bottom: 25px; color: #CE1126;"></p>
-            
-            <div style="background: #FFD300; color: #0038A8; padding: 18px; border-radius: 8px; font-family: 'Barabara'; font-size: 14px; border: 2px solid #0038A8;">
+            <p id="receiptRecipient" style="font-weight: 800; text-transform: uppercase; color: #CE1126; margin-bottom: 20px;"></p>
+            <div style="background: #FFD300; color: #0038A8; padding: 15px; border-radius: 8px; font-family: 'Barabara'; font-size: 13px; border: 2px solid #0038A8;">
                 CLAIM AT TOURISM BOOTH #23
             </div>
-
             <button onclick="window.location.href='index.html'" class="place-order-btn" style="background: #0038A8; box-shadow: 4px 4px 0px #CE1126;">RETURN TO HOME</button>
         </div>
     </div>
 
-    <script>
-        function updateNavSlider() {
-            const activeLink = document.getElementById('activeLink');
-            const slider = document.getElementById('navSlider');
-            if (activeLink && slider) {
-                slider.style.width = activeLink.offsetWidth + "px";
-                slider.style.left = activeLink.offsetLeft + "px";
-            }
-        }
-        window.addEventListener('load', updateNavSlider);
-        window.addEventListener('resize', updateNavSlider);
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-        let cart = JSON.parse(localStorage.getItem('alabat_cart')) || [];
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHmTfEQxooyvm3EK0JlDfyrBr9IEN0fuc",
+            authDomain: "alabat-tourism.firebaseapp.com",
+            projectId: "alabat-tourism",
+            storageBucket: "alabat-tourism.firebasestorage.app",
+            messagingSenderId: "438243281376",
+            appId: "1:438243281376:web:ac42908ac4cf9862e0c385"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const cart = JSON.parse(localStorage.getItem('alabat_cart')) || [];
+        const total = localStorage.getItem('alabat_total') || 0;
+
+        // Render Summary
         const listDiv = document.getElementById('checkout-list');
-        const totalDisplay = document.getElementById('grand-total');
-
-        function loadItems() {
-            if (cart.length === 0) {
-                listDiv.innerHTML = "<p style='text-align:center; padding: 40px; color:#999;'>Your cart is empty.</p>";
-                return;
-            }
-            let totalCash = 0;
-            listDiv.innerHTML = cart.map(item => {
-                const priceNum = parseFloat(item.price.replace(/[₱,]/g, ''));
-                totalCash += priceNum * item.quantity;
-                return `
-                    <div class="item-row">
-                        <img src="${item.img}">
-                        <div class="item-info">
-                            <h3>${item.name}</h3>
-                            <p>${item.price}</p>
-                        </div>
-                        <div class="item-qty">x${item.quantity}</div>
-                    </div>`;
-            }).join('');
-            totalDisplay.innerText = `₱${totalCash.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+        if (cart.length === 0) {
+            listDiv.innerHTML = "<p style='text-align:center; padding: 20px; color:#999;'>Basket is empty.</p>";
+        } else {
+            listDiv.innerHTML = cart.map(item => `
+                <div class="item-row">
+                    <div class="item-info"><h3>${item.name}</h3></div>
+                    <div class="item-price">₱${item.price}</div>
+                </div>
+            `).join('');
         }
+        document.getElementById('grand-total').innerText = `₱${total}`;
 
-        function setPayment(method) {
+        // Payment Toggle
+        window.setPayment = (method) => {
             document.getElementById('paymentMethod').value = method;
             document.getElementById('opt-inperson').classList.toggle('active', method === 'In-Person');
             document.getElementById('opt-online').classList.toggle('active', method === 'Online');
             document.getElementById('online-payment-area').style.display = (method === 'Online') ? 'block' : 'none';
         }
 
-        function processOrder() {
+        // Process Order
+        window.processOrder = async () => {
             const recipient = document.getElementById('recipientName').value;
             const method = document.getElementById('paymentMethod').value;
             const txNo = document.getElementById('transactionNo').value;
+            const btn = document.getElementById('confirmBtn');
             
-            if (!recipient.trim()) return alert("Please provide a name for the claim stub.");
-            if (method === 'Online' && !txNo.trim()) return alert("Please enter the GCash reference number.");
+            if (!recipient.trim()) return alert("Please enter your name.");
+            if (method === 'Online' && !txNo.trim()) return alert("Enter GCash reference number.");
+
+            btn.disabled = true;
+            btn.innerText = "PROCESSING...";
 
             const orderId = "ALB-" + Math.floor(100000 + Math.random() * 900000);
 
-            document.getElementById('receiptRecipient').innerText = recipient;
-            document.getElementById('receiptOrderNum').innerText = orderId; 
-            document.getElementById('receipt-modal').style.display = 'flex';
-            
-            localStorage.removeItem('alabat_cart');
+            try {
+                await addDoc(collection(db, "orders"), {
+                    orderId: orderId,
+                    customerName: recipient,
+                    items: cart,
+                    totalAmount: total,
+                    paymentMethod: method,
+                    reference: method === 'Online' ? txNo : 'N/A',
+                    status: 'Pending',
+                    date: new Date()
+                });
+
+                document.getElementById('receiptRecipient').innerText = recipient;
+                document.getElementById('receiptOrderNum').innerText = orderId; 
+                document.getElementById('receipt-modal').style.display = 'flex';
+                
+                localStorage.removeItem('alabat_cart');
+                localStorage.removeItem('alabat_total');
+            } catch (e) {
+                alert("Error: " + e.message);
+                btn.disabled = false;
+                btn.innerText = "CONFIRM PURCHASE";
+            }
         }
 
-        loadItems();
+        // Nav UI
+        window.addEventListener('load', () => {
+            const activeLink = document.getElementById('activeLink');
+            const slider = document.getElementById('navSlider');
+            if (activeLink && slider) {
+                slider.style.width = activeLink.offsetWidth + "px";
+                slider.style.left = activeLink.offsetLeft + "px";
+            }
+        });
     </script>
 </body>
 </html>
