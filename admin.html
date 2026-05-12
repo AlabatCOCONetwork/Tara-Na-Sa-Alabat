@@ -40,7 +40,9 @@
         .revenue-card p { font-size: 36px; font-weight: 900; }
 
         /* Order Cards */
-        .order-item { background: white; border: 1px solid #eee; border-radius: 15px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .order-item { background: white; border: 1px solid #eee; border-radius: 15px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: transform 0.2s; cursor: zoom-in; }
+        .order-item:hover { transform: scale(1.01); border-color: #0038A8; }
+        
         .status-badge { font-size: 10px; font-weight: 900; padding: 5px 10px; border-radius: 4px; text-transform: uppercase; margin-top: 5px; display: inline-block; }
         .status-queue { background: #fff3cd; color: #856404; } 
         .status-ready { background: #cfe2ff; color: #084298; }  
@@ -55,6 +57,12 @@
 
         .inventory-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; }
         .list-section-title { font-family: 'Barabara'; font-size: 16px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+
+        /* Detail Modal Styling */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 5000; backdrop-filter: blur(4px); }
+        .modal-card { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 500px; transform: scale(0.7); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .zoom-active .modal-card { transform: scale(1); }
+        .item-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -126,6 +134,23 @@
         </div>
     </div>
 
+    <div id="detail-modal" class="modal-overlay" onclick="closeDetail()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <h2 id="modal-cust-name" style="font-family: 'Barabara'; color: #0038A8; margin-bottom: 5px;">Customer Name</h2>
+            <p id="modal-order-id" style="font-size: 11px; color: #999; margin-bottom: 20px; font-family: monospace;"></p>
+            
+            <div id="modal-items-container">
+                </div>
+
+            <div style="margin-top: 25px; padding-top: 15px; border-top: 2px solid #f8f9fa; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 800; color: #666;">GRAND TOTAL</span>
+                <span id="modal-total" style="font-size: 24px; font-weight: 900; color: #CE1126;">₱0.00</span>
+            </div>
+            
+            <button class="action-btn btn-outline" style="width: 100%; margin-top: 25px; padding: 15px;" onclick="closeDetail()">CLOSE DETAILS</button>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
         import { getFirestore, collection, onSnapshot, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
@@ -142,7 +167,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Session & Login
+        // Global functions
         window.checkLogin = () => {
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
@@ -154,59 +179,86 @@
 
         window.logout = () => { sessionStorage.removeItem('isAdmin'); location.reload(); };
 
-        // Toggle Views
         window.toggleView = (view) => {
             const activeArea = document.getElementById('active-orders-area');
             const pastArea = document.getElementById('past-orders-area');
             const btnActive = document.getElementById('btn-active-view');
             const btnPast = document.getElementById('btn-past-view');
-
             if(view === 'past') {
-                activeArea.style.display = 'none';
-                pastArea.style.display = 'block';
-                btnPast.classList.add('btn-active');
-                btnActive.classList.remove('btn-active');
+                activeArea.style.display = 'none'; pastArea.style.display = 'block';
+                btnPast.classList.add('btn-active'); btnActive.classList.remove('btn-active');
             } else {
-                activeArea.style.display = 'block';
-                pastArea.style.display = 'none';
-                btnActive.classList.add('btn-active');
-                btnPast.classList.remove('btn-active');
+                activeArea.style.display = 'block'; pastArea.style.display = 'none';
+                btnActive.classList.add('btn-active'); btnPast.classList.remove('btn-active');
             }
         };
 
-        // UI Helpers
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
         window.updateStatus = async (id, nextStatus) => {
             await updateDoc(doc(db, "orders", id), { status: nextStatus });
         };
+
+        // ZOOM DETAIL LOGIC
+        window.openDetail = (orderDataJson, id) => {
+            const order = JSON.parse(decodeURIComponent(orderDataJson));
+            document.getElementById('modal-cust-name').innerText = order.customerName;
+            document.getElementById('modal-order-id').innerText = `ORDER ID: ${id.toUpperCase()}`;
+            document.getElementById('modal-total').innerText = `₱${order.totalAmount}`;
+            
+            const container = document.getElementById('modal-items-container');
+            container.innerHTML = "";
+            
+            if(order.items && Array.isArray(order.items)) {
+                order.items.forEach(item => {
+                    container.innerHTML += `
+                        <div class="item-row">
+                            <span><b>${item.qty || 1}x</b> ${item.name}</span>
+                            <span>₱${item.price * (item.qty || 1)}</span>
+                        </div>`;
+                });
+            } else {
+                container.innerHTML = "<p style='color:#999; font-size:13px;'>No specific item details found.</p>";
+            }
+
+            const modal = document.getElementById('detail-modal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('zoom-active'), 10);
+        };
+
+        window.closeDetail = () => {
+            const modal = document.getElementById('detail-modal');
+            modal.classList.remove('zoom-active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        };
+
+        setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
 
         if(sessionStorage.getItem('isAdmin') === 'true') {
             document.getElementById('login-overlay').style.display = 'none';
             document.getElementById('admin-content').style.display = 'block';
 
-            // Real-time Orders Listener
             const q = query(collection(db, "orders"), orderBy("date", "desc"));
             onSnapshot(q, (snapshot) => {
                 const qList = document.getElementById('queue-list');
                 const rList = document.getElementById('ready-list');
                 const pList = document.getElementById('past-list');
-                
                 qList.innerHTML = ""; rList.innerHTML = ""; pList.innerHTML = "";
                 let revenue = 0;
 
                 snapshot.forEach(d => {
                     const order = d.data();
                     const id = d.id;
-                    const status = order.status || 'Queue';
+                    // FIX: If status is undefined or missing, treat as 'Queue'
+                    const status = order.status || 'Queue'; 
+                    const orderJson = encodeURIComponent(JSON.stringify(order));
 
                     const card = `
-                        <div class="order-item">
+                        <div class="order-item" onclick="openDetail('${orderJson}', '${id}')">
                             <div>
                                 <p style="font-size:10px; color:#999; font-family:monospace;">ID: ${id.substring(0,6).toUpperCase()}</p>
                                 <p style="font-size:16px;"><b>${order.customerName}</b></p>
-                                <p style="font-size:11px; color:#0038A8; font-weight:800;">${order.paymentMethod}</p>
+                                <p style="font-size:11px; color:#0038A8; font-weight:800;">${order.paymentMethod || 'Online'}</p>
                             </div>
-                            <div style="text-align:right">
+                            <div style="text-align:right" onclick="event.stopPropagation()">
                                 <p style="font-weight:900; font-size:18px; color:#CE1126; margin-bottom:10px;">₱${order.totalAmount}</p>
                                 <div class="btn-group">
                                     ${status === 'Queue' ? `<button class="action-btn btn-blue" onclick="updateStatus('${id}', 'Ready')">Prepare</button>` : ''}
@@ -224,12 +276,10 @@
                     }
                 });
                 document.getElementById('total-revenue').innerText = `₱${revenue.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
-                
                 if(!qList.innerHTML) qList.innerHTML = "<p style='font-size:12px; opacity:0.5'>No new orders.</p>";
                 if(!rList.innerHTML) rList.innerHTML = "<p style='font-size:12px; opacity:0.5'>No orders ready.</p>";
             });
 
-            // Stocks Listener
             onSnapshot(collection(db, "products"), (snap) => {
                 const inv = document.getElementById('inventory-list');
                 inv.innerHTML = "";
