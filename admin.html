@@ -7,35 +7,60 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         @font-face { font-family: 'Barabara'; src: url('BARABARA-final.otf') format('opentype'); }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #0a0a0c; color: white; min-height: 100vh; position: relative; }
-        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('ariya.png') no-repeat center center fixed; background-size: contain; padding: 10%; opacity: 0.15; z-index: -1; }
+        
+        body { background-color: #f8f9fa; color: #222; min-height: 100vh; }
+
+        /* --- BRANDED BACKGROUND --- */
+        body::before { 
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: url('ariya.jpg') no-repeat center center; 
+            background-size: contain; opacity: 0.10; z-index: -1; pointer-events: none;
+        }
+
         .top-accent { height: 40px; background-image: url('topper.png'); background-size: auto 100%; background-repeat: repeat-x; width: 100%; position: fixed; top: 0; z-index: 4000; }
         
+        /* --- LOGIN --- */
+        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .login-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; border: 1px solid #eee; }
+        .login-box h2 { font-family: 'Barabara'; color: #0038A8; margin-bottom: 20px; }
+        .login-box input { width: 100%; padding: 15px; margin-top: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none; }
+        .login-box button { width: 100%; padding: 16px; margin-top: 25px; border-radius: 10px; border: none; background: #CE1126; color: white; font-family: 'Barabara'; cursor: pointer; box-shadow: 4px 4px 0px #FFD300; }
         
-        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0c 100%); display: flex; justify-content: center; align-items: center; z-index: 9999; }
-        .login-box { background: rgba(255,255,255,0.03); padding: 50px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 400px; text-align: center; backdrop-filter: blur(10px); }
-        .login-box h2 { font-family: 'Barabara'; color: #FFD300; letter-spacing: 1px; margin-bottom: 20px; }
-        .login-box input { width: 100%; padding: 15px; margin-top: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); color: white; outline: none; }
-        .login-box button { width: 100%; padding: 16px; margin-top: 25px; border-radius: 10px; border: none; background: #0038A8; color: white; font-family: 'Barabara'; cursor: pointer; }
-        
-        
-        #admin-content { display: none; padding: 100px 30px 30px; }
-        .header-area { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto 40px; }
-        .nav-logo, .login-logo { height: 65px; width: auto; object-fit: contain; }
-        .logout-btn { color: #ff4757; font-weight: 800; font-size: 11px; cursor: pointer; padding: 8px 18px; border-radius: 6px; border: 1px solid #ff4757; text-transform: uppercase; }
-        .dashboard-grid { display: grid; grid-template-columns: 1fr 380px; gap: 30px; max-width: 1400px; margin: 0 auto; }
-        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border-radius: 20px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); }
-        .revenue-card { background: linear-gradient(135deg, #0038A8, #CE1126); padding: 35px; border-radius: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
-        .revenue-card h3 { font-family: 'Barabara'; font-size: 14px; color: rgba(255,255,255,0.8); }
-        .revenue-card p { font-size: 42px; font-weight: 900; margin-top: 5px; }
-        .inventory-item, .order-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
-        .delete-btn { color: #ff4757; background: none; border: none; cursor: pointer; font-size: 18px; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 5000; }
-        .modal-card { background: #16161a; padding: 40px; border-radius: 20px; width: 450px; border: 1px solid #333; }
-        .modal-card input, .modal-card textarea { width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 8px; background: #000; border: 1px solid #333; color: white; }
-        .action-btn { padding: 10px 16px; border-radius: 6px; border: none; font-weight: 800; font-size: 10px; cursor: pointer; text-transform: uppercase; }
-        .btn-yellow { background: #FFD300; color: #000; }
+        /* --- DASHBOARD LAYOUT --- */
+        #admin-content { display: none; padding: 100px 20px 50px; max-width: 1400px; margin: 0 auto; }
+        .header-area { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: white; padding: 20px; border-radius: 15px; border: 1px solid #eee; }
+        .nav-logo { height: 50px; }
+
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 350px; gap: 25px; }
+        .glass-panel { background: rgba(255, 255, 255, 0.9); border-radius: 20px; padding: 25px; border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        .revenue-card { background: #0038A8; color: white; padding: 30px; border-radius: 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 20px rgba(0,56,168,0.2); }
+        .revenue-card h3 { font-family: 'Barabara'; font-size: 12px; opacity: 0.8; }
+        .revenue-card p { font-size: 36px; font-weight: 900; }
+
+        /* --- ORDER CARDS --- */
+        .order-item { background: white; border: 1px solid #eee; border-radius: 15px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .order-item:hover { border-color: #0038A8; }
+        .status-badge { font-size: 10px; font-weight: 900; padding: 5px 10px; border-radius: 4px; text-transform: uppercase; margin-top: 5px; display: inline-block; }
+        .status-queue { background: #fff3cd; color: #856404; }
+        .status-waiting { background: #cfe2ff; color: #084298; }
+        .status-claimed { background: #d1e7dd; color: #0f5132; opacity: 0.6; }
+
+        .btn-group { display: flex; gap: 8px; }
+        .action-btn { padding: 10px 15px; border-radius: 6px; border: none; font-weight: 800; font-size: 10px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+        .btn-blue { background: #0038A8; color: white; }
+        .btn-green { background: #28a745; color: white; }
+        .btn-outline { border: 1px solid #ddd; background: white; color: #666; }
+        .btn-active { background: #FFD300; border-color: #FFD300; color: #000; }
+
+        .inventory-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; }
+
+        /* --- MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 5000; }
+        .modal-card { background: white; padding: 30px; border-radius: 20px; width: 400px; }
+        .modal-card input { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
@@ -44,24 +69,22 @@
 
     <div id="login-overlay">
         <div class="login-box">
-            <img src="AlabatLogo.png" alt="Logo" class="login-logo" style="margin-bottom: 30px;">
-            <h2>ADMIN PORTAL</h2>
-            <input type="text" id="username" placeholder="Staff ID">
+            <img src="AlabatLogo.png" alt="Logo" class="login-logo" style="height: 60px; margin-bottom: 20px;">
+            <h2>ADMIN ACCESS</h2>
+            <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
-            <button onclick="checkLogin()">Login to Dashboard</button>
-            <p id="error-msg" style="color: #ff4757; margin-top: 15px; font-size: 11px; display: none; font-weight: 800;">ACCESS DENIED</p>
+            <button onclick="checkLogin()">Enter Dashboard</button>
+            <p id="error-msg" style="color: #CE1126; margin-top: 15px; font-size: 12px; display: none; font-weight: 800;">INVALID CREDENTIALS</p>
         </div>
     </div>
 
     <div id="admin-content">
         <header class="header-area">
-            <img src="AlabatLogo.png" class="nav-logo" alt="Logo">
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <div style="text-align: right;">
-                    <p style="font-size: 10px; opacity: 0.5; font-weight: 900;">SYSTEM OPERATOR</p>
-                    <p style="font-size: 12px; font-weight: 700; color:#FFD300;">ALABAT_OFFICIAL_2026</p>
-                </div>
-                <a class="logout-btn" onclick="logout()">Logout</a>
+            <img src="AlabatLogo.png" class="nav-logo">
+            <div style="display: flex; gap: 15px;">
+                <button class="action-btn btn-outline btn-active" id="btn-active-view" onclick="toggleView('active')">Active Orders</button>
+                <button class="action-btn btn-outline" id="btn-past-view" onclick="toggleView('past')">Past Orders</button>
+                <button class="action-btn btn-outline" style="color:#CE1126" onclick="logout()">Logout</button>
             </div>
         </header>
 
@@ -69,23 +92,26 @@
             <div class="main-panel">
                 <div class="revenue-card">
                     <div>
-                        <h3>LIVE REVENUE SUMMARY</h3>
+                        <h3>TOTAL REVENUE</h3>
                         <p id="total-revenue">₱0.00</p>
                     </div>
-                    <button class="action-btn" style="background: rgba(255,255,255,0.1); color: white;">Global Sync On</button>
+                    <div style="text-align: right">
+                        <p style="font-size: 10px; font-weight: 800;">ALABAT TOURISM</p>
+                        <p style="font-size: 12px;">OFFICIAL ADMIN PANEL</p>
+                    </div>
                 </div>
 
                 <div class="glass-panel">
-                    <h2 style="font-family: 'Barabara'; font-size: 18px; color: #FFD300; margin-bottom: 20px;">INCOMING ORDERS</h2>
+                    <h2 id="list-title" style="font-family: 'Barabara'; font-size: 18px; color: #0038A8; margin-bottom: 20px;">ORDER QUEUE</h2>
                     <div id="orders-list"></div>
                 </div>
             </div>
 
             <div class="side-panel">
                 <div class="glass-panel">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-                        <h2 style="font-family: 'Barabara'; font-size: 18px; color: #FFD300;">STOCK MGT</h2>
-                        <button class="action-btn btn-yellow" onclick="showAddModal()">+ NEW ITEM</button>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="font-family: 'Barabara'; font-size: 16px;">PRODUCTS</h2>
+                        <button class="action-btn btn-blue" onclick="showAddModal()">+ ADD</button>
                     </div>
                     <div id="inventory-list"></div>
                 </div>
@@ -95,21 +121,20 @@
 
     <div class="modal-overlay" id="productModal">
         <div class="modal-card">
-            <h2 style="font-family: 'Barabara'; color: #FFD300; margin-bottom: 25px;">ADD NEW PRODUCT</h2>
+            <h2 style="font-family: 'Barabara'; margin-bottom: 20px;">NEW PRODUCT</h2>
             <input type="text" id="pName" placeholder="Product Name">
-            <input type="number" id="pPrice" placeholder="Price (Numeric)">
-            <input type="text" id="pImg" placeholder="Image Filename (jam.jpg)">
-            <textarea id="pDesc" placeholder="Description..." rows="3"></textarea>
-            <div style="display: flex; gap: 10px; margin-top: 10px;">
-                <button class="action-btn" style="flex: 1; background: #333; color: white;" onclick="closeModal()">Cancel</button>
-                <button class="action-btn" style="flex: 2; background: #0038A8; color: white;" onclick="saveProduct()">Sync to DB</button>
+            <input type="number" id="pPrice" placeholder="Price">
+            <input type="text" id="pImg" placeholder="Image Name (e.g. jam.jpg)">
+            <div style="display: flex; gap: 10px;">
+                <button class="action-btn" style="flex:1; background:#eee;" onclick="closeModal()">Cancel</button>
+                <button class="action-btn btn-blue" style="flex:2;" onclick="saveProduct()">Save to Database</button>
             </div>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBHmTfEQxooyvm3EK0JlDfyrBr9IEN0fuc",
@@ -117,12 +142,13 @@
             projectId: "alabat-tourism",
             storageBucket: "alabat-tourism.firebasestorage.app",
             messagingSenderId: "438243281376",
-            appId: "1:438243281376:web:ac42908ac4cf9862e0c385",
-            measurementId: "G-BH765YRMQY"
+            appId: "1:438243281376:web:ac42908ac4cf9862e0c385"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        let currentView = 'active'; // 'active' or 'past'
 
         window.checkLogin = () => {
             const u = document.getElementById('username').value;
@@ -140,26 +166,25 @@
             location.reload();
         };
 
+        window.toggleView = (view) => {
+            currentView = view;
+            document.getElementById('btn-active-view').classList.toggle('btn-active', view === 'active');
+            document.getElementById('btn-past-view').classList.toggle('btn-active', view === 'past');
+            document.getElementById('list-title').innerText = view === 'active' ? "ORDER QUEUE" : "PAST ORDERS (CLAIMED)";
+            loadOrders();
+        };
+
+        window.updateStatus = async (id, nextStatus) => {
+            await updateDoc(doc(db, "orders", id), { status: nextStatus });
+        };
+
         window.saveProduct = async () => {
             const name = document.getElementById('pName').value;
             const price = document.getElementById('pPrice').value;
             const img = document.getElementById('pImg').value;
-            const desc = document.getElementById('pDesc').value;
-
-            if(!name || !price) return alert("Fill Name and Price");
-
-            try {
-                await addDoc(collection(db, "products"), {
-                    name, price: parseFloat(price), img, desc, date: new Date()
-                });
-                closeModal();
-            } catch (e) { alert(e.message); }
-        };
-
-        window.deleteProduct = async (id) => {
-            if(confirm("Remove this item?")) {
-                await deleteDoc(doc(db, "products", id));
-            }
+            if(!name || !price) return alert("Required fields missing");
+            await addDoc(collection(db, "products"), { name, price: parseFloat(price), img, date: new Date() });
+            closeModal();
         };
 
         window.showAddModal = () => document.getElementById('productModal').style.display = 'flex';
@@ -169,33 +194,60 @@
             document.getElementById('login-overlay').style.display = 'none';
             document.getElementById('admin-content').style.display = 'block';
 
+            // Load Inventory
             onSnapshot(collection(db, "products"), (snapshot) => {
                 const list = document.getElementById('inventory-list');
                 list.innerHTML = "";
                 snapshot.forEach(d => {
                     const item = d.data();
                     list.innerHTML += `<div class="inventory-item">
-                        <div><p><b>${item.name}</b></p><p style="color:#FFD300">₱${item.price}</p></div>
-                        <button class="delete-btn" onclick="deleteProduct('${d.id}')">🗑️</button>
+                        <span><b>${item.name}</b> (₱${item.price})</span>
+                        <button style="border:none; background:none; cursor:pointer;" onclick="deleteDoc(doc(db, 'products', '${d.id}'))">❌</button>
                     </div>`;
                 });
             });
 
-            const qOrders = query(collection(db, "orders"), orderBy("date", "desc"));
-            onSnapshot(qOrders, (snapshot) => {
-                const list = document.getElementById('orders-list');
-                let total = 0;
-                list.innerHTML = snapshot.empty ? "<p style='opacity:0.3'>No orders yet.</p>" : "";
-                snapshot.forEach(d => {
-                    const order = d.data();
-                    total += parseFloat(order.totalAmount || 0);
-                    list.innerHTML += `<div class="order-item">
-                        <div><p><b>Order #${d.id.substring(0,5)}</b></p><p style="font-size:11px">${order.customerName}</p></div>
-                        <p style="color:#FFD300">₱${order.totalAmount}</p>
-                    </div>`;
+            // Load Orders
+            function loadOrders() {
+                const q = query(collection(db, "orders"), orderBy("date", "desc"));
+                onSnapshot(q, (snapshot) => {
+                    const list = document.getElementById('orders-list');
+                    let revenue = 0;
+                    list.innerHTML = "";
+                    
+                    snapshot.forEach(d => {
+                        const order = d.data();
+                        const status = order.status || 'Queue';
+                        revenue += parseFloat(order.totalAmount || 0);
+
+                        // Filter by view
+                        if(currentView === 'active' && status === 'Claimed') return;
+                        if(currentView === 'past' && status !== 'Claimed') return;
+
+                        const statusClass = status.toLowerCase();
+                        
+                        list.innerHTML += `
+                            <div class="order-item">
+                                <div>
+                                    <p style="font-size:12px; color:#666;">#${order.orderId || d.id.substring(0,6)}</p>
+                                    <p><b>${order.customerName}</b></p>
+                                    <span class="status-badge status-${statusClass}">${status}</span>
+                                    <p style="font-size:11px; margin-top:5px; color:#0038A8;">${order.paymentMethod}</p>
+                                </div>
+                                <div style="text-align:right">
+                                    <p style="font-weight:900; font-size:18px; margin-bottom:10px;">₱${order.totalAmount}</p>
+                                    <div class="btn-group">
+                                        ${status === 'Queue' ? `<button class="action-btn btn-blue" onclick="updateStatus('${d.id}', 'Waiting')">Ready</button>` : ''}
+                                        ${status === 'Waiting' ? `<button class="action-btn btn-green" onclick="updateStatus('${d.id}', 'Claimed')">Claim</button>` : ''}
+                                        ${status === 'Claimed' ? `<button class="action-btn btn-outline" onclick="updateStatus('${d.id}', 'Queue')">Re-open</button>` : ''}
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
+                    document.getElementById('total-revenue').innerText = `₱${revenue.toLocaleString()}`;
                 });
-                document.getElementById('total-revenue').innerText = `₱${total.toLocaleString()}`;
-            });
+            }
+            loadOrders();
         }
     </script>
 </body>
