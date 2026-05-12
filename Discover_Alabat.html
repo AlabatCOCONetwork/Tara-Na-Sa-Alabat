@@ -9,18 +9,15 @@
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
-        /* --- PAGE VISIBILITY SYSTEM --- */
         .page { display: none; }
         .page.active { display: block; }
 
-        /* --- SHARED STYLES --- */
         body { color: white; min-height: 100vh; overflow-x: hidden; }
         
         .top-left-logo { position: absolute; top: 20px; left: 20px; width: 100px; z-index: 2000; }
         .logo-wrapper { display: flex; justify-content: center; padding-top: 40px; width: 100%; }
         .nav-logo { height: 60px; width: auto; filter: drop-shadow(0 0 10px rgba(0,174,239,0.3)); }
 
-        /* --- NAVIGATION --- */
         nav { 
             display: flex; justify-content: center; padding: 15px; 
             z-index: 1000; width: 100%; position: sticky; top: 0;
@@ -45,7 +42,6 @@
             top: 5px; z-index: 1; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* === PAGE 1: HOME === */
         #home-page {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url('background.jpg') no-repeat center center fixed; 
@@ -149,7 +145,6 @@
         .preview-card h3 { font-size: 14px; font-weight: 800; text-transform: uppercase; }
         .preview-card .label { font-size: 8px; font-weight: 700; opacity: 0.5; letter-spacing: 1px; }
 
-        /* === PAGE 2: ABOUT === */
         #about-page {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('background.jpg') no-repeat center center fixed; 
@@ -206,7 +201,6 @@
             padding: 20px; border-radius: 10px; margin: 25px 0; font-style: italic;
         }
 
-        /* MODAL FOR IMAGE ZOOM */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); display: none; flex-direction: column;
@@ -224,7 +218,6 @@
 
         @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* === PAGE 3: DESTINATIONS === */
         #destinations-page {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('background.jpg') no-repeat center center fixed; 
@@ -246,7 +239,6 @@
         .destination-card h3 { font-size: 18px; font-weight: 900; color: #00AEEF; margin-bottom: 10px; }
         .destination-card p { font-size: 14px; opacity: 0.8; }
 
-        /* === PAGE 4: PRODUCTS === */
         #products-page {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('farmersbg.png') no-repeat center center fixed; 
@@ -326,7 +318,6 @@
         }
         .sold-out-badge { background: #ff4757; font-size: 9px; padding: 5px 10px; border-radius: 5px; font-weight: 900; }
 
-        /* === PAGE 5: CHECKOUT === */
         #checkout-page {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('background.jpg') no-repeat center center fixed; 
@@ -363,7 +354,6 @@
         }
         .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,174,239,0.3); }
 
-        /* === PAGE 6: CONTACT === */
         #contact-page {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('background.jpg') no-repeat center center fixed; 
@@ -406,7 +396,6 @@
         }
         .map-btn:hover { background: #00AEEF; color: white; transform: scale(1.05); }
 
-        /* === PAGE 7: ADMIN === */
         #admin-page {
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
                         url('background.jpg') no-repeat center center fixed; 
@@ -518,9 +507,6 @@
 </head>
 <body>
 
-<!-- ============================================================================
-     PAGE 1: HOME
-     ============================================================================ -->
 <div id="home-page" class="page active">
     
     <!-- EDIT: TOP-LEFT LOGO IMAGE -->
@@ -535,7 +521,6 @@
         </a>
     </div>
 
-    <!-- NAVIGATION BAR -->
     <nav>
         <div class="nav-container">
             <div class="nav-slider" id="navSlider"></div>
@@ -547,32 +532,21 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <div class="hero-container">
         <div class="content">
-            <!-- EDIT: MAIN TITLE TEXT (Change "TARA NA SA ALABAT!") -->
+
             <h1 class="main-title">TARA NA SA<br>ALABAT!</h1>
-            
-            <!-- EDIT: SUBTITLE TEXT (Change "The hidden gem of Quezon!") -->
+ 
             <p class="sub-title">The hidden gem of Quezon!</p>
             
             <button class="btn-explore" onclick="navigateTo('about-page')">EXPLORE NOW →</button>
         </div>
 
-        <!-- MEDIA SECTION -->
         <div class="media-group">
-            <!-- VIDEO CONTAINER -->
+
             <div class="video-box">
                 <div class="video-label">ISLAND PREVIEW</div>
-                <!-- EDIT: HOME PAGE VIDEO 1
-                     Change the src URL to your YouTube video
-                     How to find YouTube ID:
-                     - Go to YouTube video
-                     - Copy the ID after "?v=" from URL
-                     - Example: https://www.youtube.com/watch?v=pSD9s5_IVJk
-                     - ID is: pSD9s5_IVJk
-                     - Replace it in the embed URL below
-                -->
+
                 <iframe 
                     id="heroVideo"
                     src="https://www.youtube.com/embed/pSD9s5_IVJk?autoplay=1&mute=0&loop=1&playlist=pSD9s5_IVJk" 
@@ -581,29 +555,20 @@
                 </iframe>
             </div>
 
-            <!-- VIDEO NAVIGATION BUTTONS -->
             <div class="video-controls">
                 <button class="video-nav-btn" onclick="prevVideo('hero')">‹</button>
                 <button class="video-nav-btn" onclick="nextVideo('hero')">›</button>
             </div>
 
-            <!-- PREVIEW CARDS -->
             <div class="preview-row">
-                <!-- CARD 1: DESTINATIONS -->
                 <a onclick="navigateTo('destinations-page')" class="preview-card">
                     <p class="label">DESTINATIONS</p>
-                    <!-- EDIT: PREVIEW IMAGE 1 (Change src to your image filename) -->
                     <img src="pulongbato.jpg" alt="Pulong Bato">
-                    <!-- EDIT: PREVIEW TITLE 1 -->
                     <h3>Pulong Bato</h3>
                 </a>
-
-                <!-- CARD 2: PRODUCTS -->
                 <a onclick="navigateTo('products-page')" class="preview-card">
                     <p class="label">LOCAL PRODUCTS</p>
-                    <!-- EDIT: PREVIEW IMAGE 2 (Change src to your image filename) -->
                     <img src="coco-sugar.jpg" alt="Coco Sugar">
-                    <!-- EDIT: PREVIEW TITLE 2 -->
                     <h3>Coco Sugar</h3>
                 </a>
             </div>
@@ -611,12 +576,8 @@
     </div>
 </div>
 
-<!-- ============================================================================
-     PAGE 2: ABOUT
-     ============================================================================ -->
 <div id="about-page" class="page">
-    
-    <!-- EDIT: TOP-LEFT LOGO IMAGE -->
+
     <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
 
     <div class="logo-wrapper">
@@ -636,19 +597,12 @@
         </div>
     </nav>
 
-    <!-- EDIT: PAGE TITLE -->
     <h1 class="hero-title">ALABAT</h1>
-    <!-- EDIT: PAGE SUBTITLE -->
     <p class="hero-sub">QUEZON, PHILIPPINES</p>
 
-    <!-- PHOTO SLIDER SECTION -->
-    <!-- These images appear in a horizontal scrollable slider -->
     <div class="slider-container">
         <div class="slider-wrapper">
-            <!-- EDIT: ABOUT PAGE PHOTOS (Add/Remove/Change images)
-                 Click on photos to see them zoomed in
-                 Format: onclick="openZoom(this, 'TITLE', 'DESCRIPTION')"
-            -->
+
             <img src="farmersbg.png" class="about-photo" onclick="openZoom(this, 'Farmers of Alabat', 'The hardworking local farmers processing organic goods.')">
             <img src="PulongBatoo.png" class="about-photo" onclick="openZoom(this, 'Pulong Bato', 'A natural rock formation and crystal clear waters of Villa Norte.')">
             <img src="tumiispeak.jpg" class="about-photo" onclick="openZoom(this, 'Tumii Peak', 'The highest point in Alabat offering a 360-degree view of the island.')">
@@ -657,7 +611,6 @@
         </div>
     </div>
 
-    <!-- ZOOM MODAL FOR IMAGES -->
     <div class="modal" id="zoomModal" onclick="closeZoom()">
         <img class="modal-content" id="modalImg">
         <div class="modal-details">
@@ -666,22 +619,17 @@
         </div>
     </div>
 
-    <!-- CONTENT SECTION -->
     <div class="content-card">
-        <!-- EDIT: ABOUT CONTENT - HISTORY SECTION -->
         <h2>History of Alabat</h2>
         <p>Alabat, officially the <strong>Municipality of Alabat</strong> (Tagalog: Bayan ng Alabat), is a municipality in the province of Quezon, Philippines. It is a peaceful island town known for its hospitality and rich natural resources.</p>
         
         <p>The town is home to a few speakers of the critically endangered <strong>Inagta Alabat language</strong>, one of the most endangered languages in the world as listed by UNESCO.</p>  
 
         <div class="highlight-box">
-            <!-- EDIT: HIGHLIGHT BOX TEXT -->
-            Founded in the year 1882 by a Spanish priest from Gumaca, the town originally built an ermita that honours Our Lady of Monte Carmelo.
         </div>
         
         <p>Its first name was <strong>Gordo</strong>, meaning "fat", due to the island's shape. It was later changed to Gordon, Barcelona, and finally Alabat. The formal establishment of the town occurred in the year 1900.</p>
         
-        <!-- EDIT: ABOUT CONTENT - ETYMOLOGY SECTION -->
         <h2>Etymology</h2>
         <p>Before Spanish colonization, the mountains were already inhabited by the "Baluga" (aborigines). Nomadic by nature, they would clean patches of land, plant rice and vegetables, and hunt.</p>
 
@@ -691,9 +639,6 @@
     </div>
 </div>
 
-<!-- ============================================================================
-     PAGE 3: DESTINATIONS
-     ============================================================================ -->
 <div id="destinations-page" class="page">
     
     <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
@@ -715,54 +660,40 @@
         </div>
     </nav>
 
-    <!-- PAGE TITLE -->
     <h1 class="hero-title" style="margin-top: 80px;">EXPLORE ALABAT</h1>
     <p class="hero-sub">Beautiful Destinations Await You</p>
 
-    <!-- DESTINATIONS GRID -->
-    <!-- EDIT: ADD/REMOVE DESTINATION CARDS
-         Each card has: Image, Title, Description
-    -->
     <div class="destinations-grid">
-        <!-- DESTINATION 1 -->
         <div class="destination-card">
-            <!-- EDIT: DESTINATION IMAGE 1 -->
             <img src="tumiispeak.jpg" alt="Tumii Peak">
-            <!-- EDIT: DESTINATION TITLE 1 -->
             <h3>Tumii Peak</h3>
-            <!-- EDIT: DESTINATION DESCRIPTION 1 -->
             <p>The highest point in Alabat offering breathtaking 360-degree views of the island and surrounding seas.</p>
         </div>
 
-        <!-- DESTINATION 2 -->
         <div class="destination-card">
             <img src="pulongbato.jpg" alt="Pulong Bato">
             <h3>Pulong Bato</h3>
             <p>A natural rock formation with crystal clear waters, perfect for swimming and snorkeling.</p>
         </div>
 
-        <!-- DESTINATION 3 -->
         <div class="destination-card">
             <img src="alabatcove.jpg" alt="Alabat Cove">
             <h3>Alabat Cove</h3>
             <p>A serene coastal area perfect for witnessing stunning sunsets and peaceful beach walks.</p>
         </div>
 
-        <!-- DESTINATION 4 -->
         <div class="destination-card">
             <img src="tumiisfalls.jpg" alt="Tumii Falls">
             <h3>Tumii Falls</h3>
             <p>Refreshing natural waterfalls nestled in the island's verdant landscape.</p>
         </div>
 
-        <!-- DESTINATION 5 -->
         <div class="destination-card">
             <img src="destinationbg.jpg" alt="Beach">
             <h3>Island Beaches</h3>
             <p>Pristine white-sand beaches with turquoise waters ideal for relaxation and water activities.</p>
         </div>
 
-        <!-- DESTINATION 6 -->
         <div class="destination-card">
             <img src="farmersbg.png" alt="Farm Tours">
             <h3>Local Farms</h3>
@@ -771,9 +702,6 @@
     </div>
 </div>
 
-<!-- ============================================================================
-     PAGE 4: PRODUCTS
-     ============================================================================ -->
 <div id="products-page" class="page">
     
     <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
@@ -798,7 +726,6 @@
         <button class="cart-trigger" onclick="toggleCart()">🛒<div class="cart-count" id="cart-badge">0</div></button>
     </nav>
 
-    <!-- SHOPPING CART SIDEBAR -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">YOUR BASKET <span onclick="toggleCart()" style="cursor:pointer;">✕</span></div>
         <div id="cart-items-list"></div>
@@ -811,40 +738,30 @@
         </div>
     </div>
 
-    <!-- PRODUCTS MAIN CONTENT -->
     <div class="main-content">
         <div class="video-side">
             <h1 class="made-with-love">MADE WITH LOVE<br>JUST FOR YOU!</h1>
-            
-            <!-- PRODUCTS VIDEO -->
+
             <div class="video-frame">
-                <!-- EDIT: PRODUCTS PAGE VIDEO
-                     Change the src URL to your YouTube video ID
-                     Find the ID same way as home page video
-                -->
+
                 <iframe id="processVideo" 
                         src="https://www.youtube.com/embed/Na-BqhLr-PA?autoplay=0&loop=1&playlist=Na-BqhLr-PA" 
                         allow="autoplay; encrypted-media" allowfullscreen>
                 </iframe>
             </div>
-            
-            <!-- VIDEO NAVIGATION BUTTONS -->
+
             <div class="video-controls">
                 <button class="video-nav-btn" onclick="prevVideo('products')">‹</button>
                 <button class="video-nav-btn" onclick="nextVideo('products')">›</button>
             </div>
         </div>
 
-        <!-- PRODUCTS LIST (Generated dynamically by JavaScript) -->
         <div class="slider-section">
             <div class="product-list" id="products-list"></div>
         </div>
     </div>
 </div>
 
-<!-- ============================================================================
-     PAGE 5: CHECKOUT
-     ============================================================================ -->
 <div id="checkout-page" class="page">
     
     <img src="ariya.jpg" alt="Ariya Brand Logo" class="top-left-logo">
@@ -862,7 +779,6 @@
         </div>
     </nav>
 
-    <!-- CHECKOUT FORM -->
     <div class="checkout-container">
         <h2 style="margin-bottom: 30px; font-size: 32px;">SECURE CHECKOUT</h2>
         
@@ -888,10 +804,7 @@
 
         <div class="form-group">
             <label>Payment Method</label>
-            <!-- EDIT: PAYMENT OPTIONS
-                 Change payment methods as needed
-                 Add/remove options by duplicating/removing the payment-option divs
-            -->
+
             <div class="payment-methods">
                 <div class="payment-option selected" onclick="selectPayment(this, 'gcash')">
                     💳<br>GCash
@@ -905,7 +818,6 @@
             </div>
         </div>
 
-        <!-- ORDER SUMMARY -->
         <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-bottom: 25px;">
             <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
                 <span>Subtotal:</span>
@@ -926,9 +838,6 @@
     </div>
 </div>
 
-<!-- ============================================================================
-     PAGE 6: CONTACT
-     ============================================================================ -->
 <div id="contact-page" class="page">
     
     <img src="ariya.jpg" alt="Ariya Logo" class="top-left-logo">
@@ -951,63 +860,41 @@
     </nav>
 
     <div class="contact-hero">
-        <!-- EDIT: CONTACT PAGE TITLE -->
+  
         <h1 class="contact-title">SAY HELLO TO <span>ALABAT</span></h1>
-        
-        <!-- CONTACT INFO CARDS -->
+
         <div class="info-grid">
-            <!-- LOCATION CARD -->
             <div class="info-card">
                 <h3>Location</h3>
-                <!-- EDIT: LOCATION ADDRESS -->
                 <p>Tourist Info Center, Alabat, Quezon</p>
             </div>
 
-            <!-- PHONE CARD -->
             <div class="info-card">
                 <h3>Call Us</h3>
-                <!-- EDIT: PHONE NUMBER -->
-                <a href="tel:00078263117">0007-826-3117</a>
+                <a href="tel:09078263117">0907-826-3117</a>
             </div>
 
-            <!-- EMAIL CARD -->
             <div class="info-card">
                 <h3>Email Us</h3>
-                <!-- EDIT: EMAIL ADDRESS -->
                 <a href="mailto:alabattourismoffice@gmail.com">alabattourismoffice@gmail.com</a>
             </div>
         </div>
 
-        <!-- GOOGLE MAP EMBED -->
         <div class="map-wrapper">
-            <!-- EDIT: GOOGLE MAPS EMBED CODE
-                 To get your own map:
-                 1. Go to Google Maps
-                 2. Search for your location
-                 3. Click Share > Embed a map
-                 4. Copy the iframe src URL
-                 5. Replace the src URL below
-            -->
+
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15478.434316828518!2d122.0157973!3d14.1005278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a1e2f9f9f9f9f9%3A0x123456789abcdef!2sAlabat%2C%20Quezon!5e0!3m2!1sen!2sph!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
             <a href="https://maps.google.com" target="_blank" class="map-btn">Get Directions</a>
         </div>
     </div>
 </div>
 
-<!-- ============================================================================
-     PAGE 7: ADMIN
-     ============================================================================ -->
 <div id="admin-page" class="page">
-    
-    <!-- LOGIN OVERLAY -->
+
     <div id="login-overlay">
         <div class="login-box">
             <img src="AlabatLogo.png" alt="Logo" style="height: 60px; margin-bottom: 25px;">
             <h2 style="font-weight: 900; margin-bottom: 10px;">STAFF LOGIN</h2>
-            <!-- EDIT: ADMIN CREDENTIALS
-                 Current: username="admin" password="alabat2026"
-                 Change these for security
-            -->
+
             <input type="text" id="username" placeholder="Employee ID">
             <input type="password" id="password" placeholder="Password">
             <button onclick="checkLogin()">Enter Dashboard</button>
@@ -1015,7 +902,6 @@
         </div>
     </div>
 
-    <!-- ADMIN DASHBOARD -->
     <div id="admin-content">
         <header class="header-area">
             <img src="AlabatLogo.png" class="nav-logo">
@@ -1027,7 +913,7 @@
 
         <div class="dashboard-grid">
             <div class="main-panel">
-                <!-- REVENUE CARD -->
+
                 <div class="revenue-card">
                     <div>
                         <h3>Total Earnings (Completed Orders)</h3>
@@ -1036,7 +922,6 @@
                     <button class="action-btn" style="background: rgba(0,0,0,0.3); color: white;" onclick="resetDay()">Clear History</button>
                 </div>
 
-                <!-- ORDERS TABLE -->
                 <div class="glass-panel">
                     <div class="tabs">
                         <button class="tab-btn active" onclick="switchTab('queue', this)">Active Queue</button>
@@ -1059,7 +944,6 @@
                 </div>
             </div>
 
-            <!-- INVENTORY PANEL -->
             <div class="side-panel">
                 <div class="glass-panel">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
