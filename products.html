@@ -40,7 +40,6 @@
             will-change: transform;
         }
 
-        /* --- TOP ACCENT & HEADER --- */
         .top-accent {
             height: 40px;
             background-image: url('topper.png');
@@ -69,7 +68,6 @@
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAVIGATION --- */
         nav { 
             position: sticky; top: 40px; height: 60px; z-index: 3000; 
             background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
@@ -89,7 +87,6 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* --- PRODUCT LIST & ZOOM EFFECT --- */
         .product-list { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
@@ -104,11 +101,11 @@
         }
         .product-card:hover { 
             border-color: #FFD300; 
-            transform: scale(0.96); /* Zoom out effect */
+            transform: scale(0.96);
         }
 
         .card-left { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
-        .product-card img { width: 85px; height: 85px; border-radius: 10px; object-fit: cover; }
+        .product-card img { width: 85px; height: 85px; border-radius: 10px; object-fit: cover; background: #eee;}
         .list-price { font-weight: 800; color: #CE1126; font-size: 14px; font-family: 'Barabara'; }
 
         .card-mid { flex: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
@@ -124,7 +121,6 @@
         }
         .add-cart-btn:active { transform: translateY(2px); }
 
-        /* --- CART UI --- */
         .cart-trigger {
             background: #0038A8; width: 44px; height: 44px; border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
@@ -147,7 +143,6 @@
         .cart-body { flex: 1; overflow-y: auto; padding: 20px; }
         .cart-footer { padding: 25px; border-top: 1px solid #eee; }
 
-        /* --- VIDEO & LAYOUT --- */
         .main-content { padding: 40px 20px; max-width: 1200px; width: 100%; display: flex; flex-direction: column; gap: 40px; }
         .video-side { width: 100%; max-width: 700px; margin: 0 auto; }
         .video-frame { 
@@ -162,7 +157,6 @@
             background: rgba(0, 56, 168, 0.9); padding: 6px 12px; border-radius: 4px;
         }
 
-        /* --- FOOTER --- */
         .site-footer {
             background-color: #00384d; color: #ffffff; padding: 50px 20px 30px 20px;
             width: 100%; font-family: 'Inter', sans-serif; margin-top: 60px;
@@ -221,7 +215,9 @@
                     <div class="cart-count" id="cart-badge">0</div>
                 </div>
             </div>
-            <div class="product-list" id="products-list"></div>
+            <div class="product-list" id="products-list">
+                <p style="text-align: center; opacity: 0.5;">Loading products...</p>
+            </div>
         </div>
     </div>
 
@@ -231,7 +227,7 @@
             <p style="text-align:center; color:#999; margin-top:20px;">Your basket is empty.</p>
         </div>
         <div class="cart-footer">
-            <button style="width:100%; background:#CE1126; color:white; padding:15px; border-radius:8px; border:none; font-family:'Barabara'; cursor:pointer; font-size:16px;">CHECKOUT</button>
+            <button onclick="checkout()" style="width:100%; background:#CE1126; color:white; padding:15px; border-radius:8px; border:none; font-family:'Barabara'; cursor:pointer; font-size:16px;">CHECKOUT</button>
         </div>
     </div>
 
@@ -242,59 +238,117 @@
         </div>
     </footer>
 
-    <script>
-        // --- DATA & VIDEO MAPPING ---
-        let inventory = JSON.parse(localStorage.getItem('alabat_products')) || [
-            { name: "BALAT LITSON", price: "₱100.00", img: "balatlitchon.jpg", desc: "Alabat's signature crispy bread snack!", vid: "TdZzwAT-FFw" },
-            { name: "BANANA CHIPS", price: "₱120.00", img: "bananachips.jpg", desc: "Crispy Saba slices glazed with natural coco honey.", vid: "pSD9s5_IVJk" },
-            { name: "PURE HONEY", price: "₱350.00", img: "honey.jpg", desc: "Raw, organic honey harvested from local stingless bees.", vid: "B7YRdNexH3c" },
-            { name: "DARK CHOCOLATE", price: "₱220.00", img: "darkchocolate.jpg", desc: "Premium Alabat cocoa blended with healthy coco sugar.", vid: "TdZzwAT-FFw" }
-        ];
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, addDoc } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-        function renderProducts() {
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHmTfEQxooyvm3EK0JlDfyrBr9IEN0fuc",
+            authDomain: "alabat-tourism.firebaseapp.com",
+            projectId: "alabat-tourism",
+            storageBucket: "alabat-tourism.firebasestorage.app",
+            messagingSenderId: "438243281376",
+            appId: "1:438243281376:web:ac42908ac4cf9862e0c385",
+            measurementId: "G-BH765YRMQY"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let cart = [];
+
+        // LIVE LISTENER FOR PRODUCTS
+        onSnapshot(collection(db, "products"), (snapshot) => {
             const listDiv = document.getElementById('products-list');
-            listDiv.innerHTML = inventory.map((prod) => `
-                <div class="product-card" onclick="changeVideo('${prod.vid}', '${prod.name}')">
-                    <div class="card-left">
-                        <img src="${prod.img}">
-                        <span class="list-price">${prod.price}</span>
-                    </div>
-                    <div class="card-mid">
-                        <h3 class="product-name">${prod.name}</h3>
-                        <p class="product-maker">100% natural made by Ate Eva</p>
-                        <p class="product-description">${prod.desc}</p>
-                    </div>
-                    <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('${prod.name}', '${prod.price}')">+</button>
-                </div>
-            `).join('');
-        }
+            if (snapshot.empty) {
+                listDiv.innerHTML = "<p style='text-align:center; opacity:0.5; grid-column: 1/-1;'>No products available yet.</p>";
+                return;
+            }
 
-        // Change video when a product card is clicked
-        function changeVideo(videoId, productName) {
-            const frame = document.getElementById('processVideo');
-            const label = document.getElementById('currentVideoLabel');
-            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-            label.innerText = "MAKING: " + productName;
-        }
+            listDiv.innerHTML = "";
+            snapshot.forEach((doc) => {
+                const prod = doc.data();
+                const videoId = prod.vid || "TdZzwAT-FFw"; // Default video if none provided
+                
+                listDiv.innerHTML += `
+                    <div class="product-card" onclick="changeVideo('${videoId}', '${prod.name}')">
+                        <div class="card-left">
+                            <img src="${prod.img}" onerror="this.src='https://placehold.co/100x100?text=Product'">
+                            <span class="list-price">₱${prod.price}</span>
+                        </div>
+                        <div class="card-mid">
+                            <h3 class="product-name">${prod.name}</h3>
+                            <p class="product-maker">100% natural made by Ate Eva</p>
+                            <p class="product-description">${prod.desc}</p>
+                        </div>
+                        <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('${prod.name}', ${prod.price})">+</button>
+                    </div>`;
+            });
+        });
 
-        // --- CART LOGIC ---
-        let cartCount = 0;
-        function addToCart(name, price) {
-            cartCount++;
-            document.getElementById('cart-badge').innerText = cartCount;
-            // Basic feedback for user
+        // CART FUNCTIONS
+        window.addToCart = (name, price) => {
+            cart.push({ name, price });
+            updateCartUI();
+        };
+
+        function updateCartUI() {
             const badge = document.getElementById('cart-badge');
+            const cartList = document.getElementById('cart-items-list');
+            
+            badge.innerText = cart.length;
             badge.style.transform = "scale(1.3)";
             setTimeout(() => badge.style.transform = "scale(1)", 200);
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `<p style="text-align:center; color:#999; margin-top:20px;">Your basket is empty.</p>`;
+            } else {
+                cartList.innerHTML = cart.map((item, index) => `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
+                        <span>${item.name}</span>
+                        <b>₱${item.price}</b>
+                    </div>
+                `).join('');
+            }
         }
 
-        function toggleCart() { 
-            document.getElementById('cartSidebar').classList.toggle('active'); 
-        }
+        window.checkout = async () => {
+            if (cart.length === 0) return alert("Your basket is empty!");
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const customer = prompt("Enter your name for the order:");
+            
+            if (!customer) return;
 
-        // --- NAVIGATION SLIDER ---
+            try {
+                await addDoc(collection(db, "orders"), {
+                    customerName: customer,
+                    totalAmount: total,
+                    items: cart,
+                    date: new Date()
+                });
+                alert("Order placed successfully!");
+                cart = [];
+                updateCartUI();
+                toggleCart();
+            } catch (e) {
+                alert("Error placing order: " + e.message);
+            }
+        };
+
+        window.changeVideo = (videoId, productName) => {
+            document.getElementById('processVideo').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            document.getElementById('currentVideoLabel').innerText = "MAKING: " + productName;
+        };
+
+        window.toggleCart = () => {
+            document.getElementById('cartSidebar').classList.toggle('active');
+        };
+
+        // NAVIGATION SHADE LOGIC
         const shade = document.getElementById('navShade');
         const activeLink = document.getElementById('activeLink');
+        
         function moveShade(el) {
             if (el) {
                 shade.style.width = el.offsetWidth + 'px';
@@ -302,10 +356,7 @@
             }
         }
 
-        window.addEventListener('load', () => {
-            renderProducts();
-            moveShade(activeLink);
-        });
+        window.addEventListener('load', () => moveShade(activeLink));
     </script>
 </body>
 </html>
