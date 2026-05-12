@@ -7,7 +7,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         
-        /* --- MASTER FONT --- */
         @font-face {
             font-family: 'Barabara';
             src: url('BARABARA-final.otf') format('opentype');
@@ -26,7 +25,7 @@
             flex-direction: column;
             align-items: center;
         }
-     /* --- BACKGROUND PHOTO EFFECT --- */
+        
 body::before {
     content: "";
     position: fixed;
@@ -37,26 +36,20 @@ body::before {
     z-index: -1;
     opacity: 0.15;
     
-    /* This forces the center */
     display: flex;
     align-items: center;
     justify-content: center;
 
-    /* We use mask/background logic that is rock-solid */
     background-image: url('ariya.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     
-    /* 'contain' ensures it fits the screen, 
-       '80%' ensures it doesn't touch the edges */
     background-size: contain;
-    
-    /* Fix for mobile jumping/moving */
+
     pointer-events: none;
     will-change: transform;
 }
 
-        /* --- BRANDED PATTERN TOP BAR --- */
         .top-accent {
             height: 40px;
             background-image: url('topper.png');
@@ -69,7 +62,6 @@ body::before {
             border-bottom: 0px solid #fff;
         }
 
-        /* --- HEADER AREA (FIXED HEIGHT) --- */
         header {
             height: 125px; /* Fixed height to prevent jumping */
             padding-top: 40px; 
@@ -83,10 +75,9 @@ body::before {
         }
         .nav-logo { height: 60px; width: auto; }
 
-        /* --- SIDE LOGOS (LOCKED POSITION) --- */
         .top-left-logo { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
-/* --- HEADER & BRANDING (STANDARDIZED) --- */
+
         header {
             height: 125px;
             padding-top: 40px; 
@@ -104,7 +95,6 @@ body::before {
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
             position: sticky; 
             top: 40px; 
@@ -138,7 +128,6 @@ body::before {
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Mobile Adjustments (Uniform across all pages) */
         @media (max-width: 480px) {
             header { height: 110px; }
             .top-left-logo { width: 45px; top: 50px; }
@@ -148,7 +137,7 @@ body::before {
             .nav-links a { font-size: 10px; padding: 10px 6px; }
             .nav-slider { height: 30px; }
         }
-        /* --- 4. HERO SECTION --- */
+        
         .adventure-container { 
             padding: 60px 20px; 
             text-align: center;
@@ -176,7 +165,6 @@ body::before {
         }
         .book-now-btn:hover { transform: scale(1.05); }
 
-        /* --- 5. MINIMALIST VIDEO BOX --- */
         .video-wrapper { width: 100%; max-width: 700px; margin: 0 auto; position: relative; }
         .video-frame { 
             border-radius: 20px; border: 8px solid #fff; overflow: hidden;
@@ -212,7 +200,6 @@ body::before {
         }
         .video-nav-btn:hover { background: #FFD300; border-color: #FFD300; transform: translateY(-2px); }
 
-        /* --- 6. HORIZONTAL SCROLL SLIDER --- */
         .slider-container { 
             width: 100%;
             padding: 60px 0;
@@ -235,7 +222,6 @@ body::before {
         .destination-card h3 { font-family: 'Barabara'; color: #0038A8; font-size: 18px; }
         .destination-card p { font-size: 13px; color: #666; margin-top: 5px; }
 
-        /* --- MODAL --- */
         .zoom-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(255,255,255,0.98); display: none; z-index: 5000; 
@@ -248,7 +234,6 @@ body::before {
         .zoom-desc { font-size: 16px; color: #444; margin: 15px 0; max-width: 500px; margin-inline: auto; }
         .close-zoom { position: absolute; top: 30px; right: 30px; font-size: 30px; color: #CE1126; cursor: pointer; border: none; background: none; font-family: 'Barabara'; }
 
-        /* RESPONSIVE TWEAKS */
         @media (max-width: 480px) {
             header { height: 110px; }
             .ariya-badge { width: 45px; top: 50px; }
@@ -339,7 +324,6 @@ body::before {
         window.addEventListener('load', () => moveShade(activeLink));
         window.addEventListener('resize', () => moveShade(activeLink));
 
-        // Video Control
         const vTitle = document.getElementById('videoTitle');
         const videoFrame = document.getElementById('videoPlayer');
         const myVideos = [
@@ -358,7 +342,6 @@ body::before {
         function nextVideo() { vIdx = (vIdx + 1) % myVideos.length; updateVideo(); }
         function prevVideo() { vIdx = (vIdx - 1 + myVideos.length) % myVideos.length; updateVideo(); }
 
-        // Destinations Data
         const myDestinations = [
             { name: "Pulong Bato", img: "pulongbato.jpg", short: "Iconic white rock formation.", long: "Pulong Bato is one of Alabat's most famous natural landmarks, featuring a stunning white stone structure surrounded by crystal clear waters." },
             { name: "Alabat Cove", img: "alabatcove.jpg", short: "Golden sunsets and calm seas.", long: "A serene escape offering breathtaking golden sunsets. The calm waters make it an ideal spot for peaceful afternoons." },
@@ -391,7 +374,7 @@ body::before {
         }
     </script>
     <style>
-    /* Footer Main Container */
+
     .site-footer {
         background-color: #00384d; /* The dark teal/blue from your screenshot */
         color: #ffffff;
@@ -411,7 +394,6 @@ body::before {
         gap: 40px;
     }
 
-    /* Column Headers */
     .footer-col h3 {
         font-family: 'Barabara', sans-serif;
         font-size: 14px;
@@ -422,7 +404,6 @@ body::before {
         position: relative;
     }
 
-    /* The underline effect from the screenshot */
     .footer-col h3::after {
         content: "";
         position: absolute;
@@ -441,7 +422,6 @@ body::before {
         margin-bottom: 15px;
     }
 
-    /* Quick Links */
     .footer-col ul {
         list-style: none;
         padding: 0;
@@ -463,7 +443,6 @@ body::before {
         padding-left: 5px;
     }
 
-    /* Agency Logos Section */
     .agency-grid {
         display: flex;
         gap: 15px;
@@ -475,14 +454,12 @@ body::before {
     .agency-grid img {
         height: 45px;
         width: auto;
-        /* Matches the clean look in your reference */
     }
 
     .arta-logo {
-        height: 35px !important; /* ARTA logo is usually wider, so we adjust height */
+        height: 35px !important;
     }
 
-    /* Bottom Copyright Bar */
     .footer-bottom {
         max-width: 1200px;
         margin: 50px auto 0 auto;
@@ -495,7 +472,6 @@ body::before {
         color: rgba(255, 255, 255, 0.4);
     }
 
-    /* Mobile Responsiveness */
     @media (max-width: 900px) {
         .footer-wrapper {
             grid-template-columns: 1fr 1fr;
