@@ -7,7 +7,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        /* --- LOCAL FONT --- */
         @font-face {
             font-family: 'Barabara';
             src: url('BARABARA-final.otf') format('opentype');
@@ -23,7 +22,7 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
-        /* --- BACKGROUND PHOTO EFFECT --- */
+
 body::before {
     content: "";
     position: fixed;
@@ -34,26 +33,20 @@ body::before {
     z-index: -1;
     opacity: 0.15;
     
-    /* This forces the center */
     display: flex;
     align-items: center;
     justify-content: center;
 
-    /* We use mask/background logic that is rock-solid */
     background-image: url('ariya.jpg');
     background-repeat: no-repeat;
     background-position: center center;
-    
-    /* 'contain' ensures it fits the screen, 
-       '80%' ensures it doesn't touch the edges */
+
     background-size: contain;
-    
-    /* Fix for mobile jumping/moving */
+
     pointer-events: none;
     will-change: transform;
 }
 
-        /* --- BRANDED PATTERN TOP BAR --- */
         .top-accent {
             height: 40px;
             background-image: url('topper.png');
@@ -66,7 +59,6 @@ body::before {
             border-bottom: 0px solid #fff;
         }
 
-        /* --- HEADER AREA (FIXED HEIGHT) --- */
         header {
             height: 125px; /* Fixed height to prevent jumping */
             padding-top: 40px; 
@@ -80,10 +72,9 @@ body::before {
         }
         .nav-logo { height: 60px; width: auto; }
 
-        /* --- SIDE LOGOS (LOCKED POSITION) --- */
         .top-left-logo { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
-/* --- HEADER & BRANDING (STANDARDIZED) --- */
+
         header {
             height: 125px;
             padding-top: 40px; 
@@ -101,7 +92,6 @@ body::before {
         .ariya-badge { width: 55px; position: absolute; top: 55px; left: 15px; z-index: 2000; }
         .top-right-logo { width: 70px; position: absolute; top: 50px; right: 10px; z-index: 2000; }
 
-        /* --- STICKY NAVIGATION (STANDARDIZED) --- */
         nav { 
             position: sticky; 
             top: 40px; 
@@ -135,7 +125,6 @@ body::before {
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Mobile Adjustments (Uniform across all pages) */
         @media (max-width: 480px) {
             header { height: 110px; }
             .top-left-logo { width: 45px; top: 50px; }
@@ -146,7 +135,6 @@ body::before {
             .nav-slider { height: 30px; }
         }
 
-        /* --- HERO & CONTENT --- */
         .hero { padding: 30px 20px 10px; text-align: center; }
         .hero-img { width: 80%; max-width: 300px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1)); animation: slideUp 0.8s ease forwards; }
         .hero-sub { font-family: 'Barabara', sans-serif; color: #CE1126; font-size: 16px; margin-top: 10px; letter-spacing: 2px; }
@@ -167,7 +155,6 @@ body::before {
         p { font-size: 15px; color: #444; margin-bottom: 15px; }
         .highlight-box { background: #fff9e6; border-radius: 15px; padding: 25px; border-left: 5px solid #FFD300; color: #0038A8; font-weight: 600; font-size: 16px; margin: 30px 0; box-shadow: 0 4px 15px rgba(255, 211, 0, 0.1); }
 
-        /* --- MODAL --- */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 5000; padding: 20px; }
         .modal.active { display: flex; }
         .modal-content { width: 100%; max-height: 50vh; object-fit: contain; border-radius: 15px; border: 4px solid #FFD300; }
@@ -270,7 +257,6 @@ body::before {
         }
     </script>
     <style>
-    /* 1. DEFAULT MOBILE STYLES (Screen sizes 0px to 899px) */
     .site-footer {
         background-color: #00384d; 
         color: #ffffff;
@@ -316,7 +302,6 @@ body::before {
         font-size: 13px;
     }
 
-    /* FB Button from your Screenshot */
     .fb-button {
         display: inline-flex;
         align-items: center;
@@ -348,18 +333,17 @@ body::before {
         opacity: 0.5;
     }
 
-    /* 2. DESKTOP STYLES (Screen sizes 900px and up) */
     @media (min-width: 900px) {
         .site-footer { text-align: left; padding: 60px 5%; }
         
         .footer-wrapper {
-            flex-direction: row; /* Side-by-side for desktop */
+            flex-direction: row;
             justify-content: space-between;
             align-items: flex-start;
         }
 
         .footer-col { flex: 1; }
-        .footer-col:first-child { flex: 1.5; } /* Give more room to office info */
+        .footer-col:first-child { flex: 1.5; } 
 
         .footer-col h3 { display: block; width: fit-content; }
 
