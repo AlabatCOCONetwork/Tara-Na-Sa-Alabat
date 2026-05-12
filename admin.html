@@ -23,20 +23,15 @@
             position: relative;
         }
 
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    background: url('ariya.png') no-repeat center center fixed;
-    background-size: contain; 
-    background-origin: content-box;
-    padding: 10%; 
-    opacity: 0.15; 
-    z-index: -1;
-}
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('ariya.png') no-repeat center center fixed;
+            background-size: contain; 
+            background-origin: content-box;
+            padding: 10%; opacity: 0.15; z-index: -1;
+        }
 
         .top-accent {
             height: 40px;
@@ -54,30 +49,40 @@ body::before {
             background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0c 100%);
             display: flex; justify-content: center; align-items: center; z-index: 9999;
         }
+
         .login-box {
             background: rgba(255,255,255,0.03); padding: 50px; border-radius: 24px;
             border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 400px; text-align: center;
             backdrop-filter: blur(10px);
         }
+
         .login-box h2 { font-family: 'Barabara'; color: #FFD300; letter-spacing: 1px; margin-bottom: 20px; }
+        
         .login-box input {
             width: 100%; padding: 15px; margin-top: 12px; border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4);
             color: white; outline: none; transition: 0.3s;
         }
+
         .login-box button {
             width: 100%; padding: 16px; margin-top: 25px; border-radius: 10px;
             border: none; background: #0038A8; color: white; font-family: 'Barabara';
             cursor: pointer; transition: 0.3s;
         }
 
-        #admin-content { display: none; padding: 80px 30px 30px; }
+        #admin-content { display: none; padding: 100px 30px 30px; }
         
         .header-area { 
             display: flex; justify-content: space-between; align-items: center; 
             max-width: 1400px; margin: 0 auto 40px; 
         }
-        .nav-logo { height: 60px; filter: brightness(0) invert(1); }
+
+        .nav-logo, .login-logo { 
+            height: 65px; 
+            width: auto;
+            object-fit: contain;
+        }
+
         .logout-btn { 
             color: #ff4757; font-weight: 800; font-size: 11px; cursor: pointer; 
             padding: 8px 18px; border-radius: 6px; border: 1px solid #ff4757;
@@ -99,6 +104,7 @@ body::before {
             padding: 35px; border-radius: 20px; margin-bottom: 30px;
             display: flex; justify-content: space-between; align-items: center;
         }
+
         .revenue-card h3 { font-family: 'Barabara'; font-size: 14px; color: rgba(255,255,255,0.8); }
         .revenue-card p { font-size: 42px; font-weight: 900; margin-top: 5px; }
 
@@ -110,15 +116,12 @@ body::before {
         }
         .tab-btn.active { opacity: 1; background: #0038A8; }
 
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; font-size: 10px; opacity: 0.4; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        td { padding: 20px 15px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
-
-        .inventory-item {
+        .inventory-item, .order-item {
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-bottom: 10px;
             border: 1px solid rgba(255,255,255,0.05);
         }
+
         .delete-btn { color: #ff4757; background: none; border: none; cursor: pointer; font-size: 18px; margin-left: 10px;}
 
         .modal-overlay {
@@ -126,6 +129,7 @@ body::before {
             background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); 
             display: none; justify-content: center; align-items: center; z-index: 5000;
         }
+
         .modal-card { background: #16161a; padding: 40px; border-radius: 20px; width: 450px; border: 1px solid #333; }
         .modal-card input, .modal-card textarea { 
             width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 8px; 
@@ -143,9 +147,10 @@ body::before {
 
     <div class="top-accent"></div>
 
+    <!-- Login Overlay -->
     <div id="login-overlay">
         <div class="login-box">
-            <img src="AlabatLogo.png" alt="Logo" style="height: 50px; margin-bottom: 30px; filter: brightness(0) invert(1);">
+            <img src="AlabatLogo.png" alt="Logo" class="login-logo" style="margin-bottom: 30px;">
             <h2>ADMIN PORTAL</h2>
             <input type="text" id="username" placeholder="Staff ID">
             <input type="password" id="password" placeholder="Password">
@@ -154,9 +159,10 @@ body::before {
         </div>
     </div>
 
+    <!-- Admin Content -->
     <div id="admin-content">
         <header class="header-area">
-            <img src="AlabatLogo.png" class="nav-logo">
+            <img src="AlabatLogo.png" class="nav-logo" alt="Logo">
             <div style="display: flex; align-items: center; gap: 20px;">
                 <div style="text-align: right;">
                     <p style="font-size: 10px; opacity: 0.5; font-weight: 900;">SYSTEM OPERATOR</p>
@@ -173,15 +179,16 @@ body::before {
                         <h3>LIVE REVENUE SUMMARY</h3>
                         <p id="total-revenue">₱0.00</p>
                     </div>
-                    <button class="action-btn" style="background: rgba(255,255,255,0.1); color: white;" onclick="alert('Feature coming soon')">Download Report</button>
+                    <button class="action-btn" style="background: rgba(255,255,255,0.1); color: white;">Cloud Sync Active</button>
                 </div>
 
                 <div class="glass-panel">
                     <div class="tabs">
                         <button class="tab-btn active">Incoming Orders</button>
                     </div>
-                    <div style="text-align: center; padding: 40px; opacity: 0.3;">
-                        <p>No active orders in queue.</p>
+                    <div id="orders-list">
+                        <!-- Orders will appear here -->
+                        <p style="text-align: center; opacity: 0.3; padding: 20px;">Fetching orders...</p>
                     </div>
                 </div>
             </div>
@@ -198,93 +205,137 @@ body::before {
         </div>
     </div>
 
+    <!-- Modal for adding products -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-card">
             <h2 style="font-family: 'Barabara'; color: #FFD300; margin-bottom: 25px;">ADD NEW PRODUCT</h2>
             <input type="text" id="pName" placeholder="Product Name (e.g. COCO JAM)">
-            <input type="text" id="pPrice" placeholder="Price (e.g. ₱150.00)">
+            <input type="text" id="pPrice" placeholder="Price (e.g. 150)">
             <input type="text" id="pImg" placeholder="Image Filename (e.g. jam.jpg)">
             <textarea id="pDesc" placeholder="Product Description..." rows="3" style="font-family:inherit;"></textarea>
             <div style="display: flex; gap: 10px; margin-top: 10px;">
                 <button class="action-btn" style="flex: 1; background: #333; color: white;" onclick="closeModal()">Cancel</button>
-                <button class="action-btn" style="flex: 2; background: #0038A8; color: white;" onclick="saveProduct()">Push to Website</button>
+                <button class="action-btn" style="flex: 2; background: #0038A8; color: white;" onclick="saveProduct()">Push to Database</button>
             </div>
         </div>
     </div>
 
-    <script>
-        function checkLogin() {
+    <!-- FIREBASE INTEGRATION -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { 
+            getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy 
+        } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
+        // --- PASTE YOUR FIREBASE CONFIG HERE ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // LOGIN LOGIC
+        window.checkLogin = function() {
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
             if(u === "admin" && p === "alabat2026") {
-                localStorage.setItem('alabat_admin', 'true');
-                initDashboard();
+                sessionStorage.setItem('alabat_admin', 'true');
+                location.reload();
             } else {
                 document.getElementById('error-msg').style.display = 'block';
             }
         }
 
-        function initDashboard() {
-            document.getElementById('login-overlay').style.display = 'none';
-            document.getElementById('admin-content').style.display = 'block';
-            renderInventory();
-        }
-
-        function logout() {
-            localStorage.removeItem('alabat_admin');
+        window.logout = function() {
+            sessionStorage.removeItem('alabat_admin');
             location.reload();
         }
 
-        function renderInventory() {
- 
-            const inv = JSON.parse(localStorage.getItem('alabat_products')) || [];
-            const container = document.getElementById('inventory-list');
-            container.innerHTML = "";
-            inv.forEach((item, i) => {
-                container.innerHTML += `
-                    <div class="inventory-item">
-                        <div>
-                            <p style="font-weight:800; font-size:13px;">${item.name}</p>
-                            <p style="font-size:11px; color:#FFD300;">${item.price}</p>
-                        </div>
-                        <button class="delete-btn" onclick="deleteProduct(${i})">🗑️</button>
-                    </div>`;
-            });
-        }
-
-        function showAddModal() { document.getElementById('productModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('productModal').style.display = 'none'; }
-        
-        function saveProduct() {
+        // --- PRODUCT MANAGEMENT ---
+        window.saveProduct = async function() {
             const name = document.getElementById('pName').value;
             const price = document.getElementById('pPrice').value;
             const img = document.getElementById('pImg').value;
             const desc = document.getElementById('pDesc').value;
 
-            if(!name || !price) return alert("Please enter Name and Price");
+            if(!name || !price) return alert("Fill Name and Price");
 
-            let inv = JSON.parse(localStorage.getItem('alabat_products')) || [];
-            inv.push({ name, price, img, desc });
-            
-            localStorage.setItem('alabat_products', JSON.stringify(inv));
-            renderInventory();
-            closeModal();
-            
-
-            document.getElementById('pName').value = "";
-            document.getElementById('pPrice').value = "";
+            try {
+                await addDoc(collection(db, "products"), {
+                    name, price: parseFloat(price), img, desc, date: new Date()
+                });
+                closeModal();
+                alert("Product live on website!");
+            } catch (e) { alert("Error: " + e.message); }
         }
 
-        function deleteProduct(index) {
-            if(confirm("Remove this item from the website?")) {
-                let inv = JSON.parse(localStorage.getItem('alabat_products'));
-                inv.splice(index, 1);
-                localStorage.setItem('alabat_products', JSON.stringify(inv));
-                renderInventory();
+        window.deleteProduct = async function(id) {
+            if(confirm("Delete this product from the database?")) {
+                await deleteDoc(doc(db, "products", id));
             }
         }
 
-        window.onload = () => { if(localStorage.getItem('alabat_admin') === 'true') initDashboard(); };
+        // --- REAL-TIME LISTENERS ---
+        function startListeners() {
+            // 1. Listen for Products
+            onSnapshot(collection(db, "products"), (snapshot) => {
+                const container = document.getElementById('inventory-list');
+                container.innerHTML = "";
+                snapshot.forEach((doc) => {
+                    const item = doc.data();
+                    container.innerHTML += `
+                        <div class="inventory-item">
+                            <div>
+                                <p style="font-weight:800; font-size:13px;">${item.name}</p>
+                                <p style="font-size:11px; color:#FFD300;">₱${item.price}</p>
+                            </div>
+                            <button class="delete-btn" onclick="deleteProduct('${doc.id}')">🗑️</button>
+                        </div>`;
+                });
+            });
+
+            // 2. Listen for Orders
+            const ordersQuery = query(collection(db, "orders"), orderBy("date", "desc"));
+            onSnapshot(ordersQuery, (snapshot) => {
+                const orderList = document.getElementById('orders-list');
+                let revenue = 0;
+                orderList.innerHTML = snapshot.empty ? '<p style="text-align:center; opacity:0.3">No orders yet.</p>' : "";
+                
+                snapshot.forEach((doc) => {
+                    const order = doc.data();
+                    revenue += parseFloat(order.total);
+                    orderList.innerHTML += `
+                        <div class="order-item">
+                            <div>
+                                <p style="font-size:12px; font-weight:800;">ORDER #${doc.id.substring(0,5)}</p>
+                                <p style="font-size:11px; opacity:0.6;">${order.customerName || 'Anonymous'}</p>
+                            </div>
+                            <p style="font-weight:900; color:#FFD300;">₱${order.total}</p>
+                        </div>`;
+                });
+                document.getElementById('total-revenue').innerText = `₱${revenue.toLocaleString()}`;
+            });
+        }
+
+        // INITIALIZE PAGE
+        window.onload = () => {
+            if(sessionStorage.getItem('alabat_admin') === 'true') {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('admin-content').style.display = 'block';
+                startListeners();
+            }
+        };
+
+        // UI Helpers
+        window.showAddModal = () => document.getElementById('productModal').style.display = 'flex';
+        window.closeModal = () => document.getElementById('productModal').style.display = 'none';
+
     </script>
 </body>
 </html>
