@@ -42,11 +42,12 @@
 
         /* --- ORDER CARDS --- */
         .order-item { background: white; border: 1px solid #eee; border-radius: 15px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .order-item:hover { border-color: #0038A8; }
+        .order-item:hover { border-color: #0038A8; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        
         .status-badge { font-size: 10px; font-weight: 900; padding: 5px 10px; border-radius: 4px; text-transform: uppercase; margin-top: 5px; display: inline-block; }
-        .status-queue { background: #fff3cd; color: #856404; }
-        .status-waiting { background: #cfe2ff; color: #084298; }
-        .status-claimed { background: #d1e7dd; color: #0f5132; opacity: 0.6; }
+        .status-queue { background: #fff3cd; color: #856404; } /* Yellow */
+        .status-ready { background: #cfe2ff; color: #084298; }  /* Blue */
+        .status-claimed { background: #d1e7dd; color: #0f5132; opacity: 0.6; } /* Green */
 
         .btn-group { display: flex; gap: 8px; }
         .action-btn { padding: 10px 15px; border-radius: 6px; border: none; font-weight: 800; font-size: 10px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
@@ -57,7 +58,6 @@
 
         .inventory-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; }
 
-        /* --- MODAL --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 5000; }
         .modal-card { background: white; padding: 30px; border-radius: 20px; width: 400px; }
         .modal-card input { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd; }
@@ -70,19 +70,19 @@
     <div id="login-overlay">
         <div class="login-box">
             <img src="AlabatLogo.png" alt="Logo" class="login-logo" style="height: 60px; margin-bottom: 20px;">
-            <h2>ADMIN ACCESS</h2>
-            <input type="text" id="username" placeholder="Username">
+            <h2>STAFF PORTAL</h2>
+            <input type="text" id="username" placeholder="Staff Username">
             <input type="password" id="password" placeholder="Password">
             <button onclick="checkLogin()">Enter Dashboard</button>
-            <p id="error-msg" style="color: #CE1126; margin-top: 15px; font-size: 12px; display: none; font-weight: 800;">INVALID CREDENTIALS</p>
+            <p id="error-msg" style="color: #CE1126; margin-top: 15px; font-size: 12px; display: none; font-weight: 800;">ACCESS DENIED</p>
         </div>
     </div>
 
     <div id="admin-content">
         <header class="header-area">
             <img src="AlabatLogo.png" class="nav-logo">
-            <div style="display: flex; gap: 15px;">
-                <button class="action-btn btn-outline btn-active" id="btn-active-view" onclick="toggleView('active')">Active Orders</button>
+            <div style="display: flex; gap: 10px;">
+                <button class="action-btn btn-outline btn-active" id="btn-active-view" onclick="toggleView('active')">Current Queue</button>
                 <button class="action-btn btn-outline" id="btn-past-view" onclick="toggleView('past')">Past Orders</button>
                 <button class="action-btn btn-outline" style="color:#CE1126" onclick="logout()">Logout</button>
             </div>
@@ -92,17 +92,17 @@
             <div class="main-panel">
                 <div class="revenue-card">
                     <div>
-                        <h3>TOTAL REVENUE</h3>
+                        <h3>LIVE REVENUE</h3>
                         <p id="total-revenue">₱0.00</p>
                     </div>
                     <div style="text-align: right">
                         <p style="font-size: 10px; font-weight: 800;">ALABAT TOURISM</p>
-                        <p style="font-size: 12px;">OFFICIAL ADMIN PANEL</p>
+                        <p id="clock" style="font-size: 12px; font-family: monospace;"></p>
                     </div>
                 </div>
 
                 <div class="glass-panel">
-                    <h2 id="list-title" style="font-family: 'Barabara'; font-size: 18px; color: #0038A8; margin-bottom: 20px;">ORDER QUEUE</h2>
+                    <h2 id="list-title" style="font-family: 'Barabara'; font-size: 18px; color: #0038A8; margin-bottom: 20px;">ACTIVE ORDERS</h2>
                     <div id="orders-list"></div>
                 </div>
             </div>
@@ -110,8 +110,8 @@
             <div class="side-panel">
                 <div class="glass-panel">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h2 style="font-family: 'Barabara'; font-size: 16px;">PRODUCTS</h2>
-                        <button class="action-btn btn-blue" onclick="showAddModal()">+ ADD</button>
+                        <h2 style="font-family: 'Barabara'; font-size: 16px;">STOCKS</h2>
+                        <button class="action-btn btn-blue" onclick="showAddModal()">+ NEW</button>
                     </div>
                     <div id="inventory-list"></div>
                 </div>
@@ -124,10 +124,10 @@
             <h2 style="font-family: 'Barabara'; margin-bottom: 20px;">NEW PRODUCT</h2>
             <input type="text" id="pName" placeholder="Product Name">
             <input type="number" id="pPrice" placeholder="Price">
-            <input type="text" id="pImg" placeholder="Image Name (e.g. jam.jpg)">
+            <input type="text" id="pImg" placeholder="Image filename (e.g. jam.jpg)">
             <div style="display: flex; gap: 10px;">
                 <button class="action-btn" style="flex:1; background:#eee;" onclick="closeModal()">Cancel</button>
-                <button class="action-btn btn-blue" style="flex:2;" onclick="saveProduct()">Save to Database</button>
+                <button class="action-btn btn-blue" style="flex:2;" onclick="saveProduct()">Sync to DB</button>
             </div>
         </div>
     </div>
@@ -148,8 +148,9 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        let currentView = 'active'; // 'active' or 'past'
+        let currentView = 'active';
 
+        // Check Login
         window.checkLogin = () => {
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
@@ -166,14 +167,22 @@
             location.reload();
         };
 
+        // Switch between Active and Past orders
         window.toggleView = (view) => {
             currentView = view;
             document.getElementById('btn-active-view').classList.toggle('btn-active', view === 'active');
             document.getElementById('btn-past-view').classList.toggle('btn-active', view === 'past');
-            document.getElementById('list-title').innerText = view === 'active' ? "ORDER QUEUE" : "PAST ORDERS (CLAIMED)";
+            document.getElementById('list-title').innerText = view === 'active' ? "ACTIVE ORDERS" : "COMPLETED ORDERS";
             loadOrders();
         };
 
+        // UI Clock
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+        }, 1000);
+
+        // Core Functions
         window.updateStatus = async (id, nextStatus) => {
             await updateDoc(doc(db, "orders", id), { status: nextStatus });
         };
@@ -194,7 +203,7 @@
             document.getElementById('login-overlay').style.display = 'none';
             document.getElementById('admin-content').style.display = 'block';
 
-            // Load Inventory
+            // Load Inventory List
             onSnapshot(collection(db, "products"), (snapshot) => {
                 const list = document.getElementById('inventory-list');
                 list.innerHTML = "";
@@ -207,7 +216,7 @@
                 });
             });
 
-            // Load Orders
+            // Load Orders List
             function loadOrders() {
                 const q = query(collection(db, "orders"), orderBy("date", "desc"));
                 onSnapshot(q, (snapshot) => {
@@ -217,34 +226,42 @@
                     
                     snapshot.forEach(d => {
                         const order = d.data();
-                        const status = order.status || 'Queue';
+                        const status = order.status || 'Queue'; // Default to Queue
+                        
+                        // Calculate Revenue
                         revenue += parseFloat(order.totalAmount || 0);
 
-                        // Filter by view
+                        // FILTER LOGIC
                         if(currentView === 'active' && status === 'Claimed') return;
                         if(currentView === 'past' && status !== 'Claimed') return;
 
-                        const statusClass = status.toLowerCase();
+                        const statusClass = status.toLowerCase().replace(/ /g, '-');
+                        const displayStatus = status === 'Ready' ? 'Ready to Receive' : status;
                         
                         list.innerHTML += `
                             <div class="order-item">
                                 <div>
-                                    <p style="font-size:12px; color:#666;">#${order.orderId || d.id.substring(0,6)}</p>
-                                    <p><b>${order.customerName}</b></p>
-                                    <span class="status-badge status-${statusClass}">${status}</span>
-                                    <p style="font-size:11px; margin-top:5px; color:#0038A8;">${order.paymentMethod}</p>
+                                    <p style="font-size:11px; color:#999; font-family:monospace;">${order.orderId || d.id.substring(0,8)}</p>
+                                    <p style="font-size:16px; margin: 3px 0;"><b>${order.customerName}</b></p>
+                                    <span class="status-badge status-${statusClass}">${displayStatus}</span>
+                                    <p style="font-size:10px; margin-top:5px; color:#0038A8; font-weight:800;">${order.paymentMethod}</p>
                                 </div>
                                 <div style="text-align:right">
-                                    <p style="font-weight:900; font-size:18px; margin-bottom:10px;">₱${order.totalAmount}</p>
+                                    <p style="font-weight:900; font-size:20px; color:#CE1126; margin-bottom:10px;">₱${order.totalAmount}</p>
                                     <div class="btn-group">
-                                        ${status === 'Queue' ? `<button class="action-btn btn-blue" onclick="updateStatus('${d.id}', 'Waiting')">Ready</button>` : ''}
-                                        ${status === 'Waiting' ? `<button class="action-btn btn-green" onclick="updateStatus('${d.id}', 'Claimed')">Claim</button>` : ''}
-                                        ${status === 'Claimed' ? `<button class="action-btn btn-outline" onclick="updateStatus('${d.id}', 'Queue')">Re-open</button>` : ''}
+                                        ${status === 'Queue' ? 
+                                            `<button class="action-btn btn-blue" onclick="updateStatus('${d.id}', 'Ready')">Prepare</button>` : ''}
+                                        
+                                        ${status === 'Ready' ? 
+                                            `<button class="action-btn btn-green" onclick="updateStatus('${d.id}', 'Claimed')">Mark Received</button>` : ''}
+                                        
+                                        ${status === 'Claimed' ? 
+                                            `<button class="action-btn btn-outline" onclick="updateStatus('${d.id}', 'Queue')">Re-open Order</button>` : ''}
                                     </div>
                                 </div>
                             </div>`;
                     });
-                    document.getElementById('total-revenue').innerText = `₱${revenue.toLocaleString()}`;
+                    document.getElementById('total-revenue').innerText = `₱${revenue.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
                 });
             }
             loadOrders();
