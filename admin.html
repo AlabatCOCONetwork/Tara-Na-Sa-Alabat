@@ -9,45 +9,42 @@
         @font-face { font-family: 'Barabara'; src: url('BARABARA-final.otf') format('opentype'); }
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        
         body { background-color: #f8f9fa; color: #222; min-height: 100vh; }
 
-        /* --- BRANDED BACKGROUND --- */
+        /* Background Accent */
         body::before { 
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: url('ariya.jpg') no-repeat center center; 
-            background-size: contain; opacity: 0.10; z-index: -1; pointer-events: none;
+            background-size: contain; opacity: 0.08; z-index: -1; pointer-events: none;
         }
 
         .top-accent { height: 40px; background-image: url('topper.png'); background-size: auto 100%; background-repeat: repeat-x; width: 100%; position: fixed; top: 0; z-index: 4000; }
         
-        /* --- LOGIN --- */
+        /* Login */
         #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .login-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; border: 1px solid #eee; }
         .login-box h2 { font-family: 'Barabara'; color: #0038A8; margin-bottom: 20px; }
         .login-box input { width: 100%; padding: 15px; margin-top: 12px; border-radius: 10px; border: 1px solid #ddd; outline: none; }
         .login-box button { width: 100%; padding: 16px; margin-top: 25px; border-radius: 10px; border: none; background: #CE1126; color: white; font-family: 'Barabara'; cursor: pointer; box-shadow: 4px 4px 0px #FFD300; }
         
-        /* --- DASHBOARD LAYOUT --- */
+        /* Layout */
         #admin-content { display: none; padding: 100px 20px 50px; max-width: 1400px; margin: 0 auto; }
         .header-area { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: white; padding: 20px; border-radius: 15px; border: 1px solid #eee; }
         .nav-logo { height: 50px; }
 
         .dashboard-grid { display: grid; grid-template-columns: 1fr 350px; gap: 25px; }
-        .glass-panel { background: rgba(255, 255, 255, 0.9); border-radius: 20px; padding: 25px; border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 25px; border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
         .revenue-card { background: #0038A8; color: white; padding: 30px; border-radius: 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 20px rgba(0,56,168,0.2); }
         .revenue-card h3 { font-family: 'Barabara'; font-size: 12px; opacity: 0.8; }
         .revenue-card p { font-size: 36px; font-weight: 900; }
 
-        /* --- ORDER CARDS --- */
-        .order-item { background: white; border: 1px solid #eee; border-radius: 15px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .order-item:hover { border-color: #0038A8; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        
+        /* Order Cards */
+        .order-item { background: white; border: 1px solid #eee; border-radius: 15px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
         .status-badge { font-size: 10px; font-weight: 900; padding: 5px 10px; border-radius: 4px; text-transform: uppercase; margin-top: 5px; display: inline-block; }
-        .status-queue { background: #fff3cd; color: #856404; } /* Yellow */
-        .status-ready { background: #cfe2ff; color: #084298; }  /* Blue */
-        .status-claimed { background: #d1e7dd; color: #0f5132; opacity: 0.6; } /* Green */
+        .status-queue { background: #fff3cd; color: #856404; } 
+        .status-ready { background: #cfe2ff; color: #084298; }  
+        .status-claimed { background: #d1e7dd; color: #0f5132; } 
 
         .btn-group { display: flex; gap: 8px; }
         .action-btn { padding: 10px 15px; border-radius: 6px; border: none; font-weight: 800; font-size: 10px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
@@ -57,10 +54,7 @@
         .btn-active { background: #FFD300; border-color: #FFD300; color: #000; }
 
         .inventory-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 5000; }
-        .modal-card { background: white; padding: 30px; border-radius: 20px; width: 400px; }
-        .modal-card input { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd; }
+        .list-section-title { font-family: 'Barabara'; font-size: 16px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
     </style>
 </head>
 <body>
@@ -69,7 +63,7 @@
 
     <div id="login-overlay">
         <div class="login-box">
-            <img src="AlabatLogo.png" alt="Logo" class="login-logo" style="height: 60px; margin-bottom: 20px;">
+            <img src="AlabatLogo.png" alt="Logo" style="height: 60px; margin-bottom: 20px;">
             <h2>STAFF PORTAL</h2>
             <input type="text" id="username" placeholder="Staff Username">
             <input type="password" id="password" placeholder="Password">
@@ -92,7 +86,7 @@
             <div class="main-panel">
                 <div class="revenue-card">
                     <div>
-                        <h3>LIVE REVENUE</h3>
+                        <h3>TOTAL COLLECTED (RECEIVED)</h3>
                         <p id="total-revenue">₱0.00</p>
                     </div>
                     <div style="text-align: right">
@@ -101,9 +95,23 @@
                     </div>
                 </div>
 
-                <div class="glass-panel">
-                    <h2 id="list-title" style="font-family: 'Barabara'; font-size: 18px; color: #0038A8; margin-bottom: 20px;">ACTIVE ORDERS</h2>
-                    <div id="orders-list"></div>
+                <div id="active-orders-area">
+                    <div class="glass-panel" style="margin-bottom: 20px; border-top: 5px solid #FFD300;">
+                        <h2 class="list-section-title" style="color: #856404;">🟡 1. NEW ORDERS (QUEUE)</h2>
+                        <div id="queue-list"></div>
+                    </div>
+
+                    <div class="glass-panel" style="margin-bottom: 20px; border-top: 5px solid #0038A8;">
+                        <h2 class="list-section-title" style="color: #0038A8;">🔵 2. READY TO RECEIVE</h2>
+                        <div id="ready-list"></div>
+                    </div>
+                </div>
+
+                <div id="past-orders-area" style="display: none;">
+                    <div class="glass-panel" style="border-top: 5px solid #28a745;">
+                        <h2 class="list-section-title" style="color: #155724;">🟢 3. COMPLETED (PAST ORDERS)</h2>
+                        <div id="past-list"></div>
+                    </div>
                 </div>
             </div>
 
@@ -111,7 +119,6 @@
                 <div class="glass-panel">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <h2 style="font-family: 'Barabara'; font-size: 16px;">STOCKS</h2>
-                        <button class="action-btn btn-blue" onclick="showAddModal()">+ NEW</button>
                     </div>
                     <div id="inventory-list"></div>
                 </div>
@@ -119,22 +126,9 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="productModal">
-        <div class="modal-card">
-            <h2 style="font-family: 'Barabara'; margin-bottom: 20px;">NEW PRODUCT</h2>
-            <input type="text" id="pName" placeholder="Product Name">
-            <input type="number" id="pPrice" placeholder="Price">
-            <input type="text" id="pImg" placeholder="Image filename (e.g. jam.jpg)">
-            <div style="display: flex; gap: 10px;">
-                <button class="action-btn" style="flex:1; background:#eee;" onclick="closeModal()">Cancel</button>
-                <button class="action-btn btn-blue" style="flex:2;" onclick="saveProduct()">Sync to DB</button>
-            </div>
-        </div>
-    </div>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBHmTfEQxooyvm3EK0JlDfyrBr9IEN0fuc",
@@ -148,123 +142,102 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        let currentView = 'active';
-
-        // Check Login
+        // Session & Login
         window.checkLogin = () => {
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
             if(u === "admin" && p === "alabat2026") {
                 sessionStorage.setItem('isAdmin', 'true');
                 location.reload();
+            } else { document.getElementById('error-msg').style.display = 'block'; }
+        };
+
+        window.logout = () => { sessionStorage.removeItem('isAdmin'); location.reload(); };
+
+        // Toggle Views
+        window.toggleView = (view) => {
+            const activeArea = document.getElementById('active-orders-area');
+            const pastArea = document.getElementById('past-orders-area');
+            const btnActive = document.getElementById('btn-active-view');
+            const btnPast = document.getElementById('btn-past-view');
+
+            if(view === 'past') {
+                activeArea.style.display = 'none';
+                pastArea.style.display = 'block';
+                btnPast.classList.add('btn-active');
+                btnActive.classList.remove('btn-active');
             } else {
-                document.getElementById('error-msg').style.display = 'block';
+                activeArea.style.display = 'block';
+                pastArea.style.display = 'none';
+                btnActive.classList.add('btn-active');
+                btnPast.classList.remove('btn-active');
             }
         };
 
-        window.logout = () => {
-            sessionStorage.removeItem('isAdmin');
-            location.reload();
-        };
-
-        // Switch between Active and Past orders
-        window.toggleView = (view) => {
-            currentView = view;
-            document.getElementById('btn-active-view').classList.toggle('btn-active', view === 'active');
-            document.getElementById('btn-past-view').classList.toggle('btn-active', view === 'past');
-            document.getElementById('list-title').innerText = view === 'active' ? "ACTIVE ORDERS" : "COMPLETED ORDERS";
-            loadOrders();
-        };
-
-        // UI Clock
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString();
-        }, 1000);
-
-        // Core Functions
+        // UI Helpers
+        setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
         window.updateStatus = async (id, nextStatus) => {
             await updateDoc(doc(db, "orders", id), { status: nextStatus });
         };
-
-        window.saveProduct = async () => {
-            const name = document.getElementById('pName').value;
-            const price = document.getElementById('pPrice').value;
-            const img = document.getElementById('pImg').value;
-            if(!name || !price) return alert("Required fields missing");
-            await addDoc(collection(db, "products"), { name, price: parseFloat(price), img, date: new Date() });
-            closeModal();
-        };
-
-        window.showAddModal = () => document.getElementById('productModal').style.display = 'flex';
-        window.closeModal = () => document.getElementById('productModal').style.display = 'none';
 
         if(sessionStorage.getItem('isAdmin') === 'true') {
             document.getElementById('login-overlay').style.display = 'none';
             document.getElementById('admin-content').style.display = 'block';
 
-            // Load Inventory List
-            onSnapshot(collection(db, "products"), (snapshot) => {
-                const list = document.getElementById('inventory-list');
-                list.innerHTML = "";
+            // Real-time Orders Listener
+            const q = query(collection(db, "orders"), orderBy("date", "desc"));
+            onSnapshot(q, (snapshot) => {
+                const qList = document.getElementById('queue-list');
+                const rList = document.getElementById('ready-list');
+                const pList = document.getElementById('past-list');
+                
+                qList.innerHTML = ""; rList.innerHTML = ""; pList.innerHTML = "";
+                let revenue = 0;
+
                 snapshot.forEach(d => {
-                    const item = d.data();
-                    list.innerHTML += `<div class="inventory-item">
-                        <span><b>${item.name}</b> (₱${item.price})</span>
-                        <button style="border:none; background:none; cursor:pointer;" onclick="deleteDoc(doc(db, 'products', '${d.id}'))">❌</button>
-                    </div>`;
+                    const order = d.data();
+                    const id = d.id;
+                    const status = order.status || 'Queue';
+
+                    const card = `
+                        <div class="order-item">
+                            <div>
+                                <p style="font-size:10px; color:#999; font-family:monospace;">ID: ${id.substring(0,6).toUpperCase()}</p>
+                                <p style="font-size:16px;"><b>${order.customerName}</b></p>
+                                <p style="font-size:11px; color:#0038A8; font-weight:800;">${order.paymentMethod}</p>
+                            </div>
+                            <div style="text-align:right">
+                                <p style="font-weight:900; font-size:18px; color:#CE1126; margin-bottom:10px;">₱${order.totalAmount}</p>
+                                <div class="btn-group">
+                                    ${status === 'Queue' ? `<button class="action-btn btn-blue" onclick="updateStatus('${id}', 'Ready')">Prepare</button>` : ''}
+                                    ${status === 'Ready' ? `<button class="action-btn btn-green" onclick="updateStatus('${id}', 'Claimed')">Mark Received</button>` : ''}
+                                    ${status === 'Claimed' ? `<button class="action-btn btn-outline" onclick="updateStatus('${id}', 'Queue')">Re-open</button>` : ''}
+                                </div>
+                            </div>
+                        </div>`;
+
+                    if(status === 'Queue') qList.innerHTML += card;
+                    else if(status === 'Ready') rList.innerHTML += card;
+                    else if(status === 'Claimed') {
+                        pList.innerHTML += card;
+                        revenue += parseFloat(order.totalAmount || 0);
+                    }
                 });
+                document.getElementById('total-revenue').innerText = `₱${revenue.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+                
+                if(!qList.innerHTML) qList.innerHTML = "<p style='font-size:12px; opacity:0.5'>No new orders.</p>";
+                if(!rList.innerHTML) rList.innerHTML = "<p style='font-size:12px; opacity:0.5'>No orders ready.</p>";
             });
 
-            // Load Orders List
-            function loadOrders() {
-                const q = query(collection(db, "orders"), orderBy("date", "desc"));
-                onSnapshot(q, (snapshot) => {
-                    const list = document.getElementById('orders-list');
-                    let revenue = 0;
-                    list.innerHTML = "";
-                    
-                    snapshot.forEach(d => {
-                        const order = d.data();
-                        const status = order.status || 'Queue'; // Default to Queue
-                        
-                        // Calculate Revenue
-                        revenue += parseFloat(order.totalAmount || 0);
-
-                        // FILTER LOGIC
-                        if(currentView === 'active' && status === 'Claimed') return;
-                        if(currentView === 'past' && status !== 'Claimed') return;
-
-                        const statusClass = status.toLowerCase().replace(/ /g, '-');
-                        const displayStatus = status === 'Ready' ? 'Ready to Receive' : status;
-                        
-                        list.innerHTML += `
-                            <div class="order-item">
-                                <div>
-                                    <p style="font-size:11px; color:#999; font-family:monospace;">${order.orderId || d.id.substring(0,8)}</p>
-                                    <p style="font-size:16px; margin: 3px 0;"><b>${order.customerName}</b></p>
-                                    <span class="status-badge status-${statusClass}">${displayStatus}</span>
-                                    <p style="font-size:10px; margin-top:5px; color:#0038A8; font-weight:800;">${order.paymentMethod}</p>
-                                </div>
-                                <div style="text-align:right">
-                                    <p style="font-weight:900; font-size:20px; color:#CE1126; margin-bottom:10px;">₱${order.totalAmount}</p>
-                                    <div class="btn-group">
-                                        ${status === 'Queue' ? 
-                                            `<button class="action-btn btn-blue" onclick="updateStatus('${d.id}', 'Ready')">Prepare</button>` : ''}
-                                        
-                                        ${status === 'Ready' ? 
-                                            `<button class="action-btn btn-green" onclick="updateStatus('${d.id}', 'Claimed')">Mark Received</button>` : ''}
-                                        
-                                        ${status === 'Claimed' ? 
-                                            `<button class="action-btn btn-outline" onclick="updateStatus('${d.id}', 'Queue')">Re-open Order</button>` : ''}
-                                    </div>
-                                </div>
-                            </div>`;
-                    });
-                    document.getElementById('total-revenue').innerText = `₱${revenue.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            // Stocks Listener
+            onSnapshot(collection(db, "products"), (snap) => {
+                const inv = document.getElementById('inventory-list');
+                inv.innerHTML = "";
+                snap.forEach(d => {
+                    const p = d.data();
+                    inv.innerHTML += `<div class="inventory-item"><span><b>${p.name}</b></span><span>₱${p.price}</span></div>`;
                 });
-            }
-            loadOrders();
+            });
         }
     </script>
 </body>
