@@ -6,140 +6,35 @@
     <title>Admin Dashboard | Alabat Tourism</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        
-        @font-face {
-            font-family: 'Barabara';
-            src: url('BARABARA-final.otf') format('opentype');
-            font-weight: normal; font-style: normal; font-display: swap;
-        }
-
+        @font-face { font-family: 'Barabara'; src: url('BARABARA-final.otf') format('opentype'); }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
-        body {
-            background-color: #0a0a0c;
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('ariya.png') no-repeat center center fixed;
-            background-size: contain; 
-            background-origin: content-box;
-            padding: 10%; opacity: 0.15; z-index: -1;
-        }
-
-        .top-accent {
-            height: 40px;
-            background-image: url('topper.png');
-            background-size: auto 100%;
-            background-repeat: repeat-x;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            z-index: 4000;
-        }
-
-        #login-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0c 100%);
-            display: flex; justify-content: center; align-items: center; z-index: 9999;
-        }
-
-        .login-box {
-            background: rgba(255,255,255,0.03); padding: 50px; border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 400px; text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
+        body { background-color: #0a0a0c; color: white; min-height: 100vh; position: relative; }
+        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('ariya.png') no-repeat center center fixed; background-size: contain; padding: 10%; opacity: 0.15; z-index: -1; }
+        .top-accent { height: 40px; background-image: url('topper.png'); background-size: auto 100%; background-repeat: repeat-x; width: 100%; position: fixed; top: 0; z-index: 4000; }
+        
+        
+        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0c 100%); display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .login-box { background: rgba(255,255,255,0.03); padding: 50px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 400px; text-align: center; backdrop-filter: blur(10px); }
         .login-box h2 { font-family: 'Barabara'; color: #FFD300; letter-spacing: 1px; margin-bottom: 20px; }
+        .login-box input { width: 100%; padding: 15px; margin-top: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); color: white; outline: none; }
+        .login-box button { width: 100%; padding: 16px; margin-top: 25px; border-radius: 10px; border: none; background: #0038A8; color: white; font-family: 'Barabara'; cursor: pointer; }
         
-        .login-box input {
-            width: 100%; padding: 15px; margin-top: 12px; border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4);
-            color: white; outline: none; transition: 0.3s;
-        }
-
-        .login-box button {
-            width: 100%; padding: 16px; margin-top: 25px; border-radius: 10px;
-            border: none; background: #0038A8; color: white; font-family: 'Barabara';
-            cursor: pointer; transition: 0.3s;
-        }
-
+        
         #admin-content { display: none; padding: 100px 30px 30px; }
-        
-        .header-area { 
-            display: flex; justify-content: space-between; align-items: center; 
-            max-width: 1400px; margin: 0 auto 40px; 
-        }
-
-        .nav-logo, .login-logo { 
-            height: 65px; 
-            width: auto;
-            object-fit: contain;
-        }
-
-        .logout-btn { 
-            color: #ff4757; font-weight: 800; font-size: 11px; cursor: pointer; 
-            padding: 8px 18px; border-radius: 6px; border: 1px solid #ff4757;
-            text-transform: uppercase; transition: 0.3s;
-        }
-
-        .dashboard-grid { 
-            display: grid; grid-template-columns: 1fr 380px; gap: 30px; 
-            max-width: 1400px; margin: 0 auto; 
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px);
-            border-radius: 20px; padding: 30px; border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .revenue-card {
-            background: linear-gradient(135deg, #0038A8, #CE1126);
-            padding: 35px; border-radius: 20px; margin-bottom: 30px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
+        .header-area { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto 40px; }
+        .nav-logo, .login-logo { height: 65px; width: auto; object-fit: contain; }
+        .logout-btn { color: #ff4757; font-weight: 800; font-size: 11px; cursor: pointer; padding: 8px 18px; border-radius: 6px; border: 1px solid #ff4757; text-transform: uppercase; }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 380px; gap: 30px; max-width: 1400px; margin: 0 auto; }
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border-radius: 20px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); }
+        .revenue-card { background: linear-gradient(135deg, #0038A8, #CE1126); padding: 35px; border-radius: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
         .revenue-card h3 { font-family: 'Barabara'; font-size: 14px; color: rgba(255,255,255,0.8); }
         .revenue-card p { font-size: 42px; font-weight: 900; margin-top: 5px; }
-
-        .tabs { display: flex; gap: 15px; margin-bottom: 25px; }
-        .tab-btn { 
-            background: none; border: none; color: white; padding: 12px 20px; 
-            border-radius: 8px; cursor: pointer; font-size: 11px; font-weight: 800; opacity: 0.4;
-            text-transform: uppercase; transition: 0.3s; font-family: 'Barabara';
-        }
-        .tab-btn.active { opacity: 1; background: #0038A8; }
-
-        .inventory-item, .order-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .delete-btn { color: #ff4757; background: none; border: none; cursor: pointer; font-size: 18px; margin-left: 10px;}
-
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); 
-            display: none; justify-content: center; align-items: center; z-index: 5000;
-        }
-
+        .inventory-item, .order-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
+        .delete-btn { color: #ff4757; background: none; border: none; cursor: pointer; font-size: 18px; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 5000; }
         .modal-card { background: #16161a; padding: 40px; border-radius: 20px; width: 450px; border: 1px solid #333; }
-        .modal-card input, .modal-card textarea { 
-            width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 8px; 
-            background: #000; border: 1px solid #333; color: white; 
-        }
-
-        .action-btn { 
-            padding: 10px 16px; border-radius: 6px; border: none; 
-            font-weight: 800; font-size: 10px; cursor: pointer; text-transform: uppercase; 
-        }
+        .modal-card input, .modal-card textarea { width: 100%; padding: 14px; margin-bottom: 12px; border-radius: 8px; background: #000; border: 1px solid #333; color: white; }
+        .action-btn { padding: 10px 16px; border-radius: 6px; border: none; font-weight: 800; font-size: 10px; cursor: pointer; text-transform: uppercase; }
         .btn-yellow { background: #FFD300; color: #000; }
     </style>
 </head>
@@ -147,7 +42,6 @@
 
     <div class="top-accent"></div>
 
-    <!-- Login Overlay -->
     <div id="login-overlay">
         <div class="login-box">
             <img src="AlabatLogo.png" alt="Logo" class="login-logo" style="margin-bottom: 30px;">
@@ -159,7 +53,6 @@
         </div>
     </div>
 
-    <!-- Admin Content -->
     <div id="admin-content">
         <header class="header-area">
             <img src="AlabatLogo.png" class="nav-logo" alt="Logo">
@@ -179,17 +72,12 @@
                         <h3>LIVE REVENUE SUMMARY</h3>
                         <p id="total-revenue">₱0.00</p>
                     </div>
-                    <button class="action-btn" style="background: rgba(255,255,255,0.1); color: white;">Cloud Sync Active</button>
+                    <button class="action-btn" style="background: rgba(255,255,255,0.1); color: white;">Global Sync On</button>
                 </div>
 
                 <div class="glass-panel">
-                    <div class="tabs">
-                        <button class="tab-btn active">Incoming Orders</button>
-                    </div>
-                    <div id="orders-list">
-                        <!-- Orders will appear here -->
-                        <p style="text-align: center; opacity: 0.3; padding: 20px;">Fetching orders...</p>
-                    </div>
+                    <h2 style="font-family: 'Barabara'; font-size: 18px; color: #FFD300; margin-bottom: 20px;">INCOMING ORDERS</h2>
+                    <div id="orders-list"></div>
                 </div>
             </div>
 
@@ -205,60 +93,54 @@
         </div>
     </div>
 
-    <!-- Modal for adding products -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-card">
             <h2 style="font-family: 'Barabara'; color: #FFD300; margin-bottom: 25px;">ADD NEW PRODUCT</h2>
-            <input type="text" id="pName" placeholder="Product Name (e.g. COCO JAM)">
-            <input type="text" id="pPrice" placeholder="Price (e.g. 150)">
-            <input type="text" id="pImg" placeholder="Image Filename (e.g. jam.jpg)">
-            <textarea id="pDesc" placeholder="Product Description..." rows="3" style="font-family:inherit;"></textarea>
+            <input type="text" id="pName" placeholder="Product Name">
+            <input type="number" id="pPrice" placeholder="Price (Numeric)">
+            <input type="text" id="pImg" placeholder="Image Filename (jam.jpg)">
+            <textarea id="pDesc" placeholder="Description..." rows="3"></textarea>
             <div style="display: flex; gap: 10px; margin-top: 10px;">
                 <button class="action-btn" style="flex: 1; background: #333; color: white;" onclick="closeModal()">Cancel</button>
-                <button class="action-btn" style="flex: 2; background: #0038A8; color: white;" onclick="saveProduct()">Push to Database</button>
+                <button class="action-btn" style="flex: 2; background: #0038A8; color: white;" onclick="saveProduct()">Sync to DB</button>
             </div>
         </div>
     </div>
 
-    <!-- FIREBASE INTEGRATION -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-        import { 
-            getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy 
-        } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-        // --- PASTE YOUR FIREBASE CONFIG HERE ---
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT.appspot.com",
-            messagingSenderId: "YOUR_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyBHmTfEQxooyvm3EK0JlDfyrBr9IEN0fuc",
+            authDomain: "alabat-tourism.firebaseapp.com",
+            projectId: "alabat-tourism",
+            storageBucket: "alabat-tourism.firebasestorage.app",
+            messagingSenderId: "438243281376",
+            appId: "1:438243281376:web:ac42908ac4cf9862e0c385",
+            measurementId: "G-BH765YRMQY"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // LOGIN LOGIC
-        window.checkLogin = function() {
+        window.checkLogin = () => {
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
             if(u === "admin" && p === "alabat2026") {
-                sessionStorage.setItem('alabat_admin', 'true');
+                sessionStorage.setItem('isAdmin', 'true');
                 location.reload();
             } else {
                 document.getElementById('error-msg').style.display = 'block';
             }
-        }
+        };
 
-        window.logout = function() {
-            sessionStorage.removeItem('alabat_admin');
+        window.logout = () => {
+            sessionStorage.removeItem('isAdmin');
             location.reload();
-        }
+        };
 
-        // --- PRODUCT MANAGEMENT ---
-        window.saveProduct = async function() {
+        window.saveProduct = async () => {
             const name = document.getElementById('pName').value;
             const price = document.getElementById('pPrice').value;
             const img = document.getElementById('pImg').value;
@@ -271,71 +153,50 @@
                     name, price: parseFloat(price), img, desc, date: new Date()
                 });
                 closeModal();
-                alert("Product live on website!");
-            } catch (e) { alert("Error: " + e.message); }
-        }
+            } catch (e) { alert(e.message); }
+        };
 
-        window.deleteProduct = async function(id) {
-            if(confirm("Delete this product from the database?")) {
+        window.deleteProduct = async (id) => {
+            if(confirm("Remove this item?")) {
                 await deleteDoc(doc(db, "products", id));
-            }
-        }
-
-        // --- REAL-TIME LISTENERS ---
-        function startListeners() {
-            // 1. Listen for Products
-            onSnapshot(collection(db, "products"), (snapshot) => {
-                const container = document.getElementById('inventory-list');
-                container.innerHTML = "";
-                snapshot.forEach((doc) => {
-                    const item = doc.data();
-                    container.innerHTML += `
-                        <div class="inventory-item">
-                            <div>
-                                <p style="font-weight:800; font-size:13px;">${item.name}</p>
-                                <p style="font-size:11px; color:#FFD300;">₱${item.price}</p>
-                            </div>
-                            <button class="delete-btn" onclick="deleteProduct('${doc.id}')">🗑️</button>
-                        </div>`;
-                });
-            });
-
-            // 2. Listen for Orders
-            const ordersQuery = query(collection(db, "orders"), orderBy("date", "desc"));
-            onSnapshot(ordersQuery, (snapshot) => {
-                const orderList = document.getElementById('orders-list');
-                let revenue = 0;
-                orderList.innerHTML = snapshot.empty ? '<p style="text-align:center; opacity:0.3">No orders yet.</p>' : "";
-                
-                snapshot.forEach((doc) => {
-                    const order = doc.data();
-                    revenue += parseFloat(order.total);
-                    orderList.innerHTML += `
-                        <div class="order-item">
-                            <div>
-                                <p style="font-size:12px; font-weight:800;">ORDER #${doc.id.substring(0,5)}</p>
-                                <p style="font-size:11px; opacity:0.6;">${order.customerName || 'Anonymous'}</p>
-                            </div>
-                            <p style="font-weight:900; color:#FFD300;">₱${order.total}</p>
-                        </div>`;
-                });
-                document.getElementById('total-revenue').innerText = `₱${revenue.toLocaleString()}`;
-            });
-        }
-
-        // INITIALIZE PAGE
-        window.onload = () => {
-            if(sessionStorage.getItem('alabat_admin') === 'true') {
-                document.getElementById('login-overlay').style.display = 'none';
-                document.getElementById('admin-content').style.display = 'block';
-                startListeners();
             }
         };
 
-        // UI Helpers
         window.showAddModal = () => document.getElementById('productModal').style.display = 'flex';
         window.closeModal = () => document.getElementById('productModal').style.display = 'none';
 
+        if(sessionStorage.getItem('isAdmin') === 'true') {
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('admin-content').style.display = 'block';
+
+            onSnapshot(collection(db, "products"), (snapshot) => {
+                const list = document.getElementById('inventory-list');
+                list.innerHTML = "";
+                snapshot.forEach(d => {
+                    const item = d.data();
+                    list.innerHTML += `<div class="inventory-item">
+                        <div><p><b>${item.name}</b></p><p style="color:#FFD300">₱${item.price}</p></div>
+                        <button class="delete-btn" onclick="deleteProduct('${d.id}')">🗑️</button>
+                    </div>`;
+                });
+            });
+
+            const qOrders = query(collection(db, "orders"), orderBy("date", "desc"));
+            onSnapshot(qOrders, (snapshot) => {
+                const list = document.getElementById('orders-list');
+                let total = 0;
+                list.innerHTML = snapshot.empty ? "<p style='opacity:0.3'>No orders yet.</p>" : "";
+                snapshot.forEach(d => {
+                    const order = d.data();
+                    total += parseFloat(order.totalAmount || 0);
+                    list.innerHTML += `<div class="order-item">
+                        <div><p><b>Order #${d.id.substring(0,5)}</b></p><p style="font-size:11px">${order.customerName}</p></div>
+                        <p style="color:#FFD300">₱${order.totalAmount}</p>
+                    </div>`;
+                });
+                document.getElementById('total-revenue').innerText = `₱${total.toLocaleString()}`;
+            });
+        }
     </script>
 </body>
 </html>
